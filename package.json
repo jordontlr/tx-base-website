@@ -18,7 +18,7 @@
     "develop": "done-serve --static --develop --port 8080",
     "lint": "standard",
     "lint:fix": "standard --fix",
-    "start": "done-serve --port 8080",
+    "start": "done-serve --port $PORT",
     "test": "npm run lint && npm run testee",
     "testee": "testee test.html --browsers firefox --reporter Spec"
   },
