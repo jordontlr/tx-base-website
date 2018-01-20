@@ -51,6 +51,5 @@ const AppViewModel = DefineMap.extend({
 
 route('{page}', { page: 'home' })
 route('{page}/{slug}', { slug: null })
-route.ready()
 
 export default AppViewModel
