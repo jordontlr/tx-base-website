@@ -45,9 +45,9 @@
               </div>
               <div class="col-xs-6 col-sm-3">
                 <div class="form-group">
-                  <label for="kyc-select-gender">Day of Birth</label>
+                  <label for="kyc-select-dob">Day of Birth</label>
                   {{#if daysOfMonthList}}
-                    <select id="kyc-select-gender" selectpicker="btn btn-default" value:bind="dayOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
+                    <select id="kyc-select-dob" selectpicker="btn btn-default" value:bind="dayOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
                       {{#each daysOfMonthList}}
                         <option>{{this}}</option>
                       {{/each}}
@@ -57,9 +57,9 @@
               </div>
               <div class="col-xs-6 col-sm-3">
                 <div class="form-group">
-                  <label for="kyc-select-gender">Month of Birth</label>
+                  <label for="kyc-select-mob">Month of Birth</label>
                   {{#if monthsList}}
-                    <select id="kyc-select-gender" selectpicker="btn btn-default" value:bind="monthOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
+                    <select id="kyc-select-mob" selectpicker="btn btn-default" value:bind="monthOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
                       {{#each monthsList}}
                         <option value="{{number}}">{{full}}</option>
                       {{/each}}
@@ -69,9 +69,9 @@
               </div>
               <div class="col-xs-6 col-sm-3">
                 <div class="form-group">
-                  <label for="kyc-select-gender">Year of Birth</label>
+                  <label for="kyc-select-yob">Year of Birth</label>
                   {{#if yearsList}}
-                    <select id="kyc-select-gender" selectpicker="btn btn-default" value:bind="yearOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
+                    <select id="kyc-select-yob" selectpicker="btn btn-default" value:bind="yearOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
                       {{#each yearsList}}
                         <option>{{this}}</option>
                       {{/each}}
