@@ -74,7 +74,7 @@ const Session = DefineMap.extend('Session', {
       })
       .catch(err => {
         this.logout()
-        if (err !== 'no token') this.sessionError = true
+        if (err.indexOf('no token')) this.sessionError = true
         return Promise.reject(err)
       })
   },
