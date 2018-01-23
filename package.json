@@ -3,6 +3,9 @@
   "version": "0.0.7",
   "description": "An awesome DoneJS app",
   "homepage": "",
+  "engines": {
+    "node": "9.3.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TxUniverse/tx-base-website.git"
