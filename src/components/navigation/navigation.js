@@ -36,15 +36,4 @@ export default Component.extend({
   tag: 'navigation-bar',
   ViewModel,
   view,
-  events: {
-    inserted: function () {
-      if (!this.viewModel.listenerAdded) {
-        this.viewModel.listenerAdded = true
-
-        $('.modal').on('shown.bs.modal', function () {
-          $(this).find('[autofocus]').focus()
-        })
-      }
-    }
-  }
 })

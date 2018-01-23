@@ -55,7 +55,10 @@ export const ViewModel = DefineMap.extend({
         this.processing = false
         this.changeError = true
         if (err.status === 401) this.session.error401()
-        else console.log(err)
+        else {
+          console.log(err)
+          this.clearForm()
+        }
       })
   },
   clearForm () {
@@ -67,6 +70,7 @@ export const ViewModel = DefineMap.extend({
     this.newEmail = null
     this.newEmailError = null
     this.verificationCodeVisible = false
+    this.emailCode = null
 
     $('#change-email-modal').modal('hide')
   }
