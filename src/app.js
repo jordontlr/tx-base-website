@@ -1,6 +1,6 @@
 // import '~/utils/polyfill'
 import '~/utils/helpers'
-import '~/utils/analytics'
+// import '~/utils/analytics'
 import DefineMap from 'can-define/map/map'
 import route from 'can-route'
 import 'can-route-pushstate'
