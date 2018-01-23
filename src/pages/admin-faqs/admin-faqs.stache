@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 text-center">
-      <h1>Admin Blog</h1>
+      <h1>Admin FAQs</h1>
     </div>
   </div>
   <div class="row">
@@ -21,7 +21,7 @@
               </tr>
               </thead>
               <tbody>
-              {{^if loadingBlog}}
+              {{^if loadingFAQs}}
                 {{#if rows.length}}
                   {{#each rows}}
                     <tr>
@@ -34,7 +34,7 @@
                   {{/each}}
                 {{else}}
                   <tr class="no-hover no-bg">
-                    <td colspan="5" class="text-center"><h3>There are currently no faqs</h3></td>
+                    <td colspan="5" class="text-center"><h3>There are currently no FAQs</h3></td>
                   </tr>
                 {{/if}}
               {{else}}
@@ -62,7 +62,7 @@
 
         <div class="row">
           <div class="col-sm-3 col-sm-offset-9">
-            <button class="btn btn-primary btn-block margin-top" data-toggle="modal" data-target="#edit-modal">Add New FAQ</button>
+            <button class="btn btn-primary btn-block margin-top" data-toggle="modal" data-target="#edit-faqs-modal">Add New FAQ</button>
           </div>
         </div>
 

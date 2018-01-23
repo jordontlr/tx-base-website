@@ -47,7 +47,7 @@
             <ul class="dropdown-menu">
               <li class="{{#routeCurrent page='admin-users'}}active{{/routeCurrent}}"><a href="{{routeUrl page='admin-users'}}" on:click="closeMenu()">Users{{#routeCurrent page='admin-users'}} <span class="sr-only">(current)</span>{{/routeCurrent}}</a></li>
               <li class="{{#routeCurrent page='admin-blog'}}active{{/routeCurrent}}"><a href="{{routeUrl page='admin-blog'}}" on:click="closeMenu()">Blog{{#routeCurrent page='admin-blog'}} <span class="sr-only">(current)</span>{{/routeCurrent}}</a></li>
-              <li class="{{#routeCurrent page='admin-tickets'}}active{{/routeCurrent}}"><a href="{{routeUrl page='admin-tickets'}}" on:click="closeMenu()">Tickets{{#routeCurrent page='admin-tickets'}} <span class="sr-only">(current)</span>{{/routeCurrent}}</a></li>
+              <li class="{{#routeCurrent page='admin-faqs'}}active{{/routeCurrent}}"><a href="{{routeUrl page='admin-faqs'}}" on:click="closeMenu()">FAQs{{#routeCurrent page='admin-faqs'}} <span class="sr-only">(current)</span>{{/routeCurrent}}</a></li>
             </ul>
           </li>
           {{/if}}
