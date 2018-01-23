@@ -14,14 +14,14 @@
   },
   "private": true,
   "scripts": {
-    "build": "npm run remove-build && node build",
+    "ready:staging": "npm run remove-build && node build",
     "remove-build": "make remove-build",
     "develop": "done-serve --static --develop --port 8080",
     "lint": "standard",
     "lint:fix": "standard --fix",
     "start": "done-serve --port $PORT",
     "staging": "npm run release:staging:patch",
-    "release:staging:patch": "npm test && npm run build && npm version patch && make release-staging",
+    "release:staging:patch": "npm test && npm run ready:staging && npm version patch && make release-staging",
     "test": "npm run lint && npm run testee",
     "testee": "testee test.html --browsers firefox --reporter Spec"
   },
