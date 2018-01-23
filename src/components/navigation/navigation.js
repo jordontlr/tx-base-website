@@ -35,5 +35,5 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'navigation-bar',
   ViewModel,
-  view,
+  view
 })
