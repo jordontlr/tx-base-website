@@ -14,7 +14,7 @@
   },
   "private": true,
   "scripts": {
-    "build": "npm run remove-build && node build",
+    "build": "npm run remove-build",
     "remove-build": "make remove-build",
     "develop": "done-serve --static --develop --port 8080",
     "lint": "standard",
