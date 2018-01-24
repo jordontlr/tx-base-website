@@ -12,7 +12,7 @@
               <div class="form-group no-margin-bottom">
                 <div class="form-group">
                   <label for="question">Question</label>
-                  <input type="text" class="form-control" id="question" placeholder="Question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="question" {{#if disableForm}}disabled{{/if}}>
+                  <input type="text" class="form-control" id="question" placeholder="Question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.question" {{#if disableForm}}disabled{{/if}}>
                 </div>
               </div>
             </div>
@@ -20,7 +20,7 @@
               <div class="form-group no-margin-bottom">
                 <div class="form-group">
                   <label for="answer">Answer</label>
-                  <input type="text" class="form-control" id="answer" placeholder="Answer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="answer" {{#if disableForm}}disabled{{/if}}>
+                  <input type="text" class="form-control" id="answer" placeholder="Answer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.answer" {{#if disableForm}}disabled{{/if}}>
                 </div>
               </div>
             </div>
@@ -28,7 +28,7 @@
               <div class="form-group no-margin-bottom">
                 <div class="form-group">
                   <label for="category">Category</label>
-                  <input type="text" class="form-control" id="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="category" {{#if disableForm}}disabled{{/if}}>
+                  <input type="text" class="form-control" id="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.category" {{#if disableForm}}disabled{{/if}}>
                 </div>
               </div>
             </div>

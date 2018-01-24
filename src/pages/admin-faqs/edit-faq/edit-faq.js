@@ -10,9 +10,6 @@ export const ViewModel = DefineMap.extend({
     value: false
   },
   processing: 'boolean',
-  question: 'string',
-  answer: 'string',
-  category: 'string',
   editFAQ: {
     Type: Faq
   },
