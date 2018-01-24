@@ -28,9 +28,13 @@ export const ViewModel = DefineMap.extend({
     Type: Faq,
     value: new Faq()
   },
-  openFAQ (editFAQ) {
-    this.editFAQ = editFAQ
+  openFAQ (faq) {
+    this.editFAQ = faq
     $('#editFAQ').modal('show')
+  },
+  deleteFAQ (faq) {
+    // todo: maybe add an "are you sure" question
+    faq.destroy()
   },
   loadPage () {
     this.loadingFAQs = true

@@ -49,7 +49,7 @@
                       <td class="text-nowrap text-center">{{timestampDetailed createdAt}}</td>
                       <td class="text-nowrap text-center">
                         <button class="btn btn-primary btn-sm" type="button" on:click="openUser(.)">Edit</button>
-                        <!--{{#if kycComplete}}<button class="btn btn-info btn-sm" type="button" on:click="openUserKYC(.)">{{#if kycUserLoading}}<i class="fa fa-spin fa-spinner"></i>{{else}}KYC{{/if}}</button>{{/if}}-->
+                        {{#if kycComplete}}<button class="btn btn-info btn-sm" type="button" on:click="openUserKYC(.)">{{#if kycUserLoading}}<i class="fa fa-spin fa-spinner"></i>{{else}}KYC{{/if}}</button>{{/if}}
                         {{#if locked}}<button class="btn btn-danger btn-sm" type="button" on:click="deleteUser(.)">Delete</button>{{/if}}
                         {{^if lastLogin}}{{^if locked}}<button class="btn btn-danger btn-sm" type="button" on:click="deleteUser(.)">Delete</button>{{/if}}{{/if}}
                       </td>
