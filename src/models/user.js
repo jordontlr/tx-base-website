@@ -43,8 +43,8 @@ User.connection = connect([
 ], {
   Map: User,
   List: User.List,
-  feathersService: feathersClient.service('user'),
-  name: 'user',
+  feathersService: feathersClient.service('users'),
+  name: 'users',
   algebra
 })
 
