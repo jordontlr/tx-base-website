@@ -1,7 +1,8 @@
-import Component from 'can-component';
-import DefineMap from 'can-define/map/';
-import './edit-faq.less';
-import view from './edit-faq.stache';
+import $ from 'jquery'
+import Component from 'can-component'
+import DefineMap from 'can-define/map/'
+import './edit-faq.less'
+import view from './edit-faq.stache'
 import Faq from '~/models/faq'
 
 export const ViewModel = DefineMap.extend({
@@ -19,7 +20,7 @@ export const ViewModel = DefineMap.extend({
     this.processing = true
     this.disableForm = true
 
-    this.editUser.save()
+    this.editFAQ.save()
       .then(() => {
         this.processing = false
         this.disableForm = false
@@ -34,10 +35,10 @@ export const ViewModel = DefineMap.extend({
         else console.log(err)
       })
   }
-});
+})
 
 export default Component.extend({
   tag: 'edit-faq',
   ViewModel,
   view
-});
+})

@@ -1,4 +1,4 @@
-import 'tx/pages/admin-faqs/edit-faq/edit-faq-test';
+import 'tx/pages/admin-faqs/edit-faq/edit-faq-test'
 
 // import F from 'funcunit'
 // import Mocha from 'steal-mocha'
