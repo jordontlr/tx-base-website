@@ -1,0 +1,29 @@
+<div class="modal fade" id="editFAQ" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit FAQ</h4>
+      </div>
+      {{#if editFAQ}}
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-sm-5 col-sm-offset-1">
+              <div class="form-group no-margin-bottom">
+
+              </div>
+            </div>
+            <div class="col-sm-5 col-sm-offset-1">
+              <div class="form-group no-margin-bottom">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" on:click="saveFAQ()" {{#if disableForm}}disabled{{/if}}>{{#if processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Save{{/if}}</button>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</div>

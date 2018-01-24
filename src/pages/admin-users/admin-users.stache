@@ -45,8 +45,8 @@
                       <td class="text-nowrap text-center"><a href="mailto:{{email}}">{{email}}</a></td>
                       <td class="text-nowrap text-center">{{^if locked}}<i class="fa fa-check text-success"></i>{{else}}<i class="fa fa-close text-danger"></i>{{/if}}</td>
                       <td class="text-nowrap text-center">{{#if kycApproved}}<i class="fa fa-check text-success"></i>{{else}}<i class="fa fa-close text-danger"></i>{{/if}}</td>
-                      <td class="text-nowrap text-center">{{timestampDetailed lastLogin}}</td>
-                      <td class="text-nowrap text-center">{{timestampDetailed accountCreated}}</td>
+                      <td class="text-nowrap text-center">{{timestampDetailed updatedAt}}</td>
+                      <td class="text-nowrap text-center">{{timestampDetailed createdAt}}</td>
                       <td class="text-nowrap text-center">
                         <button class="btn btn-primary btn-sm" type="button" on:click="openUser(.)">Edit</button>
                         <!--{{#if kycComplete}}<button class="btn btn-info btn-sm" type="button" on:click="openUserKYC(.)">{{#if kycUserLoading}}<i class="fa fa-spin fa-spinner"></i>{{else}}KYC{{/if}}</button>{{/if}}-->

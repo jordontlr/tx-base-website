@@ -9,17 +9,16 @@ stache.addHelper('timestamp', ts => {
   } else return 'TBD'
 })
 
-stache.addHelper('timestampFromNow', ts => {
-  if (!ts.toString().endsWith('000')) ts *= 1000
-  if (ts) return moment(parseInt(ts)).fromNow()
+stache.addHelper('timestampFromNow', t => {
+  if (!t.toString().endsWith('000')) t *= 1000
+  if (t) return moment(t).fromNow()
   else return ''
 })
 
-stache.addHelper('timestampDetailed', ts => {
-  if (ts) {
-    if (!ts.toString().endsWith('000')) ts *= 1000
+stache.addHelper('timestampDetailed', t => {
+  if (t) {
     let format = 'MMM Do YYYY, h:mm:ss a'
-    return moment(parseInt(ts)).format(format)
+    return moment(t).format(format)
   } else return 'TBD'
 })
 

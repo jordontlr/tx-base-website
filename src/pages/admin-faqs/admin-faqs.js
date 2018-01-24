@@ -11,6 +11,7 @@ export const ViewModel = DefineMap.extend({
     type: 'any'
   },
   loadingFAQs: {
+    type: 'boolean',
     value: true
   },
   rows: {
@@ -22,8 +23,16 @@ export const ViewModel = DefineMap.extend({
       return {skip: 0, limit: 10}
     }
   },
+  editFAQ: {
+    Type: Faq,
+    value: new Faq()
+  },
+  openFAQ (editFAQ) {
+    this.editFAQ = editFAQ
+    $('#editFAQ').modal('show')
+  },
   loadPage () {
-    this.loadingBlog = true
+    this.loadingFAQs = true
     let pagination = this.pagination
     Faq.getList({$skip: pagination.skip, $limit: pagination.limit})
       .then(faqs => {
@@ -44,17 +53,7 @@ export default Component.extend({
   view,
   events: {
     inserted: function () {
-      let pagination = this.viewModel.pagination
-      Faq.getList({$skip: pagination.skip, $limit: pagination.limit})
-        .then(faqs => {
-          this.viewModel.rows = faqs
-          this.viewModel.pagination.total = faqs.total
-          setTimeout(() => { this.viewModel.loadingFAQs = false }, 25)
-        })
-        .catch(err => {
-          if (err.status === 401) this.viewModel.session.error401()
-          else console.log(err)
-        })
+      this.viewModel.loadPage()
     }
   }
 })
