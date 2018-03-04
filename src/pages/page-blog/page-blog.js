@@ -4,11 +4,26 @@ import './page-blog.less'
 import view from './page-blog.stache'
 import Pagination from '~/models/pagination'
 import Blog from '~/models/blog'
-import '~/models/fixtures/blog'
 
 export const ViewModel = DefineMap.extend({
   loadingBlog: {
-    value: true
+    value: true,
+    get (val, resolve) {
+      if (!val) { return val }
+      this.rowsPromise.then(resolve)
+    }
+  },
+  rowsPromise: {
+    value () {
+      let pagination = this.pagination
+      return Blog.getList({$skip: pagination.skip, $limit: pagination.limit})
+        .then(blog => {
+          this.rows = blog
+          this.pagination.total = blog.total
+          setTimeout(() => { this.loadingBlog = false }, 25)
+        })
+        .catch(err => console.log(err))
+    }
   },
   rows: {
     Type: Blog.List
@@ -24,17 +39,5 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'page-blog',
   ViewModel,
-  view,
-  events: {
-    inserted: function () {
-      let pagination = this.viewModel.pagination
-      Blog.getList({$skip: pagination.skip, $limit: pagination.limit})
-        .then(blog => {
-          this.viewModel.rows = blog
-          this.viewModel.pagination.total = blog.total
-          setTimeout(() => { this.viewModel.loadingBlog = false }, 25)
-        })
-        .catch(err => console.log(err))
-    }
-  }
+  view
 })

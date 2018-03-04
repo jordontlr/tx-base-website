@@ -1,17 +1,23 @@
-<br>
-{{#blogPost}}
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="jumbotron">
-          <h1>{{title}}</h1>
-          <p class="small">{{author}} | {{timestamp datetime}}</p>
-          <p>{{shortPost}}</p>
+{{^if loadingBlogPost}}
+  <br>
+  {{#blogPost}}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="jumbotron">
+            <h1>{{title}}</h1>
+            <p class="small">{{author}} | {{timestamp datetime}}</p>
+            <p>{{shortPost}}</p>
+          </div>
         </div>
       </div>
-      <div class="col-sm-12">
-        {{{post}}}
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          {{{post}}}
+        </div>
       </div>
     </div>
-  </div>
-{{/blogPost}}
+  {{/blogPost}}
+{{else}}
+  <div class="text-center top-bottom-padding"><i class="fa fa-spin fa-spinner fa-5x"></i></div>
+{{/if}}
