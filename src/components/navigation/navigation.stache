@@ -28,6 +28,8 @@
       {{else}}
         <ul class="nav navbar-nav">
           <li class="{{#routeCurrent page='dash'}}active{{/routeCurrent}}"><a href="{{routeUrl page='dash'}}" on:click="closeMenu()">Dashboard{{#routeCurrent page='dash'}} <span class="sr-only">(current)</span>{{/routeCurrent}}</a></li>
+          <li class="{{#routeCurrent page='faqs'}}active{{/routeCurrent}}"><a href="{{routeUrl page='faqs'}}" on:click="closeMenu()">FAQs{{#routeCurrent page='faqs'}} <span class="sr-only">(current)</span>{{/routeCurrent}}</a></li>
+          <li class="{{#routeCurrent page='blog'}}active{{/routeCurrent}}"><a href="{{routeUrl page='blog'}}" on:click="closeMenu()">Blog{{#routeCurrent page='blog'}} <span class="sr-only">(current)</span>{{/routeCurrent}}</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
