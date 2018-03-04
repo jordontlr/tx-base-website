@@ -16,7 +16,8 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="kyc-first-name">First Name or Full Name &nbsp;<button type="button" class="btn-clear text-warning" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Can't separate your name into first and last, just enter it all here."><i class="fa fa-info-circle" aria-hidden="true"></i></button></label>
+                  <label for="kyc-first-name">First Name or Full Name</label>
+                  <button type="button" class="btn-clear text-warning" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Can't separate your name into first and last, just enter it all here."><i class="fa fa-info-circle" aria-hidden="true"></i></button>
                   <input type="text" class="form-control" id="kyc-first-name" placeholder="First Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus value:bind="firstName" {{#if disableForm}}disabled{{/if}}>
                   <validation-message message:from="firstNameError" />
                 </div>
@@ -120,7 +121,8 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="kyc-address-line-one">Address Line &nbsp;<button type="button" class="btn-clear text-warning" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="If you have additional address information, you can enter it here."><i class="fa fa-info-circle" aria-hidden="true"></i></button></label>
+                  <label for="kyc-address-line-one">Address Line</label>
+                  <button type="button" class="btn-clear text-warning" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="If you have additional address information, you can enter it here."><i class="fa fa-info-circle" aria-hidden="true"></i></button>
                   <input type="text" class="form-control" id="kyc-address-line-one" placeholder="Address Line" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="addressLine" {{#if disableForm}}disabled{{/if}}>
                 </div>
               </div>
@@ -142,7 +144,8 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="kyc-country">Country &nbsp;<button type="button" class="btn-clear text-warning" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Can't find your country? Please contact us."><i class="fa fa-info-circle" aria-hidden="true"></i></button></label>
+                  <label for="kyc-country">Country</label>
+                  <button type="button" class="btn-clear text-warning" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Can't find your country? Please contact us." style="display:inline"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
                   {{#if countryList}}
                     <select id="kyc-country" selectpicker="btn btn-default" value:bind="countryCode" on:change="populateProvState(scope.element.value)" class="bootstrap-select form-control show-tick" title="Search and Select a Country" data-live-search="{{countryListSearch}}" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
                       <option data-hidden="true"></option>
