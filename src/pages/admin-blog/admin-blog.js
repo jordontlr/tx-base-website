@@ -71,7 +71,7 @@ export const ViewModel = DefineMap.extend({
     blog.destroy()
   },
   editBlog (blog) {
-    Blog.get(blog.id).then(data => {
+    Blog.get(blog._id).then(data => {
       this.quill.setContents(JSON.parse(data.delta))
       this.newEditBlog = data
       $('#edit-modal').modal('show')
