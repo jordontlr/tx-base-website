@@ -20,9 +20,9 @@ export default Component.extend({
   view,
   events: {
     inserted: function () {
-      Blog.get(this.viewModel.slug)
+      Blog.getList({ "linkTitle" : this.viewModel.slug })
         .then(blog => {
-          this.viewModel.blogPost = blog
+          this.viewModel.blogPost = blog[0]
           setTimeout(() => { this.viewModel.loadingBlog = false }, 25)
         })
         .catch(err => console.log(err))
