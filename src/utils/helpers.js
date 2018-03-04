@@ -3,14 +3,12 @@ import moment from 'moment'
 
 stache.addHelper('timestamp', ts => {
   if (ts) {
-    if (!ts.toString().endsWith('000')) ts *= 1000
     let format = 'MMM D, YYYY'
     return moment(parseInt(ts)).format(format)
   } else return 'TBD'
 })
 
 stache.addHelper('timestampFromNow', t => {
-  if (!t.toString().endsWith('000')) t *= 1000
   if (t) return moment(t).fromNow()
   else return ''
 })
