@@ -41,7 +41,7 @@ export const ViewModel = DefineMap.extend({
   categories: {
     value () {
       return this.rows.reduce((list, item) => {
-        if (item.category !== '' && !list.includes(item.category)) list.push(item.category)
+        if (item.category !== '' && typeof item.category !== 'undefined' && !list.includes(item.category)) list.push(item.category)
         return list
       }, [])
     }
@@ -58,16 +58,5 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'page-faqs',
   ViewModel,
-  view,
-  events: {
-    // inserted: function () {
-    //   Faq.getList()
-    //     .then(faqs => {
-    //       this.viewModel.rows = faqs
-    //       this.viewModel.filteredRows = faqs
-    //       setTimeout(() => { this.viewModel.loadingFAQs = false }, 25)
-    //     })
-    //     .catch(err => console.log(err))
-    // }
-  }
+  view
 })

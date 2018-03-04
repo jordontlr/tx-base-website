@@ -5,14 +5,14 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Edit FAQ</h4>
       </div>
-      {{#if editFAQ}}
+      {{#editFAQ}}
         <div class="modal-body">
           <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
               <div class="form-group no-margin-bottom">
                 <div class="form-group">
                   <label for="question">Question</label>
-                  <input type="text" class="form-control" id="question" placeholder="Question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.question" {{#if disableForm}}disabled{{/if}}>
+                  <input type="text" class="form-control" id="question" placeholder="Question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="question" {{#if disableForm}}disabled{{/if}}>
                 </div>
               </div>
             </div>
@@ -20,7 +20,7 @@
               <div class="form-group no-margin-bottom">
                 <div class="form-group">
                   <label for="answer">Answer</label>
-                  <input type="text" class="form-control" id="answer" placeholder="Answer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.answer" {{#if disableForm}}disabled{{/if}}>
+                  <input type="text" class="form-control" id="answer" placeholder="Answer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="answer" {{#if disableForm}}disabled{{/if}}>
                 </div>
               </div>
             </div>
@@ -28,7 +28,7 @@
               <div class="form-group no-margin-bottom">
                 <div class="form-group">
                   <label for="category">Category</label>
-                  <input type="text" class="form-control" id="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.category" {{#if disableForm}}disabled{{/if}}>
+                  <input type="text" class="form-control" id="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="category" {{#if disableForm}}disabled{{/if}}>
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" on:click="saveFAQ()" {{#if disableForm}}disabled{{/if}}>{{#if processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Save{{/if}}</button>
         </div>
-      {{/if}}
+      {{/editFAQ}}
     </div>
   </div>
 </div>
