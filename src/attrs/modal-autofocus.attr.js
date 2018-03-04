@@ -5,7 +5,6 @@ callback.attr('modal-autofocus', (el) => {
   let $el = $(el)
 
   $el.on('shown.bs.modal', function () {
-    $(this).find('[autofocus]').focus();
-  });
-
+    $(this).find('[autofocus]').focus()
+  })
 })
