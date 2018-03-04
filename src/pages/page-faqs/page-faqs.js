@@ -35,7 +35,7 @@ export const ViewModel = DefineMap.extend({
   },
   hasCategories: {
     value () {
-      return this.rows.filter(item => item.category !== '').length
+      return this.rows.filter(item => item.category !== '' && typeof item.category !== 'undefined').length
     }
   },
   categories: {

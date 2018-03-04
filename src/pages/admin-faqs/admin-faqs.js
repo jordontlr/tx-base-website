@@ -21,7 +21,7 @@ export const ViewModel = DefineMap.extend({
   pagination: {
     Type: Pagination,
     value () {
-      return {skip: 0, limit: 10}
+      return {skip: 0, limit: 20}
     }
   },
   editFAQ: {

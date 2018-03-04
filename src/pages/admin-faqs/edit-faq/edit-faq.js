@@ -25,7 +25,9 @@ export const ViewModel = DefineMap.extend({
         this.processing = false
         this.disableForm = false
 
-        $('#EditFAQ').modal('hide')
+        $('#editFAQ').modal('hide')
+
+        this.editFAQ = new Faq()
       })
       .catch(err => {
         this.processing = false
