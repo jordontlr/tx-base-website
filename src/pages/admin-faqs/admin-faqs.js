@@ -5,7 +5,6 @@ import './admin-faqs.less'
 import view from './admin-faqs.stache'
 import Pagination from '~/models/pagination'
 import Faq from '~/models/faq'
-import '~/models/fixtures/faq'
 
 export const ViewModel = DefineMap.extend({
   session: {
@@ -13,7 +12,10 @@ export const ViewModel = DefineMap.extend({
   },
   loadingFAQs: {
     type: 'boolean',
-    value: true
+    value: true,
+    get () {
+      this.loadPage()
+    }
   },
   rows: {
     Type: Faq.List
@@ -55,10 +57,5 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'admin-faqs',
   ViewModel,
-  view,
-  events: {
-    inserted: function () {
-      this.viewModel.loadPage()
-    }
-  }
+  view
 })

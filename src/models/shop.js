@@ -8,7 +8,7 @@ import algebra from './algebra'
 
 const Shop = DefineMap.extend('Shop', {
   _id: 'any',
-  text: 'string',
+  product: 'string',
   category: 'string'
 })
 
