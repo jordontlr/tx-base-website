@@ -10,7 +10,9 @@ const Faq = DefineMap.extend('Faq', {
   _id: 'any',
   question: 'string',
   answer: 'string',
-  category: 'string'
+  category: 'string',
+  updatedAt: 'number',
+  createdAt: 'number'
 })
 
 Faq.List = DefineList.extend({

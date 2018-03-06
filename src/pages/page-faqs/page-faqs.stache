@@ -19,7 +19,7 @@
           <div class="pull-right" style="line-height: 32px;"><strong>Filter Category</strong></div>
         </div>
         <div class="col-sm-3">
-          <select id="kyc-select-gender" selectpicker="btn btn-default" value:bind="filterBy" on:change="runFilter()" class="bootstrap-select form-control show-tick">
+          <select id="kyc-select-gender" data-container="body" selectpicker="btn btn-default" value:bind="filterBy" on:change="runFilter()" class="bootstrap-select form-control show-tick">
             <option value="">None</option>
             {{#each categories}}
               <option>{{this}}</option>

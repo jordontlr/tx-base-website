@@ -15,7 +15,9 @@ const Blog = DefineMap.extend('Blog', {
   post: 'string',
   delta: 'string',
   author: 'string',
-  linkTitle: 'string'
+  linkTitle: 'string',
+  updatedAt: 'number',
+  createdAt: 'number'
 })
 
 Blog.List = DefineList.extend({
