@@ -51,7 +51,7 @@ export const ViewModel = DefineMap.extend({
     this.processing = true
     this.disableForm = true
 
-    if (password != this.session.tmpPassword) {
+    if (String(password) !== String(this.session.tmpPassword)) {
       this.session.user.changePassword(password, this.session.tmpPassword)
         .then(() => {
           this.processing = false

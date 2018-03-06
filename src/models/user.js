@@ -19,6 +19,7 @@ const User = DefineMap.extend('User', {
   lastLogin: 'number',
   locked: 'boolean',
   isAdmin: 'boolean',
+  tmpPasswordTimestampExpiry: 'number',
   signUp (email) {
     return feathersClient.service('users').create({email})
   },
