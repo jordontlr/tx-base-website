@@ -1,5 +1,5 @@
 <can-import from="grid-component" />
-<can-import from="~/pages/admin-faqs/edit-faq/" />
+<can-import from="~/pages/admin-shop/edit-item/" />
 
 <div class="container">
   <div class="row">
@@ -16,7 +16,8 @@
             <table class="table table-striped">
               <thead>
               <tr>
-                <th class="text-nowrap text-center">Product</th>
+                <th class="text-nowrap text-center">Item Name</th>
+                <th class="text-nowrap text-center">Category</th>
               </tr>
               </thead>
               <tbody>
@@ -25,6 +26,7 @@
                   {{#each rows}}
                     <tr>
                       <td class="text-nowrap text-center">{{product}}</td>
+                      <td class="text-nowrap text-center">{{category}}</td>
                       <td class="text-nowrap text-center">
                         <button class="btn btn-primary btn-sm" type="button" on:click="openShopItem(.)">Edit</button>
                         <button class="btn btn-danger btn-sm" type="button" on:click="deleteShopItem(.)">Delete</button>

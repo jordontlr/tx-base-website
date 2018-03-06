@@ -32,7 +32,7 @@ export const ViewModel = DefineMap.extend({
   },
   openShopItem (shop) {
     this.editShopItem = shop
-    $('#editShop').modal('show')
+    $('#editShopItem').modal('show')
   },
   deleteShopItem (shop) {
     // todo: maybe add an "are you sure" question
