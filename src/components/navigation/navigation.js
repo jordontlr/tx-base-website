@@ -19,6 +19,16 @@ export const ViewModel = DefineMap.extend({
   page: {
     type: 'any'
   },
+  email: {
+    type: 'string',
+    value () {
+      if (this.session.user) {
+        return this.session.user.email
+      } else {
+        return 'User Menu'
+      }
+    }
+  },
   closeMenu () {
     if ($('.navbar-toggle').is(':visible') && $('.navbar-collapse').hasClass('in')) {
       $('.navbar-toggle').trigger('click')
