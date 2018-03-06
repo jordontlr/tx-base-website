@@ -1,0 +1,44 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="jumbotron">
+        <h1>Shop</h1>
+        <p>Some things to buy.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{^if loadingShop}}
+  <div class="container">
+
+    {{#if hasCategories}}
+      <div class="row">
+        <div class="col-sm-2 col-sm-offset-7">
+          <div class="pull-right" style="line-height: 32px;"><strong>Filter Category</strong></div>
+        </div>
+        <div class="col-sm-3">
+          <select id="kyc-select-gender" data-container="body" selectpicker="btn btn-default" value:bind="filterBy" on:change="runFilter()" class="bootstrap-select form-control show-tick">
+            <option value="">None</option>
+            {{#each categories}}
+              <option>{{this}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#each filteredRows}}
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <div class="h3">{{text}}</div>
+          <hr class="hr-primary">
+        </div>
+      </div>
+    {{/each}}
+
+  </div>
+{{else}}
+  <div class="text-center top-bottom-padding"><i class="fa fa-spin fa-spinner fa-5x"></i></div>
+{{/if}}

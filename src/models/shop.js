@@ -1,0 +1,32 @@
+import DefineMap from 'can-define/map/map'
+import DefineList from 'can-define/list/list'
+import connect from 'can-connect'
+import feathersClient from './feathers-client'
+import feathersServiceBehavior from 'can-connect-feathers/service/service'
+import behaviors from './behaviors'
+import algebra from './algebra'
+
+const Shop = DefineMap.extend('Shop', {
+  _id: 'any',
+  text: 'string',
+  category: 'string'
+})
+
+Shop.List = DefineList.extend({
+  '#': Shop
+})
+
+Shop.connection = connect([
+  feathersServiceBehavior,
+  ...behaviors
+], {
+  Map: Shop,
+  List: Shop.List,
+  feathersService: feathersClient.service('shop'),
+  name: 'faq',
+  algebra
+})
+
+Shop.algebra = algebra
+
+export default Shop

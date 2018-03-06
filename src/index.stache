@@ -54,6 +54,11 @@
       <page-home />
     </can-import>
   {{/case}}
+  {{#case 'shop'}}
+    <can-import from="~/pages/page-shop/" can-tag="tag-loading">
+      <page-shop />
+    </can-import>
+  {{/case}}
   {{#case 'faqs'}}
     <can-import from="~/pages/page-faqs/" can-tag="tag-loading">
       <page-faqs />
@@ -123,6 +128,17 @@
     {{#if session.isAdmin}}
       <can-import from="~/pages/admin-faqs/" can-tag="tag-loading">
         <admin-faqs session:from="session" />
+      </can-import>
+    {{else}}
+      <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
+        <page-unauthorized />
+      </can-import>
+    {{/if}}
+  {{/case}}
+  {{#case 'admin-shop'}}
+    {{#if session.isAdmin}}
+      <can-import from="~/pages/admin-shop/" can-tag="tag-loading">
+        <admin-shop session:from="session" />
       </can-import>
     {{else}}
       <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">

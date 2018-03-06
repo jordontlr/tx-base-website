@@ -1,11 +1,11 @@
 import Component from 'can-component'
-import DefineMap from 'can-define/map/map'
-import './page-faqs.less'
-import view from './page-faqs.stache'
-import Faq from '~/models/faq'
+import DefineMap from 'can-define/map/'
+import './page-shop.less'
+import view from './page-shop.stache'
+import Shop from '~/models/shop'
 
 export const ViewModel = DefineMap.extend({
-  loadingFAQs: {
+  loadingShop: {
     value: true,
     get (val, resolve) {
       if (!val) { return val }
@@ -14,20 +14,20 @@ export const ViewModel = DefineMap.extend({
   },
   rowsPromise: {
     value () {
-      return Faq.getList()
-        .then(faqs => {
-          this.rows = faqs
-          this.filteredRows = faqs
-          setTimeout(() => { this.loadingFAQs = false }, 25)
+      return Shop.getList()
+        .then(shop => {
+          this.rows = shop
+          this.filteredRows = shop
+          setTimeout(() => { this.loadingShop = false }, 25)
         })
         .catch(err => console.log(err))
     }
   },
   rows: {
-    Type: Faq.List
+    Type: Shop.List
   },
   filteredRows: {
-    Type: Faq.List
+    Type: Shop.List
   },
   filterBy: {
     type: 'string'
@@ -55,7 +55,7 @@ export const ViewModel = DefineMap.extend({
 })
 
 export default Component.extend({
-  tag: 'page-faqs',
+  tag: 'page-shop',
   ViewModel,
   view
 })
