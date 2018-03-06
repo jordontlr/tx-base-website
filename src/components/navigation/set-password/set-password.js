@@ -17,6 +17,7 @@ export const ViewModel = DefineMap.extend({
     }
   },
   changeError: 'boolean',
+  changeErrorSamePassword: 'boolean',
   processing: 'boolean',
   passwordError: 'string',
   disableForm: {
@@ -46,28 +47,37 @@ export const ViewModel = DefineMap.extend({
     ev.preventDefault()
     if (this.hasErrors) return false
     this.changeError = false
+    this.changeErrorSamePassword = false
     this.processing = true
     this.disableForm = true
 
-    this.session.user.changePassword(password, this.session.tmpPassword)
-      .then(() => {
-        this.processing = false
-        this.changeError = false
-        this.disableForm = false
-        this.password = null
+    if (password != this.session.tmpPassword) {
+      this.session.user.changePassword(password, this.session.tmpPassword)
+        .then(() => {
+          this.processing = false
+          this.changeError = false
+          this.changeErrorSamePassword = false
+          this.disableForm = false
+          this.password = null
 
-        delete this.session.tmpPassword
+          delete this.session.tmpPassword
 
-        $('#set-password-modal').modal('hide')
-      })
-      .catch(err => {
-        this.disableForm = false
-        this.processing = false
-        this.changeError = true
+          $('#set-password-modal').modal('hide')
+        })
+        .catch(err => {
+          this.disableForm = false
+          this.processing = false
+          this.changeError = true
+          this.changeErrorSamePassword = false
 
-        if (err.status === 401) this.session.error401()
-        else console.log(err)
-      })
+          if (err.status === 401) this.session.error401()
+          else console.log(err)
+        })
+    } else {
+      this.changeErrorSamePassword = true
+      this.disableForm = false
+      this.processing = false
+    }
   }
 })
 
