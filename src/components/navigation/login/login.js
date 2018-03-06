@@ -71,7 +71,7 @@ export const ViewModel = DefineMap.extend({
         route.data.set({page: 'dash'}, true)
 
         this.session.loggedIn = true
-        if (tmpPasswordUsed) {
+        if (tmpPasswordUsed || user.isNewUser) {
           this.session.tmpPassword = password
           $('#set-password-modal').modal('show')
         }
