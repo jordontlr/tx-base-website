@@ -87,7 +87,8 @@ export const ViewModel = DefineMap.extend({
     this.loadingProfile = true
     Profile.getList()
       .then(profile => {
-        this.currentProfile = profile[0]
+        if (profile.length < 1) this.currentProfile = new Profile({})
+        else this.currentProfile = profile[0]
         setTimeout(() => { this.loadingProfile = false }, 25)
       })
       .catch(err => {

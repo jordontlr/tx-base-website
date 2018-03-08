@@ -15,6 +15,7 @@ const Profile = DefineMap.extend('Profile', {
   dayOfBirth: 'number',
   monthOfBirth: 'number',
   yearOfBirth: 'number',
+  userId: 'string',
   updatedAt: 'date',
   createdAt: 'date'
 })
