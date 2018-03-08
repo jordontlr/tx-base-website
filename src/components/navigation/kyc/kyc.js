@@ -14,7 +14,6 @@ import 'bootstrap-select'
 import validate from '~/utils/validators'
 import User from '~/models/user'
 import Kyc from '~/models/kyc'
-import '~/models/fixtures/kyc'
 
 export const ViewModel = DefineMap.extend({
   startYear: {
@@ -262,7 +261,7 @@ export const ViewModel = DefineMap.extend({
           this.processing = false
           $bs.trigger('reset-select-picker')
 
-          if (err.status === 401) this.session.error401()
+          if (err.code === 401) this.session.error401()
           else console.log(err)
         })
     } else {
