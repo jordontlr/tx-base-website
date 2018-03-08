@@ -96,7 +96,6 @@ export const ViewModel = DefineMap.extend({
         else if (err.code === 404) this.currentProfile = new Profile({})
         else console.log(err)
       })
-
   }
 })
 
