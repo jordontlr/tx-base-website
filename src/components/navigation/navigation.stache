@@ -37,6 +37,8 @@
           <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{email}} <span class="caret"></span></a>
             <ul class="dropdown-menu">
+              <li><a href="" data-toggle="modal" data-target="#profile-modal" on:click="closeMenu()">Profile</a></li>
+              <li class="divider"></li>
               <li><a href="" data-toggle="modal" data-target="#kyc-modal" on:click="closeMenu()">Identity Verification</a></li>
               <li class="divider"></li>
               <li><a href="" data-toggle="modal" data-target="#change-password-modal" on:click="closeMenu()">Change Password</a></li>
@@ -71,10 +73,12 @@
 
 {{else}}
 
+  <can-import from="~/components/navigation/profile/" />
   <can-import from="~/components/navigation/kyc/" />
   <can-import from="~/components/navigation/set-password/" />
   <can-import from="~/components/navigation/change-password/" />
   <can-import from="~/components/navigation/change-email/" />
+  <profile-modal session:from="session" />
   <kyc-modal session:from="session" />
   <set-password-modal session:from="session" />
   <change-password-modal session:from="session" />
