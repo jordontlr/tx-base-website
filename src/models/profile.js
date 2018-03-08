@@ -8,8 +8,8 @@ import algebra from './algebra'
 
 const Profile = DefineMap.extend('Profile', {
   _id: 'any',
-  first: 'string',
-  last: 'string',
+  firstName: 'string',
+  lastName: 'string',
   image: 'string',
   gender: 'string',
   dayOfBirth: 'number',
@@ -29,7 +29,7 @@ Profile.connection = connect([
 ], {
   Map: Profile,
   List: Profile.List,
-  feathersService: feathersClient.service('faq'),
+  feathersService: feathersClient.service('profile'),
   name: 'faq',
   algebra
 })
