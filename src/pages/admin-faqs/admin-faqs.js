@@ -48,7 +48,7 @@ export const ViewModel = DefineMap.extend({
         setTimeout(() => { this.loadingFAQs = false }, 25)
       })
       .catch(err => {
-        if (err.status === 401) this.session.error401()
+        if (err.code === 401) this.session.error401()
         else console.log(err)
       })
   }

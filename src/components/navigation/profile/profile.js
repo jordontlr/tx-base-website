@@ -6,8 +6,7 @@ import './profile.less'
 import view from './profile.stache'
 import monthsData from './data/months'
 import 'bootstrap-select'
-import User from '~/models/user'
-// import Profile from '~/models/profile'
+import Profile from '~/models/profile'
 
 export const ViewModel = DefineMap.extend({
   startYear: {
@@ -19,11 +18,18 @@ export const ViewModel = DefineMap.extend({
   dropDownSize: {
     value: 12
   },
-  currentUser: {
-    Type: User
+  loadingProfile: {
+    type: 'boolean',
+    value: true,
+    get () {
+      this.loadPage()
+    }
   },
   session: {
     type: 'any'
+  },
+  currentProfile: {
+    Type: Profile
   },
   monthsList: {
     Type: DefineList,
@@ -43,13 +49,6 @@ export const ViewModel = DefineMap.extend({
   },
   disableForm: 'boolean',
   processing: 'boolean',
-  firstName: 'string',
-  firstNameError: 'string',
-  lastName: 'string',
-  gender: 'string',
-  dayOfBirth: 'number',
-  monthOfBirth: 'number',
-  yearOfBirth: 'number',
   dayOfBirthString: {
     get () {
       let s = '0' + this.dayOfBirth
@@ -65,17 +64,25 @@ export const ViewModel = DefineMap.extend({
   clearForm () {
     this.processing = false
     this.disableForm = false
-    this.firstName = null
-    this.lastName = null
-    this.gender = null
-    this.dayOfBirth = 1
-    this.monthOfBirth = 1
-    this.yearOfBirth = this.startYear
     $('.bootstrap-select').trigger('reset-select-picker')
     $('#profile-modal').modal('hide')
   },
-  save () {
-    console.log('here')
+  save (something) {
+    console.log('here', something)
+  },
+  loadPage () {
+    this.loadingProfile = true
+    Profile.get()
+      .then(profile => {
+        this.currentProfile = profile
+        setTimeout(() => { this.loadingProfile = false }, 25)
+      })
+      .catch(err => {
+        if (err.code === 401) this.session.error401()
+        else if (err.code === 404) this.currentProfile = new Profile({})
+        else console.log(err)
+      })
+
   }
 })
 

@@ -30,7 +30,7 @@ Profile.connection = connect([
   Map: Profile,
   List: Profile.List,
   feathersService: feathersClient.service('profile'),
-  name: 'faq',
+  name: 'profile',
   algebra
 })
 

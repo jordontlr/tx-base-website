@@ -70,7 +70,7 @@ export const ViewModel = DefineMap.extend({
           this.changeError = true
           this.changeErrorSamePassword = false
 
-          if (err.status === 401) this.session.error401()
+          if (err.code === 401) this.session.error401()
           else console.log(err)
         })
     } else {

@@ -49,7 +49,7 @@ export const ViewModel = DefineMap.extend({
         setTimeout(() => { this.loadingUsers = false }, 25)
       })
       .catch(err => {
-        if (err.status === 401) this.session.error401()
+        if (err.code === 401) this.session.error401()
         else console.log(err)
       })
   },
@@ -68,7 +68,7 @@ export const ViewModel = DefineMap.extend({
         $('#KYCUser').modal('show')
       })
       .catch(err => {
-        if (err.status === 401) this.session.error401()
+        if (err.code === 401) this.session.error401()
         else console.log(err)
       })
   },
@@ -96,7 +96,7 @@ export default Component.extend({
           setTimeout(() => { this.viewModel.loadingUsers = false }, 25)
         })
         .catch(err => {
-          if (err.status === 401) this.viewModel.session.error401()
+          if (err.code === 401) this.viewModel.session.error401()
           else console.log(err)
         })
     }

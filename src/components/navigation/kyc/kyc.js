@@ -261,7 +261,7 @@ export const ViewModel = DefineMap.extend({
           this.processing = false
           $bs.trigger('reset-select-picker')
 
-          if (err.status === 401) this.session.error401()
+          if (err.code === 401) this.session.error401()
           else console.log(err)
         })
     } else {
