@@ -15,8 +15,8 @@ const Profile = DefineMap.extend('Profile', {
   dayOfBirth: 'number',
   monthOfBirth: 'number',
   yearOfBirth: 'number',
-  updatedAt: 'number',
-  createdAt: 'number'
+  updatedAt: 'date',
+  createdAt: 'date'
 })
 
 Profile.List = DefineList.extend({

@@ -67,14 +67,27 @@ export const ViewModel = DefineMap.extend({
     $('.bootstrap-select').trigger('reset-select-picker')
     $('#profile-modal').modal('hide')
   },
-  save (something) {
-    console.log('here', something)
+  save () {
+    this.currentProfile.save()
+      .then(() => {
+        this.processing = false
+        this.disableForm = false
+
+        $('#profile-modal').modal('hide')
+      })
+      .catch(err => {
+        this.disableForm = false
+        this.processing = false
+
+        if (err.code === 401) this.session.error401()
+        else console.log(err)
+      })
   },
   loadPage () {
     this.loadingProfile = true
-    Profile.get()
+    Profile.getList()
       .then(profile => {
-        this.currentProfile = profile
+        this.currentProfile = profile[0]
         setTimeout(() => { this.loadingProfile = false }, 25)
       })
       .catch(err => {
