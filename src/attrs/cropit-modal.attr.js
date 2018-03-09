@@ -9,8 +9,6 @@ callback.attr('cropit-modal', (el) => {
   $el.on('shown.bs.modal', function () {
     let $cropit = $el.find('#image-cropper')
 
-    console.log($cropit.attr('data-init'))
-
     if (!init) {
       init = true
 
