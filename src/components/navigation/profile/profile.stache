@@ -1,7 +1,8 @@
 <can-import from="~/attrs/modal-autofocus.attr" />
 <can-import from="~/attrs/selectpicker.attr" />
+<can-import from="~/attrs/cropit-modal.attr" />
 
-<div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" modal-autofocus>
+<div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" modal-autofocus cropit-modal>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,64 +14,103 @@
           {{^if loadingProfile}}
             {{#currentProfile}}
               <div class="row">
-                <div class="col-xs-6 col-sm-4">
-                  <div class="form-group">
-                    <label for="profile-first-name">First Name</label>
-                    <input type="text" class="form-control" id="profile-first-name" placeholder="First Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus value:bind="firstName" {{#if disableForm}}disabled{{/if}}>
+                <div class="col-sm-7">
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <div class="form-group">
+                        <label for="profile-first-name">First Name</label>
+                        <input type="text" class="form-control" id="profile-first-name" placeholder="First Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus value:bind="firstName" {{#if ../disableForm}}disabled{{/if}}>
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group">
+                        <label for="profile-last-name">Last Name</label>
+                        <input type="text" class="form-control" id="profile-last-name" placeholder="Last Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="lastName" {{#if ../disableForm}}disabled{{/if}}>
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group">
+                        <label for="profile-select-gender">Gender</label>
+                        <select id="profile-select-gender" selectpicker="btn btn-default" value:bind="gender" class="bootstrap-select form-control show-tick" {{#if ../disableForm}}disabled{{/if}}>
+                          <option value="M">Male</option>
+                          <option value="F">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-xs-6">
+                      <div class="form-group">
+                        <label for="profile-country">Country</label>
+                        {{#if ../countryList}}
+                          <select id="profile-country" selectpicker="btn btn-default" value:bind="countryCode" class="bootstrap-select form-control show-tick" title="Select your Country" data-live-search="{{../countryListSearch}}" data-size="{{../dropDownSize}}" {{#if ../disableForm}}disabled{{/if}}>
+                            <option data-hidden="true"></option>
+                            {{#each ../countryList}}
+                              <option value="{{code}}">{{name}}</option>
+                            {{/each}}
+                          </select>
+                        {{/if}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-6 col-sm-4">
+                      <div class="form-group">
+                        <label for="profile-select-dob">Day of Birth</label>
+                        {{#if ../daysOfMonthList}}
+                          <select id="profile-select-dob" selectpicker="btn btn-default" value:bind="dayOfBirth" class="bootstrap-select form-control show-tick" data-size="{{../dropDownSize}}" {{#if ../disableForm}}disabled{{/if}}>
+                            {{#each ../daysOfMonthList}}
+                              <option>{{this}}</option>
+                            {{/each}}
+                          </select>
+                        {{/if}}
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                      <div class="form-group">
+                        <label for="profile-select-mob">Month of Birth</label>
+                        {{#if ../monthsList}}
+                          <select id="profile-select-mob" selectpicker="btn btn-default" value:bind="monthOfBirth" class="bootstrap-select form-control show-tick" data-size="{{../dropDownSize}}" {{#if ../disableForm}}disabled{{/if}}>
+                            {{#each ../monthsList}}
+                              <option value="{{number}}">{{full}}</option>
+                            {{/each}}
+                          </select>
+                        {{/if}}
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4">
+                      <div class="form-group">
+                        <label for="profile-select-yob">Year of Birth</label>
+                        {{#if ../yearsList}}
+                          <select id="profile-select-yob" selectpicker="btn btn-default" value:bind="yearOfBirth" class="bootstrap-select form-control show-tick" data-size="{{../dropDownSize}}" {{#if ../disableForm}}disabled{{/if}}>
+                            {{#each ../yearsList}}
+                              <option>{{this}}</option>
+                            {{/each}}
+                          </select>
+                        {{/if}}
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="col-xs-6 col-sm-4">
-                  <div class="form-group">
-                    <label for="profile-last-name">Last Name</label>
-                    <input type="text" class="form-control" id="profile-last-name" placeholder="Last Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="lastName" {{#if disableForm}}disabled{{/if}}>
+                <div class="col-sm-5">
+                  <label>Profile Image <span class="select-image-btn pull-right"><i class="fa fa-file-image-o" aria-hidden="true"></i> Select File</span></label>
+
+                  <div id="image-cropper">
+                    <div class="cropit-preview"></div>
+
+                    <div class="controls-wrapper">
+                      <div class="rotation-btns">
+                        <span class="rotate-ccw-btn"><i class="fa fa-undo" aria-hidden="true"></i></span>&nbsp;
+                        <span class="rotate-cw-btn"><i class="fa fa-repeat" aria-hidden="true"></i></span>
+                      </div>
+                      <div class="slider-wrapper">
+                        <span><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+                        <input type="range" class="cropit-image-zoom-input custom" min="0" max="1" step="0.01">
+                        <span><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></span>
+                      </div>
+                    </div>
+
+                    <input type="file" class="cropit-image-input" />
                   </div>
-                </div>
-                <div class="col-xs-6 col-sm-4">
-                  <div class="form-group">
-                    <label for="profile-select-gender">Gender</label>
-                    <select id="profile-select-gender" selectpicker="btn btn-default" value:bind="gender" class="bootstrap-select form-control show-tick" {{#if disableForm}}disabled{{/if}}>
-                      <option value="M">Male</option>
-                      <option value="F">Female</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-6 col-sm-4">
-                  <div class="form-group">
-                    <label for="profile-select-dob">Day of Birth</label>
-                    {{#if ../daysOfMonthList}}
-                      <select id="profile-select-dob" selectpicker="btn btn-default" value:bind="dayOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
-                        {{#each ../daysOfMonthList}}
-                          <option>{{this}}</option>
-                        {{/each}}
-                      </select>
-                    {{/if}}
-                  </div>
-                </div>
-                <div class="col-xs-6 col-sm-4">
-                  <div class="form-group">
-                    <label for="profile-select-mob">Month of Birth</label>
-                    {{#if ../monthsList}}
-                      <select id="profile-select-mob" selectpicker="btn btn-default" value:bind="monthOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
-                        {{#each ../monthsList}}
-                          <option value="{{number}}">{{full}}</option>
-                        {{/each}}
-                      </select>
-                    {{/if}}
-                  </div>
-                </div>
-                <div class="col-xs-6 col-sm-4">
-                  <div class="form-group">
-                    <label for="profile-select-yob">Year of Birth</label>
-                    {{#if ../yearsList}}
-                      <select id="profile-select-yob" selectpicker="btn btn-default" value:bind="yearOfBirth" class="bootstrap-select form-control show-tick" data-size="{{dropDownSize}}" {{#if disableForm}}disabled{{/if}}>
-                        {{#each ../yearsList}}
-                          <option>{{this}}</option>
-                        {{/each}}
-                      </select>
-                    {{/if}}
-                  </div>
+
                 </div>
               </div>
             {{/currentProfile}}

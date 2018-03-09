@@ -12,6 +12,7 @@ const Profile = DefineMap.extend('Profile', {
   lastName: 'string',
   image: 'string',
   gender: 'string',
+  countryCode: 'string',
   dayOfBirth: 'number',
   monthOfBirth: 'number',
   yearOfBirth: 'number',

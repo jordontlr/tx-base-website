@@ -5,8 +5,10 @@ import DefineList from 'can-define/list/list'
 import './profile.less'
 import view from './profile.stache'
 import monthsData from './data/months'
+import countryData from './data/country'
 import 'bootstrap-select'
 import Profile from '~/models/profile'
+import Uploads from '~/models/uploads'
 
 export const ViewModel = DefineMap.extend({
   startYear: {
@@ -31,6 +33,12 @@ export const ViewModel = DefineMap.extend({
   currentProfile: {
     Type: Profile
   },
+  countryList: {
+    Type: DefineList,
+    value () {
+      return countryData
+    }
+  },
   monthsList: {
     Type: DefineList,
     value () {
@@ -45,6 +53,11 @@ export const ViewModel = DefineMap.extend({
   yearsList: {
     get () {
       return new DefineList(new Array(this.countYears).fill(0).map((v, i) => i + this.startYear))
+    }
+  },
+  countryListSearch: {
+    get () {
+      return (this.countryList.length > this.dropDownSize)
     }
   },
   disableForm: 'boolean',
@@ -68,20 +81,53 @@ export const ViewModel = DefineMap.extend({
     $('#profile-modal').modal('hide')
   },
   save () {
-    this.currentProfile.save()
-      .then(() => {
-        this.processing = false
-        this.disableForm = false
+    let $cropit = $('#image-cropper')
+    $cropit.trigger('get-data')
 
-        $('#profile-modal').modal('hide')
-      })
-      .catch(err => {
-        this.disableForm = false
-        this.processing = false
+    let imageData = $cropit.attr('data-image-data')
 
-        if (err.code === 401) this.session.error401()
-        else console.log(err)
+    if (imageData !== 'undefined') {
+      let sendObj = {
+        uri: imageData
+      }
+
+      let imageUpload = new Uploads(sendObj)
+
+      imageUpload
+        .save()
+        .then(imageInfo => {
+          this.currentProfile.image = imageInfo.id
+          this.currentProfile.save()
+            .then(() => {
+              this.processing = false
+              this.disableForm = false
+
+              $('#profile-modal').modal('hide')
+            })
+            .catch(err => {
+              this.disableForm = false
+              this.processing = false
+
+              if (err.code === 401) this.session.error401()
+              else console.log(err)
+            })
       })
+    } else {
+      this.currentProfile.save()
+        .then(() => {
+          this.processing = false
+          this.disableForm = false
+
+          $('#profile-modal').modal('hide')
+        })
+        .catch(err => {
+          this.disableForm = false
+          this.processing = false
+
+          if (err.code === 401) this.session.error401()
+          else console.log(err)
+        })
+    }
   },
   loadPage () {
     this.loadingProfile = true

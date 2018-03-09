@@ -1,3 +1,63 @@
 profile-modal {
 	display: block;
+
+	input.cropit-image-input {
+		visibility: hidden;
+	}
+	.cropit-preview {
+		position: relative;
+		width: 140px;
+		height: 140px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		margin: auto;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		-webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	}
+	.controls-wrapper {
+		margin-top: 10px;
+		text-align: center;
+		position: relative;
+	}
+	.controls-wrapper .rotation-btns {
+		font-size: 16px;
+		margin-right: 20px;
+		display: inline-block;
+	}
+	.rotation-btns > span {
+		vertical-align: middle;
+		transition: color 0.25s;
+		cursor: pointer;
+	}
+	.controls-wrapper .slider-wrapper {
+		-webkit-transition: opacity 0.25s;
+		-moz-transition: opacity 0.25s;
+		-o-transition: opacity 0.25s;
+		-ms-transition: opacity 0.25s;
+		transition: opacity 0.25s;
+		display: inline-block;
+	}
+	.controls-wrapper .slider-wrapper * {
+		vertical-align: middle;
+	}
+	.controls-wrapper .slider-wrapper .cropit-image-zoom-input.custom {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		height: 5px;
+		background: #eee;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+		outline: none;
+	}
+	.controls-wrapper .slider-wrapper .cropit-image-zoom-input {
+		display: inline-block;
+		width: 130px;
+		margin: 0 20px;
+	}
+	.cropit-preview-background-container {
+		opacity: 0.1;
+	}
 }
