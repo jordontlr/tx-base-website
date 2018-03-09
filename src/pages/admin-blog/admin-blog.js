@@ -57,16 +57,39 @@ export const ViewModel = DefineMap.extend({
   saveBlog () {
     this.processing = true
     this.disableForm = true
-    this.quill.enable(false)
-    this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
-    this.newEditBlog.post = $('.ql-editor').html()
-    this.newEditBlog.save()
-      .then(() => {
-        this.processing = false
-        this.disableForm = false
-        this.quill.enable(true)
-        $('#edit-modal').modal('hide')
-      })
+
+    if (this.imageData) {
+      let sendObj = {
+        uri: this.imageData
+      }
+      let imageUpload = new Uploads(sendObj)
+      imageUpload
+        .save()
+        .then(imageInfo => {
+          this.quill.enable(false)
+          this.newEditBlog.imageId = imageInfo._id
+          this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
+          this.newEditBlog.post = $('.ql-editor').html()
+          this.newEditBlog.save()
+            .then(() => {
+              this.processing = false
+              this.disableForm = false
+              this.quill.enable(true)
+              $('#edit-modal').modal('hide')
+            })
+        })
+    } else {
+      this.quill.enable(false)
+      this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
+      this.newEditBlog.post = $('.ql-editor').html()
+      this.newEditBlog.save()
+        .then(() => {
+          this.processing = false
+          this.disableForm = false
+          this.quill.enable(true)
+          $('#edit-modal').modal('hide')
+        })
+    }
   },
   deleteBlog (blog) {
     blog.destroy()
@@ -90,6 +113,9 @@ export const ViewModel = DefineMap.extend({
     this.quill.enable(true)
     this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#edit-modal').modal('hide')
+  },
+  initFileUpload () {
+    $('.image-input-btn').trigger('click')
   }
 })
 
@@ -130,6 +156,16 @@ export default Component.extend({
           if (err.code === 401) this.viewModel.session.error401()
           else console.log(err)
         })
+
+      const reader  = new FileReader()
+      $('input.image-input-btn').change(function() {
+        let file = this.files[0]
+        reader.readAsDataURL(file)
+      })
+
+      reader.addEventListener('load', () => {
+        this.viewModel.imageData = reader.result
+      }, false);
     }
   }
 })

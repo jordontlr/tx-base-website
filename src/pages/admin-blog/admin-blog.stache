@@ -97,7 +97,7 @@
               <img src="{{../imageData}}" class="img-responsive img-rounded">
             {{/if}}
             <br>
-            <button type="button" class="btn btn-warning btn-sm">Upload Image</button>
+            <button type="button" class="btn btn-warning btn-sm" on:click="initFileUpload()">Upload Image</button>
           </div>
 
           <div class="row">
@@ -130,7 +130,7 @@
           <label for="blog-post">Post</label>
           <div id="blog-post"></div>
         </div>
-
+        <input type="file" class="image-input-btn" accept="image/*" />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" on:click="clearForm()">Cancel</button>
