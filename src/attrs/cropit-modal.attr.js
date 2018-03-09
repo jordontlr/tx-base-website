@@ -39,6 +39,7 @@ callback.attr('cropit-modal', (el) => {
       })
 
       $cropit.attr('data-image-data', data)
+      $cropit.attr('data-current-image', data)
     })
   })
 })
