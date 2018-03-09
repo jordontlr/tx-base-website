@@ -96,7 +96,7 @@ export const ViewModel = DefineMap.extend({
       imageUpload
         .save()
         .then(imageInfo => {
-          this.currentProfile.image = imageInfo._id
+          this.currentProfile.imageId = imageInfo._id
           this.currentProfile.save()
             .then(() => {
               this.processing = false
@@ -111,7 +111,7 @@ export const ViewModel = DefineMap.extend({
               if (err.code === 401) this.session.error401()
               else console.log(err)
             })
-      })
+        })
     } else {
       this.currentProfile.save()
         .then(() => {
@@ -136,9 +136,9 @@ export const ViewModel = DefineMap.extend({
         if (profile.length < 1) this.currentProfile = new Profile({})
         else this.currentProfile = profile[0]
 
-        if (this.currentProfile.image !== 'undefined' && this.currentProfile.image !== '') {
+        if (this.currentProfile.imageId !== 'undefined' && this.currentProfile.imageId !== '' && this.currentProfile.imageId) {
           Uploads
-            .get({_id: this.currentProfile.image })
+            .get({ _id: this.currentProfile.imageId })
             .then(imageData => {
               $('#image-cropper').attr('data-current-image', imageData.uri)
             })

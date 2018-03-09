@@ -6,7 +6,7 @@ import view from './admin-blog.stache'
 import Quill from 'quill'
 import Pagination from '~/models/pagination'
 import Blog from '~/models/blog'
-import '~/models/fixtures/blog'
+import Uploads from '~/models/uploads'
 
 export const ViewModel = DefineMap.extend({
   newEditBlog: {
@@ -27,6 +27,7 @@ export const ViewModel = DefineMap.extend({
   rows: {
     Type: Blog.List
   },
+  imageData: 'string',
   pagination: {
     Type: Pagination,
     value () {
@@ -74,6 +75,13 @@ export const ViewModel = DefineMap.extend({
     Blog.get(blog._id).then(data => {
       this.quill.setContents(JSON.parse(data.delta))
       this.newEditBlog = data
+      if (this.newEditBlog.imageId !== 'undefined' && this.newEditBlog.imageId !== '' && this.newEditBlog.imageId) {
+        Uploads
+          .get({ _id: this.newEditBlog.imageId })
+          .then(imageData => {
+            this.imageData = imageData.uri
+          })
+      }
       $('#edit-modal').modal('show')
     })
   },

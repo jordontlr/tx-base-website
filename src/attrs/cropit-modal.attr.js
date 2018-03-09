@@ -32,10 +32,10 @@ callback.attr('cropit-modal', (el) => {
       $cropit.cropit('rotateCCW')
     })
 
-    $cropit.on('get-data', function() {
+    $cropit.on('get-data', function () {
       let data = $cropit.cropit('export', {
         type: 'image/jpeg',
-        quality: .9
+        quality: 0.9
       })
 
       $cropit.attr('data-image-data', data)
