@@ -157,15 +157,15 @@ export default Component.extend({
           else console.log(err)
         })
 
-      const reader  = new FileReader()
-      $('input.image-input-btn').change(function() {
+      const reader = new window.FileReader()
+      $('input.image-input-btn').change(function () {
         let file = this.files[0]
         reader.readAsDataURL(file)
       })
 
       reader.addEventListener('load', () => {
         this.viewModel.imageData = reader.result
-      }, false);
+      }, false)
     }
   }
 })
