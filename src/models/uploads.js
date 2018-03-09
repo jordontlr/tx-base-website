@@ -7,7 +7,7 @@ import behaviors from './behaviors'
 import algebra from './algebra'
 
 const Uploads = DefineMap.extend('Uploads', {
-  id: 'any',
+  _id: 'any',
   uri: 'string',
   size: 'number'
 })
