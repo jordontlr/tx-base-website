@@ -92,10 +92,8 @@
                 </div>
                 <div class="col-sm-5">
                   <label>Profile Image <span class="select-image-btn pull-right"><i class="fa fa-file-image-o" aria-hidden="true"></i> Select File</span></label>
-
                   <div id="image-cropper">
                     <div class="cropit-preview"></div>
-
                     <div class="controls-wrapper">
                       <div class="rotation-btns">
                         <span class="rotate-ccw-btn"><i class="fa fa-undo" aria-hidden="true"></i></span>&nbsp;
@@ -107,10 +105,8 @@
                         <span><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></span>
                       </div>
                     </div>
-
                     <input type="file" class="cropit-image-input" />
                   </div>
-
                 </div>
               </div>
             {{/currentProfile}}

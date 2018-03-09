@@ -15,6 +15,11 @@ callback.attr('cropit-modal', (el) => {
       imageBackgroundBorderWidth: 5
     })
 
+    let current = $cropit.attr('data-current-image')
+    if (current !== 'undefined' && current !== '') {
+      $cropit.cropit('imageSrc', current)
+    }
+
     $('.select-image-btn').click(function () {
       $el.find('.cropit-image-input').click()
     })
