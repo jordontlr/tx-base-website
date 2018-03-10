@@ -20,7 +20,7 @@
               <div class="form-group no-margin-bottom">
                 <div class="form-group">
                   <label for="answer">Answer</label>
-                  <input type="text" class="form-control" id="answer" placeholder="Answer" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="answer" {{#if ../disableForm}}disabled{{/if}}>
+                  <div id="faq-answer"></div>
                 </div>
               </div>
             </div>

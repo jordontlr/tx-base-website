@@ -28,7 +28,7 @@
                   {{#each rows}}
                     <tr>
                       <td class="text-nowrap text-center">{{question}}</td>
-                      <td class="text-nowrap text-center">{{answer}}</td>
+                      <td class="text-nowrap text-center">{{shorten answer 50}}</td>
                       <td class="text-nowrap text-center">{{category}}</td>
                       <td class="text-nowrap text-center">
                         <button class="btn btn-primary btn-sm" type="button" on:click="openFAQ(.)">Edit</button>

@@ -3,11 +3,15 @@ import Component from 'can-component'
 import DefineMap from 'can-define/map/'
 import './edit-faq.less'
 import view from './edit-faq.stache'
+import Quill from 'quill'
 import Faq from '~/models/faq'
 
 export const ViewModel = DefineMap.extend({
   disableForm: {
     value: false
+  },
+  quill: {
+    type: 'any'
   },
   processing: 'boolean',
   editFAQ: {
@@ -42,5 +46,25 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'edit-faq',
   ViewModel,
-  view
+  view,
+  events: {
+    inserted: function () {
+      let toolbarOptions = [
+        ['bold', 'italic', 'underline'],
+        ['blockquote', 'code-block'],
+        [{'list': 'ordered'}, {'list': 'bullet'}],
+        [{'color': []}, {'background': []}],
+        [{'align': []}],
+        ['link'],
+        ['clean']
+      ]
+
+      this.viewModel.quill = new Quill('#faq-answer', {
+        modules: {
+          toolbar: toolbarOptions
+        },
+        theme: 'snow'
+      })
+    }
+  }
 })
