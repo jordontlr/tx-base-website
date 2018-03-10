@@ -73,21 +73,31 @@
             <can-import from="~/pages/page-blog/" can-tag="tag-loading">
               <page-blog filterAuthor:from="target" />
             </can-import>
+          {{else}}
+            <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
+              <page-missing />
+            </can-import>
           {{/if}}
         {{/case}}
-
         {{#case 'category'}}
           {{#if target}}
             <can-import from="~/pages/page-blog/" can-tag="tag-loading">
               <page-blog filterCategory:from="target" />
             </can-import>
+          {{else}}
+            <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
+              <page-missing />
+            </can-import>
           {{/if}}
         {{/case}}
-
         {{#case 'tags'}}
           {{#if target}}
             <can-import from="~/pages/page-blog/" can-tag="tag-loading">
               <page-blog filterTags:from="target" />
+            </can-import>
+          {{else}}
+            <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
+              <page-missing />
             </can-import>
           {{/if}}
         {{/case}}
