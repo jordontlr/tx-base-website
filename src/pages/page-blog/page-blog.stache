@@ -9,6 +9,9 @@
         {{#if filterAuthor}}
           <p>For Author <strong>{{filterAuthor}}</strong></p>
         {{/if}}
+        {{#if filterCategory}}
+          <p>For Category <strong>{{filterCategory}}</strong></p>
+        {{/if}}
       </div>
     </div>
   </div>
@@ -24,8 +27,15 @@
         <div class="col-sm-8 col-sm-offset-2">
           <div class="h3"><a href="{{routeUrl page='blog' slug=linkTitle}}">{{title}}</a></div>
           <p class="small">
-            {{^if filterAuthor}}
-              <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
+            {{#if author}}
+              {{^if filterAuthor}}
+                <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
+              {{/if}}
+            {{/if}}
+            {{#if category}}
+              {{^if filterCategory}}
+                <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a> |
+              {{/if}}
             {{/if}}
             {{timestamp datetime}}
           </p>

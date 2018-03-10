@@ -74,6 +74,12 @@
           </can-import>
         {{/case}}
 
+        {{#case 'category'}}
+          <can-import from="~/pages/page-blog/" can-tag="tag-loading">
+            <page-blog filterCategory:from="target" />
+          </can-import>
+        {{/case}}
+
       {{#default}}
         <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
           <blog-post slug:from="slug" />

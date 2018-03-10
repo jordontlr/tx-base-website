@@ -12,7 +12,13 @@
             <div class="jumbotron">
               <h1>{{title}}</h1>
               <p class="small">
-                <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> | {{timestampDetailed datetime}}
+                {{#if author}}
+                  <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
+                {{/if}}
+                {{#if category}}
+                  <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a> |
+                {{/if}}
+                {{timestampDetailed datetime}}
               </p>
               <p>{{shortPost}}</p>
             </div>
