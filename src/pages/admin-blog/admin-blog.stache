@@ -135,7 +135,11 @@
             <div class="col-sm-8">
               <div class="form-group">
                 <label for="blog-tags">Tags</label><br>
-                <select multiple tagsinput=10 id="blog-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}></select>
+                <select multiple tagsinput=10 id="blog-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
+                  {{#each tags}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
               </div>
             </div>
           </div>
