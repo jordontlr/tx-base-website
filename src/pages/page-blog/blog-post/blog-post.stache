@@ -11,7 +11,9 @@
           <div class="col-sm-12">
             <div class="jumbotron">
               <h1>{{title}}</h1>
-              <p class="small">{{author}} | {{timestampDetailed datetime}}</p>
+              <p class="small">
+                <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> | {{timestampDetailed datetime}}
+              </p>
               <p>{{shortPost}}</p>
             </div>
           </div>

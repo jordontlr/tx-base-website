@@ -23,7 +23,7 @@ export const ViewModel = DefineMap.extend({
         $skip: pagination.skip,
         $limit: pagination.limit,
         $sort: {
-          createdAt: -1
+          datetime: -1
         },
         published: true
       }
