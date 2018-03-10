@@ -1,4 +1,5 @@
 <can-import from="grid-component" />
+<can-import from="~/attrs/datetimepicker.attr" />
 
 <div class="container">
   <div class="row">
@@ -18,7 +19,7 @@
                 <th class="text-nowrap text-center">Title</th>
                 <th class="text-nowrap text-center">Author</th>
                 <th class="text-nowrap text-center">Published</th>
-                <th class="text-nowrap text-center">Date</th>
+                <th class="text-nowrap text-center">Create Date</th>
                 <th class="text-nowrap text-center">Actions</th>
               </tr>
               </thead>
@@ -30,7 +31,7 @@
                       <td class="text-nowrap text-center">{{title}}</td>
                       <td class="text-nowrap text-center">{{author}}</td>
                       <td class="text-nowrap text-center">{{#if published}}<i class="fa fa-check text-success"></i>{{else}}<i class="fa fa-close text-danger"></i>{{/if}}</td>
-                      <td class="text-nowrap text-center">{{timestampDetailed datetime}}</td>
+                      <td class="text-nowrap text-center">{{timestampDetailed createdAt}}</td>
                       <td class="text-nowrap text-center">
                         <button class="btn btn-primary btn-sm" type="button" on:click="editBlog(.)">Edit</button>
                         <button class="btn btn-danger btn-sm" type="button" on:click="deleteBlog(.)">Delete</button>
@@ -64,14 +65,11 @@
 
           </div>
         </grid-component>
-
         <div class="row">
           <div class="col-sm-3 col-sm-offset-9">
             <button class="btn btn-primary btn-block margin-top" data-toggle="modal" data-target="#edit-modal">Add New Post</button>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
@@ -101,13 +99,13 @@
           </div>
 
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <div class="form-group">
                 <label for="blog-author">Post Author</label>
                 <input type="text" class="form-control" id="blog-author" value:bind="author" placeholder="Post Author" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <div class="form-group text-center">
                 <label> </label>
                 <div class="checkbox checkbox-primary">
@@ -116,6 +114,12 @@
                     Publish Post
                   </label>
                 </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="blog-datetime">Post Date / Time</label>
+                <input type="text" class="form-control" id="blog-datetime" datetimepicker="{{timestampTimeDatePicker datetime}}" placeholder="Post Date / Time" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
               </div>
             </div>
           </div>

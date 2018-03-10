@@ -36,3 +36,8 @@ stache.addHelper('numberFormat', num => {
     return '<span class="text-danger">' + formatter.format(num) + '</span>'
   } else return formatter.format(num)
 })
+
+stache.addHelper('timestampTimeDatePicker', ts => {
+  if (ts) return (ts ? moment(ts).format('MM/DD/YYYY h:mm a') : null)
+  else return "TBD"
+})

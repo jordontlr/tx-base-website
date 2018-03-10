@@ -66,9 +66,19 @@
   {{/case}}
   {{#case 'blog'}}
     {{#if slug}}
-      <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
-        <blog-post slug:from="slug" />
-      </can-import>
+      {{#switch slug}}
+
+        {{#case 'author'}}
+
+          
+        {{/case}}
+
+      {{#default}}
+        <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
+          <blog-post slug:from="slug" />
+        </can-import>
+      {{/default}}
+    {{/switch}}
     {{else}}
       <can-import from="~/pages/page-blog/" can-tag="tag-loading">
         <page-blog />

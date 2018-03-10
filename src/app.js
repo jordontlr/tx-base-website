@@ -20,6 +20,10 @@ const AppViewModel = DefineMap.extend({
     type: 'string',
     serialize: true
   },
+  target: {
+    type: 'string',
+    serialize: true
+  },
   session: {
     Type: Session,
     value: function () {
@@ -51,5 +55,6 @@ const AppViewModel = DefineMap.extend({
 
 route('{page}', { page: 'home' })
 route('{page}/{slug}', { slug: null })
+route('{page}/{slug}/{target}', { target: null })
 
 export default AppViewModel
