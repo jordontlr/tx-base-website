@@ -14,10 +14,27 @@ export const ViewModel = DefineMap.extend({
       this.rowsPromise.then(resolve)
     }
   },
+  filterAuthor: 'string',
   rowsPromise: {
     value () {
       let pagination = this.pagination
-      return Blog.getList({ $skip: pagination.skip, $limit: pagination.limit, $sort: {createdAt: -1}, published: true })
+
+      let query = {
+        $skip: pagination.skip,
+        $limit: pagination.limit,
+        $sort: {
+          createdAt: -1
+        },
+        published: true
+      }
+
+      if (this.filterAuthor) {
+        query = Object.assign(query, {
+          author: this.filterAuthor
+        })
+      }
+
+      return Blog.getList(query)
         .then(blog => {
           this.rows = blog
           blog.forEach((currentValue) => {
