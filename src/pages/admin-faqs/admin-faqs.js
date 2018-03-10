@@ -5,8 +5,15 @@ import './admin-faqs.less'
 import view from './admin-faqs.stache'
 import Pagination from '~/models/pagination'
 import Faq from '~/models/faq'
+import Quill from 'quill'
 
 export const ViewModel = DefineMap.extend({
+  processing: {
+    value: false
+  },
+  disableForm: {
+    value: false
+  },
   session: {
     type: 'any'
   },
@@ -20,6 +27,9 @@ export const ViewModel = DefineMap.extend({
   rows: {
     Type: Faq.List
   },
+  quill: {
+    type: 'any'
+  },
   pagination: {
     Type: Pagination,
     value () {
@@ -32,6 +42,13 @@ export const ViewModel = DefineMap.extend({
   },
   openFAQ (faq) {
     this.editFAQ = faq
+    this.quill.setContents(JSON.parse(this.editFAQ.delta))
+
+    $('#editFAQ').modal('show')
+  },
+  addNew () {
+    this.editFAQ = new Faq({})
+    this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#editFAQ').modal('show')
   },
   deleteFAQ (faq) {
@@ -51,11 +68,60 @@ export const ViewModel = DefineMap.extend({
         if (err.code === 401) this.session.error401()
         else console.log(err)
       })
+  },
+  saveFAQ () {
+    this.processing = true
+    this.disableForm = true
+
+    this.editFAQ.delta = JSON.stringify(this.quill.getContents())
+    this.editFAQ.answer = $('.ql-editor').html()
+
+    this.editFAQ.save()
+      .then(() => {
+        this.processing = false
+        this.disableForm = false
+
+        this.clearForm()
+      })
+      .catch(err => {
+        this.processing = false
+        this.disableForm = false
+
+        if (err.code === 401) this.session.error401()
+        else console.log(err)
+      })
+  },
+  clearForm () {
+    this.editFAQ = new Faq({})
+    this.quill.enable(true)
+    this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
+
+    $('#editFAQ').modal('hide')
   }
 })
 
 export default Component.extend({
   tag: 'admin-faqs',
   ViewModel,
-  view
+  view,
+  events: {
+    inserted: function () {
+      let toolbarOptions = [
+        ['bold', 'italic', 'underline'],
+        ['blockquote', 'code-block'],
+        [{'list': 'ordered'}, {'list': 'bullet'}],
+        [{'color': []}, {'background': []}],
+        [{'align': []}],
+        ['link'],
+        ['clean']
+      ]
+
+      this.viewModel.quill = new Quill('#faq-answer', {
+        modules: {
+          toolbar: toolbarOptions
+        },
+        theme: 'snow'
+      })
+    }
+  }
 })

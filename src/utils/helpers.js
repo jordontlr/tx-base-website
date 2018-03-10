@@ -41,3 +41,13 @@ stache.addHelper('timestampTimeDatePicker', ts => {
   if (ts) return (ts ? moment(ts).format('MM/DD/YYYY h:mm a') : null)
   else return 'TBD'
 })
+
+stache.addHelper('stripHTML', (s, l) => {
+  if (s !== 'undefined' && s) {
+    let temporalDivElement = document.createElement('div')
+    temporalDivElement.innerHTML = s
+    s = temporalDivElement.textContent || temporalDivElement.innerText || ''
+  }
+  if (l !== 'undefined' && s && s.length > l) return s.substr(0, l) + '...'
+  else return s
+})
