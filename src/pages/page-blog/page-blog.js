@@ -16,6 +16,7 @@ export const ViewModel = DefineMap.extend({
   },
   filterAuthor: 'string',
   filterCategory: 'string',
+  filterTags: 'string',
   rowsPromise: {
     value () {
       let pagination = this.pagination
@@ -38,6 +39,12 @@ export const ViewModel = DefineMap.extend({
       if (this.filterCategory) {
         query = Object.assign(query, {
           category: this.filterCategory
+        })
+      }
+
+      if (this.filterTags) {
+        query = Object.assign(query, {
+          tags: { $in: [ this.filterTags ] }
         })
       }
 

@@ -12,6 +12,9 @@
         {{#if filterCategory}}
           <p>For Category <strong>{{filterCategory}}</strong></p>
         {{/if}}
+        {{#if filterTags}}
+          <p>For Posts with Tag <strong>{{filterTags}}</strong></p>
+        {{/if}}
       </div>
     </div>
   </div>

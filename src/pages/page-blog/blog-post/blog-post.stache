@@ -34,6 +34,17 @@
             {{{post}}}
           </div>
         </div>
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <hr>
+            {{#if tags}}
+              Tags:
+              {{#each tags}}
+                <a href="{{routeUrl page='blog' slug='tags' target=this}}">{{this}}</a>
+              {{/each}}
+            {{/if}}
+          </div>
+        </div>
       </div>
     {{/blogPost}}
   {{/if}}

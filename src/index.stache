@@ -84,6 +84,14 @@
           {{/if}}
         {{/case}}
 
+        {{#case 'tags'}}
+          {{#if target}}
+            <can-import from="~/pages/page-blog/" can-tag="tag-loading">
+              <page-blog filterTags:from="target" />
+            </can-import>
+          {{/if}}
+        {{/case}}
+
         {{#default}}
           <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
             <blog-post slug:from="slug" />
