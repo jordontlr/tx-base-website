@@ -39,5 +39,5 @@ stache.addHelper('numberFormat', num => {
 
 stache.addHelper('timestampTimeDatePicker', ts => {
   if (ts) return (ts ? moment(ts).format('MM/DD/YYYY h:mm a') : null)
-  else return "TBD"
+  else return 'TBD'
 })

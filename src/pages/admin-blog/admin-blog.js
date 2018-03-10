@@ -58,7 +58,7 @@ export const ViewModel = DefineMap.extend({
     this.processing = true
     this.disableForm = true
 
-    let $datetime = $("#blog-datetime")
+    let $datetime = $('#blog-datetime')
 
     if ($datetime.val() !== '') this.newEditBlog.datetime = Date.parse($datetime.val())
 
