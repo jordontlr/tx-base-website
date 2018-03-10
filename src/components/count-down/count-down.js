@@ -19,13 +19,13 @@ export const ViewModel = DefineMap.extend({
     value: '00'
   },
   days: {
-    values: '00'
+    value: '00'
   },
   hours: {
     value: '00'
   },
   minutes: {
-    values: '00'
+    value: '00'
   },
   seconds: {
     value: '00'
