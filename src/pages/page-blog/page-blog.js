@@ -17,7 +17,7 @@ export const ViewModel = DefineMap.extend({
   rowsPromise: {
     value () {
       let pagination = this.pagination
-      return Blog.getList({$skip: pagination.skip, $limit: pagination.limit, $sort: {createdAt: -1}, published: 'true' })
+      return Blog.getList({ $skip: pagination.skip, $limit: pagination.limit, $sort: {createdAt: -1}, published: 'true' })
         .then(blog => {
           this.rows = blog
           blog.forEach((currentValue) => {
