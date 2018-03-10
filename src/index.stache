@@ -69,23 +69,27 @@
       {{#switch slug}}
 
         {{#case 'author'}}
-          <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-            <page-blog filterAuthor:from="target" />
-          </can-import>
+          {{#if target}}
+            <can-import from="~/pages/page-blog/" can-tag="tag-loading">
+              <page-blog filterAuthor:from="target" />
+            </can-import>
+          {{/if}}
         {{/case}}
 
         {{#case 'category'}}
-          <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-            <page-blog filterCategory:from="target" />
-          </can-import>
+          {{#if target}}
+            <can-import from="~/pages/page-blog/" can-tag="tag-loading">
+              <page-blog filterCategory:from="target" />
+            </can-import>
+          {{/if}}
         {{/case}}
 
-      {{#default}}
-        <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
-          <blog-post slug:from="slug" />
-        </can-import>
-      {{/default}}
-    {{/switch}}
+        {{#default}}
+          <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
+            <blog-post slug:from="slug" />
+          </can-import>
+        {{/default}}
+      {{/switch}}
     {{else}}
       <can-import from="~/pages/page-blog/" can-tag="tag-loading">
         <page-blog />
