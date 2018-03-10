@@ -11,14 +11,16 @@
           <div class="col-sm-12">
             <div class="jumbotron">
               <h1>{{title}}</h1>
-              <p class="small">
-                {{#if author}}
-                  <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
-                {{/if}}
-                {{#if category}}
-                  <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a> |
-                {{/if}}
-                {{timestampDetailed datetime}}
+              <p>
+                <strong>
+                  {{#if author}}
+                    <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
+                  {{/if}}
+                  {{#if category}}
+                    <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a> |
+                  {{/if}}
+                  {{timestampDetailed datetime}}
+                </strong>
               </p>
               <p>{{shortPost}}</p>
             </div>
