@@ -14,26 +14,16 @@
   <div class="container">
 
     {{#if hasCategories}}
-      <div class="row">
-        <div class="col-sm-2 col-sm-offset-7">
-          <div class="pull-right" style="line-height: 32px;"><strong>Filter Category</strong></div>
-        </div>
-        <div class="col-sm-3">
-          <select id="kyc-select-gender" data-container="body" selectpicker="btn btn-default" value:bind="filterBy" on:change="runFilter()" class="bootstrap-select form-control show-tick">
-            <option value="">None</option>
-            {{#each categories}}
-              <option>{{this}}</option>
-            {{/each}}
-          </select>
-        </div>
-      </div>
+      {{#each categories}}
+        <h1>{{this}}</h1>
+      {{/each}}
     {{/if}}
 
-    {{#each filteredRows}}
+    {{#each rows}}
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
           <div class="h3">{{product}}</div>
-          <hr class="hr-primary">
+          <hr>
         </div>
       </div>
     {{/each}}
