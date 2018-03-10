@@ -1,5 +1,6 @@
 <can-import from="grid-component" />
 <can-import from="~/attrs/datetimepicker.attr" />
+<can-import from="~/attrs/tagsinput.attr" />
 
 <div class="container">
   <div class="row">
@@ -120,6 +121,21 @@
               <div class="form-group">
                 <label for="blog-datetime">Post Date / Time</label>
                 <input type="text" class="form-control" id="blog-datetime" datetimepicker="{{timestampTimeDatePicker datetime}}" placeholder="Post Date / Time" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="blog-category">Category</label>
+                <input type="text" class="form-control" id="blog-category" value:bind="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="form-group">
+                <label for="blog-tags">Tags</label><br>
+                <select multiple tagsinput=10 id="blog-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}></select>
               </div>
             </div>
           </div>

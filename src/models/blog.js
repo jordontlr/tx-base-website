@@ -15,6 +15,8 @@ const Blog = DefineMap.extend('Blog', {
   post: 'string',
   delta: 'string',
   author: 'string',
+  category: 'string',
+  tags: [ 'string' ],
   linkTitle: 'string',
   imageId: 'string',
   imageData: {

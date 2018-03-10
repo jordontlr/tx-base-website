@@ -62,6 +62,8 @@ export const ViewModel = DefineMap.extend({
 
     if ($datetime.val() !== '') this.newEditBlog.datetime = Date.parse($datetime.val())
 
+    this.newEditBlog.tags = $('#blog-tags').val()
+
     if (this.imageData) {
       let sendObj = {
         uri: this.imageData
