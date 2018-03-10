@@ -125,8 +125,6 @@
     </can-import>
   {{/case}}
 
-
-
   {{#case 'dash'}}
     {{#if session.loggedIn}}
       <can-import from="~/pages/page-dash/" can-tag="tag-loading">
@@ -138,8 +136,6 @@
       </can-import>
     {{/if}}
   {{/case}}
-
-
 
   {{#case 'admin-users'}}
     {{#if session.isAdmin}}
