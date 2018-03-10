@@ -43,7 +43,7 @@
             {{timestamp datetime}}
           </p>
           <p>{{shortPost}}</p>
-          <hr class="hr-primary">
+          <hr>
         </div>
       </div>
     {{/each}}

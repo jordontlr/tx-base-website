@@ -34,7 +34,7 @@
         <div class="col-sm-8 col-sm-offset-2">
           <div class="h3">{{question}}</div>
           <p class="small">{{answer}}</p>
-          <hr class="hr-primary">
+          <hr>
         </div>
       </div>
     {{/each}}

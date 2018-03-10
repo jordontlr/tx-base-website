@@ -19,6 +19,12 @@ export const ViewModel = DefineMap.extend({
       this.blogPromise.then(resolve)
     }
   },
+  authorPosts: {
+    Type: Blog.list
+  },
+  categoryPosts: {
+    Type: Blog.list
+  },
   errorNotFound: {
     value: false
   },
@@ -35,6 +41,31 @@ export const ViewModel = DefineMap.extend({
                 .get({ _id: this.blogPost.imageId })
                 .then(imageData => {
                   this.blogPost.imageData = imageData.uri
+                })
+            }
+            let query = {
+              $limit: 3,
+              $sort: {
+                datetime: -1
+              },
+              published: true
+            }
+
+            if (this.blogPost.author) {
+              let authorQuery = Object.assign({}, query, { author: this.blogPost.author, linkTitle: {$nin: this.blogPost.linkTitle} })
+              console.log(authorQuery)
+              Blog.getList(authorQuery)
+                .then(blog => {
+                  if (blog.length > 0) {
+                    this.authorPosts = blog
+                  } else {
+                    let categoryQuery = Object.assign({}, query, { category: this.blogPost.category, linkTitle: {$nin: this.blogPost.linkTitle} })
+                    console.log(categoryQuery)
+                    Blog.getList(categoryQuery)
+                      .then(blog => {
+                        if (blog.length > 0) this.categoryPosts = blog
+                      })
+                  }
                 })
             }
             setTimeout(() => { this.loadingBlogPost = false }, 25)
