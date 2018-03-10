@@ -24,7 +24,7 @@ export const ViewModel = DefineMap.extend({
   },
   blogPromise: {
     value () {
-      return Blog.getList({'linkTitle': this.slug, published: 'true'})
+      return Blog.getList({ 'linkTitle': this.slug, published: true })
         .then(blog => {
           if (blog.length === 0) {
             this.errorNotFound = true
