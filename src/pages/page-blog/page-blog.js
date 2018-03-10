@@ -4,6 +4,7 @@ import './page-blog.less'
 import view from './page-blog.stache'
 import Pagination from '~/models/pagination'
 import Blog from '~/models/blog'
+import Uploads from '~/models/uploads'
 
 export const ViewModel = DefineMap.extend({
   loadingBlog: {
@@ -16,9 +17,18 @@ export const ViewModel = DefineMap.extend({
   rowsPromise: {
     value () {
       let pagination = this.pagination
-      return Blog.getList({$skip: pagination.skip, $limit: pagination.limit, $sort: {createdAt: -1}})
+      return Blog.getList({$skip: pagination.skip, $limit: pagination.limit, $sort: {createdAt: -1}, published: 'true' })
         .then(blog => {
           this.rows = blog
+          blog.forEach((currentValue) => {
+            if (currentValue.imageId !== 'undefined' && currentValue.imageId !== '' && currentValue.imageId) {
+              Uploads
+                .get({ _id: currentValue.imageId })
+                .then(imageData => {
+                  currentValue.imageData = imageData.uri
+                })
+            }
+          })
           this.pagination.total = blog.total
           setTimeout(() => { this.loadingBlog = false }, 25)
         })

@@ -16,6 +16,9 @@
     {{#each rows}}
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
+          <div class="blog-image" style="background-image: url({{imageData}})"></div>
+        </div>
+        <div class="col-sm-8 col-sm-offset-2">
           <div class="h3"><a href="{{routeUrl page='blog' slug=linkTitle}}">{{title}}</a></div>
           <p class="small">{{author}} | {{timestamp datetime}}</p>
           <p>{{shortPost}}</p>

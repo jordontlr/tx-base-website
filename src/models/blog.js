@@ -17,6 +17,10 @@ const Blog = DefineMap.extend('Blog', {
   author: 'string',
   linkTitle: 'string',
   imageId: 'string',
+  imageData: {
+    serialize: false,
+    type: 'string'
+  },
   updatedAt: 'date',
   createdAt: 'date'
 })

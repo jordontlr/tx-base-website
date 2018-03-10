@@ -146,7 +146,7 @@ export default Component.extend({
       })
 
       let pagination = this.viewModel.pagination
-      Blog.getList({$skip: pagination.skip, $limit: pagination.limit})
+      Blog.getList({$skip: pagination.skip, $limit: pagination.limit, $sort: {createdAt: -1}})
         .then(blog => {
           this.viewModel.rows = blog
           this.viewModel.pagination.total = blog.total
