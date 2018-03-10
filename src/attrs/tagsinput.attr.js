@@ -10,6 +10,6 @@ callback.attr('tagsinput', (el) => {
     $el.tagsinput({
       tagClass: 'label label-primary',
       maxTags: value
-    });
+    })
   }, 50)
 })
