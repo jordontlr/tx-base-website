@@ -14,6 +14,11 @@ export const ViewModel = DefineMap.extend({
     }
   },
   filterCategory: 'string',
+  changeCategory (to) {
+    if (this.filterCategory !== to) this.filterCategory = to
+    else this.filterCategory = null
+    this.loadPage()
+  },
   sortType: {
     value: 'product'
   },

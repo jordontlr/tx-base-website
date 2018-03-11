@@ -20,7 +20,7 @@
         <div class="list-group">
           <div class="list-header list-group-item h3 no-margin-top">Product Categories</div>
           {{#each categories}}
-            <a href="#" class="list-group-item">{{this}}</a>
+            <a href="javascript:void(0)" on:click="changeCategory(this)" class="list-group-item {{#eq ../filterCategory this}} active{{/eq}}">{{this}}</a>
           {{/each}}
         </div>
       </div>
@@ -28,7 +28,7 @@
       <grid-component rows:bind="rows" pagination:bind="pagination" on:onpage="loadPage()">
         <div class="col-sm-9">
           {{#if ../filterCategory}}
-            <h1>{{../filterCategory}}</h1>
+            <h1 class="no-margin-top margin-bottom">{{../filterCategory}}</h1>
           {{/if}}
           <div class="row">
             <div class="col-sm-4">
@@ -40,7 +40,6 @@
                 <ul class="dropdown-menu">
                   <li><a href="javascript:void(0)" on:click="changeSortType('product')">Product</a></li>
                   <li><a href="javascript:void(0)" on:click="changeSortType('price')">Price</a></li>
-                  <li><a href="javascript:void(0)" on:click="changeSortType('review')">Reviews</a></li>
                 </ul>
               </div>
               <button class="btn btn-default" on:click="../changeSortDirection()"><i class="fa fa-arrow-{{../sortDirection}}" aria-hidden="true"></i></button>
