@@ -128,7 +128,7 @@
   {{#case 'dash'}}
     {{#if session.loggedIn}}
       <can-import from="~/pages/page-dash/" can-tag="tag-loading">
-        <page-dash session:from="session" />
+        <page-dash session:from="../session" />
       </can-import>
     {{else}}
       <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
@@ -140,7 +140,7 @@
   {{#case 'admin-users'}}
     {{#if session.isAdmin}}
       <can-import from="~/pages/admin-users/" can-tag="tag-loading">
-        <admin-users session:from="session" />
+        <admin-users session:from="../session" />
       </can-import>
     {{else}}
       <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
@@ -151,7 +151,7 @@
   {{#case 'admin-blog'}}
     {{#if session.isAdmin}}
       <can-import from="~/pages/admin-blog/" can-tag="tag-loading">
-        <admin-blog session:from="session" />
+        <admin-blog session:from="../session" />
       </can-import>
     {{else}}
       <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
@@ -162,7 +162,7 @@
   {{#case 'admin-faqs'}}
     {{#if session.isAdmin}}
       <can-import from="~/pages/admin-faqs/" can-tag="tag-loading">
-        <admin-faqs session:from="session" />
+        <admin-faqs session:from="../session" />
       </can-import>
     {{else}}
       <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
@@ -173,7 +173,7 @@
   {{#case 'admin-shop'}}
     {{#if session.isAdmin}}
       <can-import from="~/pages/admin-shop/" can-tag="tag-loading">
-        <admin-shop session:from="session" />
+        <admin-shop session:from="../session" />
       </can-import>
     {{else}}
       <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">

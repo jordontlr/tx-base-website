@@ -28,7 +28,9 @@ export const ViewModel = DefineMap.extend({
   },
   editShopItem: {
     Type: Shop,
-    value: new Shop()
+    value () {
+      return new Shop()
+    }
   },
   openShopItem (shop) {
     this.editShopItem = shop

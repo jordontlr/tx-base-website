@@ -32,12 +32,12 @@
           <p>
             <strong>
               {{#if author}}
-                {{^if filterAuthor}}
+                {{^if ../filterAuthor}}
                   <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
                 {{/if}}
               {{/if}}
               {{#if category}}
-                {{^if filterCategory}}
+                {{^if ../filterCategory}}
                   <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a> |
                 {{/if}}
               {{/if}}
