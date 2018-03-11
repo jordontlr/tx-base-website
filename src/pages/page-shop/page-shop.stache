@@ -114,7 +114,9 @@
                     <div class="col-sm-9">
                       <h4 class="no-margin-top">{{product}}<small class="pull-right">{{numberFormat price}}</small></h4>
                       <p class="one-line">{{short}}</p>
-                      <p><a href="#" class="btn btn-primary" role="button">Add to Cart</a></p>
+                      <div class="hidden visible-lg"><br><br></div>
+                      <div class="hidden visible-md"><br></div>
+                      <div class="text-right"><a href="#" class="btn btn-primary" role="button">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></div>
                     </div>
                   </div>
                   <hr>
@@ -128,7 +130,7 @@
                       <small class="pull-right">{{numberFormat price}}</small>
                       <h4 class="one-line">{{product}}</h4>
                       <p class="one-line">{{short}}</p>
-                      <div class="text-right"><a href="#" class="btn btn-primary" role="button">Add to Cart</a></div>
+                      <div class="text-right"><a href="#" class="btn btn-primary" role="button">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></div>
                     </div>
                   </div>
                 </div>
