@@ -66,8 +66,12 @@ export const ViewModel = DefineMap.extend({
   pagination: {
     Type: Pagination,
     value () {
-      return {skip: 0, limit: 2}
+      return {skip: 0, limit: 10}
     }
+  },
+  changeLimit (to) {
+    this.pagination.limit = to
+    this.loadPage()
   },
   loadPage () {
     let pagination = this.pagination
