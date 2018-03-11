@@ -50,7 +50,6 @@
         {{#if authorPosts}}
           <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-              <hr>
               <strong>Other Posts By <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a></strong>
               {{#each authorPosts}}
                 <p class="small">

@@ -2,6 +2,7 @@ import Component from 'can-component'
 import DefineMap from 'can-define/map/map'
 import './page-shop.less'
 import view from './page-shop.stache'
+import Pagination from '~/models/pagination'
 import Shop from '~/models/shop'
 
 export const ViewModel = DefineMap.extend({
@@ -12,14 +13,26 @@ export const ViewModel = DefineMap.extend({
       this.rowsPromise.then(resolve)
     }
   },
+  filterCategory: 'string',
+  sortType: {
+    value: 'Name'
+  },
+  sortDirection: {
+    value: 'down'
+  },
+  changeSortDirection () {
+    if (this.sortDirection === 'down') this.sortDirection = 'up'
+    else this.sortDirection = 'down'
+  },
+  displayType: {
+    value: 'large'
+  },
+  changeDisplayType (to) {
+    this.displayType = to
+  },
   rowsPromise: {
     value () {
-      return Shop.getList()
-        .then(shop => {
-          this.rows = shop
-          setTimeout(() => { this.loadingShop = false }, 25)
-        })
-        .catch(err => console.log(err))
+      return this.loadPage()
     }
   },
   rows: {
@@ -37,7 +50,36 @@ export const ViewModel = DefineMap.extend({
         return list
       }, [])
     }
-  }
+  },
+  pagination: {
+    Type: Pagination,
+    value () {
+      return {skip: 0, limit: 2}
+    }
+  },
+  loadPage () {
+    let pagination = this.pagination
+
+    let query = {
+      $skip: pagination.skip,
+      $limit: pagination.limit,
+      listed: true
+    }
+
+    if (this.filterCategory) {
+      query = Object.assign(query, {
+        category: this.filterCategory
+      })
+    }
+
+    return Shop.getList(query)
+      .then(shop => {
+        this.rows = shop
+        this.pagination.total = shop.total
+        setTimeout(() => { this.loadingShop = false }, 25)
+      })
+      .catch(err => console.log(err))
+  },
 })
 
 export default Component.extend({

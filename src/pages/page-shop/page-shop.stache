@@ -1,3 +1,5 @@
+<can-import from="grid-component" />
+
 <br>
 <div class="container">
   <div class="row">
@@ -13,20 +15,63 @@
 {{^if loadingShop}}
   <div class="container">
 
-    {{#if hasCategories}}
-      {{#each categories}}
-        <h1>{{this}}</h1>
-      {{/each}}
-    {{/if}}
-
-    {{#each rows}}
-      <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-          <div class="h3">{{product}}</div>
-          <hr>
+    <div class="row">
+      {{#if hasCategories}}
+        <div class="col-sm-3">
+          <div class="list-group">
+            <div class="list-header list-group-item h3 no-margin-top">Product Categories</div>
+            {{#each categories}}
+              <a href="#" class="list-group-item">{{this}}</a>
+            {{/each}}
+          </div>
         </div>
-      </div>
-    {{/each}}
+      {{/if}}
+
+      <grid-component rows:bind="rows" pagination:bind="pagination" on:onpage="loadPage()">
+        <div class="col-sm-9">
+          {{#if ../filterCategory}}
+            <h1>{{../filterCategory}}</h1>
+          {{/if}}
+          <div class="row">
+            <div class="col-sm-4">
+
+              <div class="btn-group dropdown">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sort By {{../sortType}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Name</a></li>
+                  <li><a href="#">Price</a></li>
+                  <li><a href="#">Reviews</a></li>
+                </ul>
+              </div>
+              <button class="btn btn-default" on:click="../changeSortDirection()"><i class="fa fa-arrow-{{../sortDirection}}" aria-hidden="true"></i></button>
+
+            </div>
+            <div class="col-sm-4 text-center">
+              <button class="btn {{#eq ../displayType 'large'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('large')"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+              <button class="btn {{#eq ../displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+            </div>
+            <div class="col-sm-4">
+              {{#if hasPages}}
+                <nav aria-label="Page navigation" class="pull-right">
+                  <button class="btn btn-default" {{^if isPrevActive}}disabled{{/if}} on:click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+                  {{#each pages}}
+                    <button class="btn {{#if isActive}}btn-primary{{else}}btn-default{{/if}}" on:click="changePage(pageNumber)">{{pageTitle}}</button>
+                  {{/each}}
+                  <button class="btn btn-default" {{^if isNextActive}}disabled{{/if}} on:click="next()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                </nav>
+              {{/if}}
+            </div>
+          </div>
+          <hr>
+          {{#each rows}}
+            <div class="h3">{{product}}</div>
+            <hr>
+          {{/each}}
+        </div>
+      </grid-component>
+    </div>
 
   </div>
 {{else}}

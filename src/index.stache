@@ -56,7 +56,7 @@
   {{/case}}
   {{#case 'shop'}}
     <can-import from="~/pages/page-shop/" can-tag="tag-loading">
-      <page-shop />
+      <page-shop filterCategory:from="slug" />
     </can-import>
   {{/case}}
   {{#case 'faqs'}}
