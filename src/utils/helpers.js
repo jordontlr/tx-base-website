@@ -25,6 +25,11 @@ stache.addHelper('shorten', (s, l) => {
   else return s
 })
 
+stache.addHelper('capFirst', s => {
+  if (s !== 'undefined' && s) return s.charAt(0).toUpperCase() + s.slice(1)
+  else return s
+})
+
 stache.addHelper('numberFormat', num => {
   let formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',

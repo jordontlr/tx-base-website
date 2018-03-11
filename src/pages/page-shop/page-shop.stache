@@ -16,16 +16,14 @@
   <div class="container">
 
     <div class="row">
-      {{#if hasCategories}}
-        <div class="col-sm-3">
-          <div class="list-group">
-            <div class="list-header list-group-item h3 no-margin-top">Product Categories</div>
-            {{#each categories}}
-              <a href="#" class="list-group-item">{{this}}</a>
-            {{/each}}
-          </div>
+      <div class="col-sm-3">
+        <div class="list-group">
+          <div class="list-header list-group-item h3 no-margin-top">Product Categories</div>
+          {{#each categories}}
+            <a href="#" class="list-group-item">{{this}}</a>
+          {{/each}}
         </div>
-      {{/if}}
+      </div>
 
       <grid-component rows:bind="rows" pagination:bind="pagination" on:onpage="loadPage()">
         <div class="col-sm-9">
@@ -37,12 +35,12 @@
 
               <div class="btn-group dropdown">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Sort By {{../sortType}} <span class="caret"></span>
+                  Sort By {{capFirst ../sortType}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Name</a></li>
-                  <li><a href="#">Price</a></li>
-                  <li><a href="#">Reviews</a></li>
+                  <li><a href="javascript:void(0)" on:click="changeSortType('product')">Product</a></li>
+                  <li><a href="javascript:void(0)" on:click="changeSortType('price')">Price</a></li>
+                  <li><a href="javascript:void(0)" on:click="changeSortType('review')">Reviews</a></li>
                 </ul>
               </div>
               <button class="btn btn-default" on:click="../changeSortDirection()"><i class="fa fa-arrow-{{../sortDirection}}" aria-hidden="true"></i></button>
