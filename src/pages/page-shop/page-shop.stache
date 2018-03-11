@@ -107,20 +107,28 @@
             {{#each rows}}
               {{#eq ../displayType 'list'}}
                 <div class="col-sm-12">
-                  <h4 class="no-margin-top">{{product}}<small class="pull-right">{{numberFormat price}}</small></h4>
-                  <p class="one-line">{{short}}</p>
-                  <p><a href="#" class="btn btn-primary" role="button">Add to Cart</a></p>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="embed-responsive embed-responsive-4by3 img-rounded" style="background-color: #eee;"></div>
+                    </div>
+                    <div class="col-sm-9">
+                      <h4 class="no-margin-top">{{product}}<small class="pull-right">{{numberFormat price}}</small></h4>
+                      <p class="one-line">{{short}}</p>
+                      <p><a href="#" class="btn btn-primary" role="button">Add to Cart</a></p>
+                    </div>
+                  </div>
                   <hr>
                 </div>
               {{/eq}}
               {{#eq ../displayType 'large'}}
                 <div class="col-sm-6 col-md-6 col-lg-4">
                   <div class="thumbnail">
+                    <div class="embed-responsive embed-responsive-4by3 img-rounded" style="background-color: #eee;"></div>
                     <div class="caption">
                       <small class="pull-right">{{numberFormat price}}</small>
                       <h4 class="one-line">{{product}}</h4>
                       <p class="one-line">{{short}}</p>
-                      <p><a href="#" class="btn btn-primary" role="button">Add to Cart</a></p>
+                      <div class="text-right"><a href="#" class="btn btn-primary" role="button">Add to Cart</a></div>
                     </div>
                   </div>
                 </div>
