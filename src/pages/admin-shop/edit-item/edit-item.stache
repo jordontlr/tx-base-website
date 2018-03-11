@@ -31,6 +31,12 @@
               </div>
               <div class="form-group no-margin-bottom">
                 <div class="form-group">
+                  <label for="shop-short">Short Description</label>
+                  <input type="text" class="form-control" id="shop-short" placeholder="Short Description" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="short" {{#if ../disableForm}}disabled{{/if}}>
+                </div>
+              </div>
+              <div class="form-group no-margin-bottom">
+                <div class="form-group">
                   <label for="shop-price">Price</label>
                   <input type="text" class="form-control" id="shop-price" placeholder="Price" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="price" {{#if ../disableForm}}disabled{{/if}}>
                 </div>

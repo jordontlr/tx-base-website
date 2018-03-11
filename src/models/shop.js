@@ -11,6 +11,7 @@ const Shop = DefineMap.extend('Shop', {
   product: 'string',
   category: 'string',
   price: 'number',
+  short: 'string',
   description: 'string',
   content: 'string',
   sku: 'string',
