@@ -53,14 +53,12 @@ export const ViewModel = DefineMap.extend({
 
             if (this.blogPost.author) {
               let authorQuery = Object.assign({}, query, { author: this.blogPost.author, linkTitle: {$nin: this.blogPost.linkTitle} })
-              console.log(authorQuery)
               Blog.getList(authorQuery)
                 .then(blog => {
                   if (blog.length > 0) {
                     this.authorPosts = blog
                   } else {
                     let categoryQuery = Object.assign({}, query, { category: this.blogPost.category, linkTitle: {$nin: this.blogPost.linkTitle} })
-                    console.log(categoryQuery)
                     Blog.getList(categoryQuery)
                       .then(blog => {
                         if (blog.length > 0) this.categoryPosts = blog

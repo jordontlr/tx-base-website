@@ -105,18 +105,21 @@
           <hr>
           <div class="row">
             {{#each rows}}
-              {{#eq displayType 'list'}}
+              {{#eq ../displayType 'list'}}
                 <div class="col-sm-12">
-                  <div class="h3">{{product}}</div>
+                  <div class="h3 no-margin-top">{{product}}</div>
+                  <p>{{numberFormat price}}</p>
+                  <p><a href="#" class="btn btn-primary" role="button">Add to Cart</a>
                   <hr>
                 </div>
               {{/eq}}
-              {{#eq displayType 'large'}}
+              {{#eq ../displayType 'large'}}
                 <div class="col-sm-6 col-md-4">
                   <div class="thumbnail">
                     <div class="caption">
                       <h3>{{product}}</h3>
-                      <p>{{product}}</p>
+                      <p>{{numberFormat price}}</p>
+                      <p><a href="#" class="btn btn-primary" role="button">Add to Cart</a>
                     </div>
                   </div>
                 </div>
