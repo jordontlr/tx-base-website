@@ -33,7 +33,7 @@
           <div class="row">
 
             <!-- filter sort type -->
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+            <div class="col-xs-8 col-sm-6 col-md-6 col-lg-3">
               <div class="btn-group dropdown">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Sort By {{capFirst ../sortType}} <span class="caret"></span>
@@ -53,7 +53,7 @@
                 <button class="btn {{#eq ../displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
               </div>
             </div>
-            <div class="hidden-lg col-xs-6 col-sm-6 col-md-6">
+            <div class="hidden-lg col-xs-4 col-sm-6 col-md-6">
               <div class="text-right">
                 <button class="btn {{#eq ../displayType 'large'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('large')"><i class="fa fa-th-large" aria-hidden="true"></i></button>
                 <button class="btn {{#eq ../displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
@@ -112,7 +112,9 @@
                       <div class="embed-responsive embed-responsive-4by3 img-rounded" style="background-color: #eee;"></div>
                     </div>
                     <div class="col-sm-9">
-                      <h4 class="no-margin-top">{{product}}<small class="pull-right">{{numberFormat price}}</small></h4>
+                      <div class="hidden visible-xs"><br></div>
+                      <small class="pull-right">{{numberFormat price}}</small>
+                      <h4 class="no-margin-top one-line">{{product}}</h4>
                       <p class="one-line">{{short}}</p>
                       <div class="hidden visible-lg"><br><br></div>
                       <div class="hidden visible-md"><br></div>
