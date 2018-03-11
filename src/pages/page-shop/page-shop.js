@@ -79,7 +79,7 @@ export const ViewModel = DefineMap.extend({
         setTimeout(() => { this.loadingShop = false }, 25)
       })
       .catch(err => console.log(err))
-  },
+  }
 })
 
 export default Component.extend({
