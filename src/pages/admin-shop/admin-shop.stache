@@ -1,5 +1,4 @@
 <can-import from="grid-component" />
-<can-import from="~/pages/admin-shop/edit-item/" />
 
 <div class="container">
   <div class="row">
@@ -73,4 +72,58 @@
   </div>
 </div>
 
-<edit-item editShopItem:bind="editShopItem" session:from="session"/>
+<div class="modal fade" id="editShopItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" on:click="clearForm()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Shop Item</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1">
+            <div class="form-group no-margin-bottom">
+              <div class="form-group">
+                <label for="shop-product">Name</label>
+                <input type="text" class="form-control" id="shop-product" placeholder="Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.product" {{#if ../disableForm}}disabled{{/if}}>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="checkbox checkbox-primary">
+                <input type="checkbox" id="shop-listed" checked:bind="editShopItem.listed" {{#if ../disableForm}}disabled{{/if}}>
+                <label for="shop-listed">
+                  <strong>List Product</strong>
+                </label>
+              </div>
+            </div>
+            <div class="form-group no-margin-bottom">
+              <div class="form-group">
+                <label for="shop-category">Category</label>
+                <input type="text" class="form-control" id="shop-category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.category" {{#if ../disableForm}}disabled{{/if}}>
+              </div>
+            </div>
+            <div class="form-group no-margin-bottom">
+              <div class="form-group">
+                <label for="shop-short">Short Description</label>
+                <input type="text" class="form-control" id="shop-short" placeholder="Short Description" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.short" {{#if ../disableForm}}disabled{{/if}}>
+              </div>
+            </div>
+            <div class="form-group no-margin-bottom">
+              <div class="form-group">
+                <label for="shop-price">Price</label>
+                <input type="text" class="form-control" id="shop-price" placeholder="Price" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.price" {{#if ../disableForm}}disabled{{/if}}>
+              </div>
+            </div>
+            <div class="form-group no-margin-bottom">
+              <label for="blog-post">Description</label>
+              <div id="shop-description"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" on:click="saveShopItem()" {{#if ../disableForm}}disabled{{/if}}>{{#if ../processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Save{{/if}}</button>
+      </div>
+    </div>
+  </div>
+</div>

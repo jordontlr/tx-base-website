@@ -38,7 +38,9 @@ export const ViewModel = DefineMap.extend({
   },
   editFAQ: {
     Type: Faq,
-    value: new Faq()
+    value () {
+      return new Faq({})
+    }
   },
   openFAQ (faq) {
     this.editFAQ = faq
@@ -93,9 +95,7 @@ export const ViewModel = DefineMap.extend({
   },
   clearForm () {
     this.editFAQ = new Faq({})
-    this.quill.enable(true)
     this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
-
     $('#editFAQ').modal('hide')
   }
 })

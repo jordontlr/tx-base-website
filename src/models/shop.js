@@ -13,6 +13,10 @@ const Shop = DefineMap.extend('Shop', {
   price: 'number',
   short: 'string',
   description: 'string',
+  delta: {
+    type: 'string',
+    value: '{"ops":[{"insert":"\\n"}]}'
+  },
   content: 'string',
   sku: 'string',
   brand: 'string',
