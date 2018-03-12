@@ -65,9 +65,35 @@
               <hr style="margin-top: 10px; margin-bottom: 10px" />
             </div>
 
-            <!-- display view number -->
-            <div class="hidden-md hidden-sm hidden-xs col-lg-3">
+            <!-- pagination -->
+            <div class="hidden-xs hidden-sm hidden-md col-lg-3">
               <div class="text-center">
+                {{#if hasPages}}
+                  <nav aria-label="Page navigation">
+                    <button class="btn btn-default" {{^if isPrevActive}}disabled{{/if}} on:click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+                    {{#each pages}}
+                      <button class="btn {{#if isActive}}btn-primary{{else}}btn-default{{/if}}" on:click="changePage(pageNumber)">{{pageTitle}}</button>
+                    {{/each}}
+                    <button class="btn btn-default" {{^if isNextActive}}disabled{{/if}} on:click="next()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                  </nav>
+                {{/if}}
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 hidden-lg">
+              {{#if hasPages}}
+                <nav aria-label="Page navigation">
+                  <button class="btn btn-default" {{^if isPrevActive}}disabled{{/if}} on:click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
+                  {{#each pages}}
+                    <button class="btn {{#if isActive}}btn-primary{{else}}btn-default{{/if}}" on:click="changePage(pageNumber)">{{pageTitle}}</button>
+                  {{/each}}
+                  <button class="btn btn-default" {{^if isNextActive}}disabled{{/if}} on:click="next()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                </nav>
+              {{/if}}
+            </div>
+
+            <!-- display view number -->
+            <div class="col-lg-3 col-xs-6 col-sm-6 col-md-6">
+              <div class="pull-right">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   View {{../pagination.limit}} <span class="caret"></span>
                 </button>
@@ -78,29 +104,7 @@
                 </ul>
               </div>
             </div>
-            <div class="hidden-lg col-xs-6 col-sm-6 col-md-6">
-              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                View {{../pagination.limit}} <span class="caret"></span>
-              </button>
-              <ul class="view-btn dropdown-menu">
-                <li><a href="javascript:void(0)" on:click="changeLimit('10')">10</a></li>
-                <li><a href="javascript:void(0)" on:click="changeLimit('25')">25</a></li>
-                <li><a href="javascript:void(0)" on:click="changeLimit('50')">50</a></li>
-              </ul>
-            </div>
 
-            <!-- pagination -->
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
-              {{#if hasPages}}
-                <nav aria-label="Page navigation" class="pull-right">
-                  <button class="btn btn-default" {{^if isPrevActive}}disabled{{/if}} on:click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
-                  {{#each pages}}
-                    <button class="btn {{#if isActive}}btn-primary{{else}}btn-default{{/if}}" on:click="changePage(pageNumber)">{{pageTitle}}</button>
-                  {{/each}}
-                  <button class="btn btn-default" {{^if isNextActive}}disabled{{/if}} on:click="next()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
-                </nav>
-              {{/if}}
-            </div>
           </div>
           <hr>
           <div class="row">
