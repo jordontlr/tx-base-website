@@ -128,16 +128,21 @@ export default Component.extend({
         theme: 'snow'
       })
 
-      const reader = new window.FileReader()
-      $('input.image-input-btn').change(function () {
-        this.files.forEach(file => {
-          reader.readAsDataURL(file)
-        })
-      })
+      let _self = this
 
-      reader.addEventListener('load', () => {
-        this.viewModel.imageData.push(reader.result)
-      }, false)
+      $('input.image-input-btn').change(function() {
+        let files = this.files
+
+        for (let i = 0; i < files.length; i++) {
+          ((file) => {
+            let reader = new FileReader()
+            reader.onload = (e) => {
+              _self.viewModel.editShopItem.imageData.push(e.target.result)
+            }
+            reader.readAsDataURL(file)
+          })(files[i])
+        }
+      })
     }
   }
 })

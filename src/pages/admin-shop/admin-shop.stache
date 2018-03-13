@@ -156,9 +156,15 @@
             <button type="button" class="btn btn-warning btn-sm" on:click="initFileUpload()">Upload Image</button>
           </div>
           <div class="col-sm-9">
-            {{#if ../imageData}}
-              <img src="{{../imageData}}" class="img-responsive img-rounded">
-            {{/if}}
+            <div class="row">
+              {{#if editShopItem.imageData}}
+                {{#each editShopItem.imageData}}
+                  <div class="col-sm-3">
+                    <img src="{{this}}" class="img-responsive img-rounded">
+                  </div>
+                {{/each}}
+              {{/if}}
+            </div>
           </div>
         </div>
         <input type="file" class="image-input-btn" accept="image/*" multiple="multiple" />
