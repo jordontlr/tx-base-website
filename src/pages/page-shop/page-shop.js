@@ -17,7 +17,7 @@ export const ViewModel = DefineMap.extend({
   changeCategory (to) {
     if (this.filterCategory !== to) this.filterCategory = to
     else this.filterCategory = null
-    this.loadPage()
+    this.loadPage(true)
   },
   sortType: {
     value: 'product'
@@ -73,7 +73,7 @@ export const ViewModel = DefineMap.extend({
     this.pagination.limit = to
     this.loadPage()
   },
-  loadPage () {
+  loadPage (resetSkip) {
     let pagination = this.pagination
 
     let query = {
@@ -81,6 +81,8 @@ export const ViewModel = DefineMap.extend({
       $limit: pagination.limit,
       listed: true
     }
+
+    if (resetSkip) query.$skip = 0
 
     if (this.filterCategory) {
       query = Object.assign(query, {
