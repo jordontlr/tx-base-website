@@ -96,6 +96,9 @@ export const ViewModel = DefineMap.extend({
     this.editShopItem = new Shop({})
     this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#editShopItem').modal('hide')
+  },
+  initFileUpload () {
+    $('.image-input-btn').trigger('click')
   }
 })
 
@@ -125,15 +128,16 @@ export default Component.extend({
         theme: 'snow'
       })
 
-      // const reader = new window.FileReader()
-      // $('input.image-input-btn').change(function () {
-      //   let file = this.files[0]
-      //   reader.readAsDataURL(file)
-      // })
-      //
-      // reader.addEventListener('load', () => {
-      //   this.viewModel.imageData = reader.result
-      // }, false)
+      const reader = new window.FileReader()
+      $('input.image-input-btn').change(function () {
+        this.files.forEach( file => {
+          reader.readAsDataURL(file)
+        })
+      })
+
+      reader.addEventListener('load', () => {
+        this.viewModel.imageData.push(reader.result)
+      }, false)
     }
   }
 })

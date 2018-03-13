@@ -20,7 +20,13 @@ const Shop = DefineMap.extend('Shop', {
   content: 'string',
   sku: 'string',
   brand: 'string',
+  tags: [ 'string' ],
   imageId: [ 'string' ],
+  imageData: {
+    serialize: false,
+    type: [ 'string' ],
+    value: [ null ]
+  },
   listed: 'boolean',
   updatedAt: 'date',
   createdAt: 'date'
