@@ -130,12 +130,12 @@ export default Component.extend({
 
       let _self = this
 
-      $('input.image-input-btn').change(function() {
+      $('input.image-input-btn').change(function () {
         let files = this.files
 
         for (let i = 0; i < files.length; i++) {
           ((file) => {
-            let reader = new FileReader()
+            let reader = new window.FileReader()
             reader.onload = (e) => {
               _self.viewModel.editShopItem.imageData.push(e.target.result)
             }
