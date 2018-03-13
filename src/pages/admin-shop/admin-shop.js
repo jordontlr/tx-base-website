@@ -130,7 +130,7 @@ export default Component.extend({
 
       const reader = new window.FileReader()
       $('input.image-input-btn').change(function () {
-        this.files.forEach( file => {
+        this.files.forEach(file => {
           reader.readAsDataURL(file)
         })
       })
