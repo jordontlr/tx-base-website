@@ -155,6 +155,9 @@ export const ViewModel = DefineMap.extend({
           })
       })
       .catch(err => console.log(err))
+  },
+  openShopModal (shopItem) {
+    console.log(shopItem.product)
   }
 })
 

@@ -115,7 +115,7 @@
                 <div class="col-sm-12">
                   <div class="row">
                     <div class="col-sm-3">
-                      <div {{#if this.imageData[1]}}class="hover-change-image"{{/if}}>
+                      <div class="mouse-pointer {{#if this.imageData[1]}}hover-change-image{{/if}}" on:click="openShopModal(this)">
                         <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css {{#if this.imageData[1]}}image-one{{/if}}" {{#if this.imageData[0]}}style="background-image: url({{this.imageData[0]}})"{{else}}style="background-color: #eee;"{{/if}}></div>
                         {{#if this.imageData[1]}}<div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css image-two" style="background-image: url({{this.imageData[1]}})"></div>{{/if}}
                       </div>
@@ -123,7 +123,7 @@
                     <div class="col-sm-9">
                       <div class="hidden visible-xs"><br></div>
                       <small class="pull-right">{{numberFormat price}}</small>
-                      <h4 class="no-margin-top one-line">{{product}}</h4>
+                      <h4 class="no-margin-top one-line mouse-pointer hover-color" on:click="openShopModal(this)">{{product}}</h4>
                       <p class="one-line">{{short}}</p>
                       <div class="hidden visible-lg"><br><br></div>
                       <div class="hidden visible-md"><br></div>
@@ -136,13 +136,13 @@
               {{#eq ../displayType 'large'}}
                 <div class="col-sm-6 col-md-6 col-lg-4">
                   <div class="thumbnail">
-                    <div {{#if this.imageData[1]}}class="hover-change-image"{{/if}}>
+                    <div class="mouse-pointer {{#if this.imageData[1]}}hover-change-image{{/if}}" on:click="openShopModal(this)">
                       <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css {{#if this.imageData[1]}}image-one{{/if}}" {{#if this.imageData[0]}}style="background-image: url({{this.imageData[0]}})"{{else}}style="background-color: #eee;"{{/if}}></div>
                       {{#if this.imageData[1]}}<div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css image-two" style="background-image: url({{this.imageData[1]}})"></div>{{/if}}
                     </div>
                     <div class="caption">
                       <small class="pull-right">{{numberFormat price}}</small>
-                      <h4 class="one-line">{{product}}</h4>
+                      <h4 class="one-line mouse-pointer hover-color" on:click="openShopModal(this)">{{product}}</h4>
                       <p class="one-line">{{short}}</p>
                       <div class="text-right"><a href="#" class="btn btn-primary" role="button">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a></div>
                     </div>
