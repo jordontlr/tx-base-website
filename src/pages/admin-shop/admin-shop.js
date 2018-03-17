@@ -138,7 +138,6 @@ export const ViewModel = DefineMap.extend({
         this.editShopItem.imageId = values
         this.saveShopItemFunction()
       })
-
     } else {
       this.saveShopItemFunction()
     }
