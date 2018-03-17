@@ -56,7 +56,7 @@
                 <button class="btn {{#eq ../displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
               </div>
             </div>
-            <div class="hidden-lg col-xs-4 col-sm-6 col-md-6">
+            <div class="hidden-lg hidden-xs col-sm-6 col-md-6">
               <div class="text-right">
                 <button class="btn {{#eq ../displayType 'large'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('large')"><i class="fa fa-th-large" aria-hidden="true"></i></button>
                 <button class="btn {{#eq ../displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
@@ -180,7 +180,7 @@
                 {{/if}}
               {{/each}}
             </div>
-            <div class="col-sm-8 col-md-5">
+            <div class="hidden-xs col-sm-8 col-md-5">
               <div class="thumbnail">
                 <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{viewShopItem.imageData[0]}})"></div>
               </div>
@@ -195,7 +195,7 @@
             <hr>
 
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-xs-6">
 
                 <div class="input-group">
                   <span class="input-group-btn">
@@ -212,7 +212,7 @@
                 </div>
 
               </div>
-              <div class="col-sm-6">
+              <div class="col-xs-6">
                 <button type="button" class="btn btn-primary btn-block" role="button">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
               </div>
             </div>
@@ -222,18 +222,20 @@
           </div>
         </div>
         {{#if viewShopItem.description}}
-          <div class="row">
-            <div class="col-sm-12">
-              <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#desc" aria-controls="home" role="tab" data-toggle="tab"><strong>Description</strong></a></li>
-                {{#if viewShopItem.content}}<li role="presentation"><a href="#content" aria-controls="profile" role="tab" data-toggle="tab"><strong>Box Contents</strong></a></li>{{/if}}
-              </ul>
+          <div class="well">
+            <div class="row">
+              <div class="col-sm-12">
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                  <li role="presentation" class="active"><a href="#desc" aria-controls="home" role="tab" data-toggle="tab"><strong>Description</strong></a></li>
+                  {{#if viewShopItem.content}}<li role="presentation"><a href="#content" aria-controls="profile" role="tab" data-toggle="tab"><strong>Box Contents</strong></a></li>{{/if}}
+                </ul>
 
-              <br>
+                <br>
 
-              <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="desc">{{{viewShopItem.description}}}</div>
-                {{#if viewShopItem.content}}<div role="tabpanel" class="tab-pane" id="content">{{{viewShopItem.content}}}</div>{{/if}}
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="desc">{{{viewShopItem.description}}}</div>
+                  {{#if viewShopItem.content}}<div role="tabpanel" class="tab-pane" id="content">{{{viewShopItem.content}}}</div>{{/if}}
+                </div>
               </div>
             </div>
           </div>

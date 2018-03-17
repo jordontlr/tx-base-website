@@ -81,100 +81,102 @@
         <h4 class="modal-title" id="myModalLabel">Edit Shop Item</h4>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
+        {{#editShopItem}}
+          <div class="row">
+            <div class="col-sm-6">
               <div class="form-group">
-                <label for="shop-product">Name</label>
-                <input type="text" class="form-control" id="shop-product" placeholder="Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.product" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-brand">Brand Name</label>
-                <input type="text" class="form-control" id="shop-brand" placeholder="Brand Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.brand" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-price">Price</label>
-                <input type="number" class="form-control" id="shop-price" placeholder="Price" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.price" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-category">Category</label>
-                <input type="text" class="form-control" id="shop-category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.category" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-short">Short Description</label>
-                <input type="text" class="form-control" id="shop-short" placeholder="Short Description" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.short" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="shop-tags">Tags</label><br>
-              <select multiple tagsinput=10 id="shop-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
-                {{#each tags}}
-                  <option value="{{this}}">{{this}}</option>
-                {{/each}}
-              </select>
-            </div>
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-content">Box Content</label>
-                <input type="text" class="form-control" id="shop-content" placeholder="Box Content" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.content" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-sku">SKU</label>
-                <input type="text" class="form-control" id="shop-sku" placeholder="SKU" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.sku" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-group">
-              <label for="blog-post">Description</label>
-              <div id="shop-description"></div>
-            </div>
-            <div class="form-group">
-              <div class="checkbox checkbox-primary">
-                <input type="checkbox" id="shop-listed" checked:bind="editShopItem.listed" {{#if ../disableForm}}disabled{{/if}}>
-                <label for="shop-listed">
-                  <strong>List Product</strong>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
-            <label for="blog-title">Post Image {{editShopItem.imageData.length}}</label>
-            <br>
-            <button type="button" class="btn btn-warning btn-sm" on:click="initFileUpload()">Upload Image</button>
-            <input type="file" class="image-input-btn" accept="image/*" multiple="multiple" />
-          </div>
-        </div>
-        <div class="row">
-          {{#each editShopItem.imageData}}
-            {{#if this}}
-              <div class="col-sm-3">
-                <div class="thumbnail">
-                  <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{this}})"></div>
-                  <div class="caption">
-                    <div class="text-center"><button type="button" class="btn btn-danger" role="button">Delete</button></div>
-                  </div>
+                <div class="form-group">
+                  <label for="shop-product">Name</label>
+                  <input type="text" class="form-control" id="shop-product" placeholder="Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="product" {{#if ../disableForm}}disabled{{/if}}>
                 </div>
               </div>
-            {{/if}}
-          {{/each}}
-        </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="shop-brand">Brand Name</label>
+                  <input type="text" class="form-control" id="shop-brand" placeholder="Brand Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="brand" {{#if ../disableForm}}disabled{{/if}}>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="shop-price">Price</label>
+                  <input type="number" class="form-control" id="shop-price" placeholder="Price" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="price" {{#if ../disableForm}}disabled{{/if}}>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="shop-category">Category</label>
+                  <input type="text" class="form-control" id="shop-category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="category" {{#if ../disableForm}}disabled{{/if}}>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="shop-short">Short Description</label>
+                  <input type="text" class="form-control" id="shop-short" placeholder="Short Description" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="short" {{#if ../disableForm}}disabled{{/if}}>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="shop-tags">Tags</label><br>
+                <select multiple tagsinput=10 id="shop-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
+                  {{#each tags}}
+                    <option value="{{this}}">{{this}}</option>
+                  {{/each}}
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="shop-content">Box Content</label>
+                  <input type="text" class="form-control" id="shop-content" placeholder="Box Content" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="content" {{#if ../disableForm}}disabled{{/if}}>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-group">
+                  <label for="shop-sku">SKU</label>
+                  <input type="text" class="form-control" id="shop-sku" placeholder="SKU" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="sku" {{#if ../disableForm}}disabled{{/if}}>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="blog-post">Description</label>
+                <div id="shop-description"></div>
+              </div>
+              <div class="form-group">
+                <div class="checkbox checkbox-primary">
+                  <input type="checkbox" id="shop-listed" checked:bind="listed" {{#if ../disableForm}}disabled{{/if}}>
+                  <label for="shop-listed">
+                    <strong>List Product</strong>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <label for="blog-title">Post Image {{imageData.length}}</label>
+              <br>
+              <button type="button" class="btn btn-warning btn-sm" on:click="initFileUpload()">Upload Image</button>
+              <input type="file" class="image-input-btn" accept="image/*" multiple="multiple" />
+            </div>
+          </div>
+          <div class="row">
+            {{#each imageData}}
+              {{#if this}}
+                <div class="col-sm-3">
+                  <div class="thumbnail">
+                    <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{this}})"></div>
+                    <div class="caption">
+                      <div class="text-center"><button type="button" class="btn btn-danger" role="button">Delete</button></div>
+                    </div>
+                  </div>
+                </div>
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/editShopItem}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" on:click="saveShopItem()" {{#if ../disableForm}}disabled{{/if}}>{{#if ../processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Save{{/if}}</button>

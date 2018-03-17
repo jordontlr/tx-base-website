@@ -143,6 +143,8 @@ export const ViewModel = DefineMap.extend({
     }
   },
   saveShopItemFunction () {
+    this.editShopItem.tags = $('#shop-tags').val()
+
     this.editShopItem.save()
       .then(() => {
         this.processing = false
