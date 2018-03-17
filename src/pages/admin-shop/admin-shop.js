@@ -63,7 +63,7 @@ export const ViewModel = DefineMap.extend({
   loadPage () {
     this.loadingShop = true
     let pagination = this.pagination
-    Shop.getList({$skip: pagination.skip, $limit: pagination.limit})
+    Shop.getList({$skip: pagination.skip, $limit: pagination.limit, $sort: {createdAt: -1}})
       .then(shop => {
         this.rows = shop
         this.pagination.total = shop.total

@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import Component from 'can-component'
 import DefineMap from 'can-define/map/map'
 import './page-shop.less'
@@ -9,6 +10,12 @@ import Uploads from '~/models/uploads'
 export const ViewModel = DefineMap.extend({
   isSsr: {
     value: typeof process === 'object' && {}.toString.call(process) === '[object process]'
+  },
+  viewShopItem: {
+    Type: Shop,
+    value () {
+      return new Shop({})
+    }
   },
   loadingShop: {
     value: true,
@@ -157,7 +164,9 @@ export const ViewModel = DefineMap.extend({
       .catch(err => console.log(err))
   },
   openShopModal (shopItem) {
-    console.log(shopItem.product)
+    this.viewShopItem = shopItem
+
+    $('#viewShopItem').modal('show')
   }
 })
 
