@@ -155,27 +155,25 @@
         </div>
         <div class="row">
           <div class="col-sm-3">
-            <label for="blog-title">Post Image</label>
+            <label for="blog-title">Post Image {{editShopItem.imageData.length}}</label>
             <br>
             <button type="button" class="btn btn-warning btn-sm" on:click="initFileUpload()">Upload Image</button>
             <input type="file" class="image-input-btn" accept="image/*" multiple="multiple" />
           </div>
         </div>
         <div class="row">
-          {{#if editShopItem.imageData}}
-            {{#each editShopItem.imageData}}
-              {{#if this}}
-                <div class="col-sm-3">
-                  <div class="thumbnail">
-                    <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{this}})"></div>
-                    <div class="caption">
-                      <div class="text-center"><button type="button" class="btn btn-danger" role="button">Delete</button></div>
-                    </div>
+          {{#each editShopItem.imageData}}
+            {{#if this}}
+              <div class="col-sm-3">
+                <div class="thumbnail">
+                  <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{this}})"></div>
+                  <div class="caption">
+                    <div class="text-center"><button type="button" class="btn btn-danger" role="button">Delete</button></div>
                   </div>
                 </div>
-              {{/if}}
-            {{/each}}
-          {{/if}}
+              </div>
+            {{/if}}
+          {{/each}}
         </div>
       </div>
       <div class="modal-footer">
