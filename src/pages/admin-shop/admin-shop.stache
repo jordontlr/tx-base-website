@@ -90,14 +90,6 @@
               </div>
             </div>
             <div class="form-group">
-              <div class="checkbox checkbox-primary">
-                <input type="checkbox" id="shop-listed" checked:bind="editShopItem.listed" {{#if ../disableForm}}disabled{{/if}}>
-                <label for="shop-listed">
-                  <strong>List Product</strong>
-                </label>
-              </div>
-            </div>
-            <div class="form-group">
               <div class="form-group">
                 <label for="shop-brand">Brand Name</label>
                 <input type="text" class="form-control" id="shop-brand" placeholder="Brand Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.brand" {{#if ../disableForm}}disabled{{/if}}>
@@ -106,19 +98,13 @@
             <div class="form-group">
               <div class="form-group">
                 <label for="shop-price">Price</label>
-                <input type="text" class="form-control" id="shop-price" placeholder="Price" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.price" {{#if ../disableForm}}disabled{{/if}}>
+                <input type="number" class="form-control" id="shop-price" placeholder="Price" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.price" {{#if ../disableForm}}disabled{{/if}}>
               </div>
             </div>
             <div class="form-group">
               <div class="form-group">
                 <label for="shop-category">Category</label>
                 <input type="text" class="form-control" id="shop-category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.category" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-sku">SKU</label>
-                <input type="text" class="form-control" id="shop-sku" placeholder="SKU" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.sku" {{#if ../disableForm}}disabled{{/if}}>
               </div>
             </div>
           </div>
@@ -128,10 +114,6 @@
                 <label for="shop-short">Short Description</label>
                 <input type="text" class="form-control" id="shop-short" placeholder="Short Description" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.short" {{#if ../disableForm}}disabled{{/if}}>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="blog-post">Description</label>
-              <div id="shop-description"></div>
             </div>
             <div class="form-group">
               <label for="shop-tags">Tags</label><br>
@@ -145,6 +127,28 @@
               <div class="form-group">
                 <label for="shop-content">Box Content</label>
                 <input type="text" class="form-control" id="shop-content" placeholder="Box Content" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.content" {{#if ../disableForm}}disabled{{/if}}>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-group">
+                <label for="shop-sku">SKU</label>
+                <input type="text" class="form-control" id="shop-sku" placeholder="SKU" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editShopItem.sku" {{#if ../disableForm}}disabled{{/if}}>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="blog-post">Description</label>
+              <div id="shop-description"></div>
+            </div>
+            <div class="form-group">
+              <div class="checkbox checkbox-primary">
+                <input type="checkbox" id="shop-listed" checked:bind="editShopItem.listed" {{#if ../disableForm}}disabled{{/if}}>
+                <label for="shop-listed">
+                  <strong>List Product</strong>
+                </label>
               </div>
             </div>
           </div>
