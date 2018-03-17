@@ -170,21 +170,23 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-sm-4 col-md-2">
-            {{#each viewShopItem.imageData}}
-              {{#if this}}
-                <div class="thumbnail">
-                  <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{this}})"></div>
-                </div>
-              {{/if}}
-            {{/each}}
-          </div>
-          <div class="col-sm-8 col-md-5">
-            <div class="thumbnail">
-              <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{viewShopItem.imageData[0]}})"></div>
+          {{#if viewShopItem.imageData.length}}
+            <div class="col-sm-4 col-md-2">
+              {{#each viewShopItem.imageData}}
+                {{#if this}}
+                  <div class="thumbnail">
+                    <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{this}})"></div>
+                  </div>
+                {{/if}}
+              {{/each}}
             </div>
-          </div>
-          <div class="col-sm-12 col-md-5">
+            <div class="col-sm-8 col-md-5">
+              <div class="thumbnail">
+                <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{viewShopItem.imageData[0]}})"></div>
+              </div>
+            </div>
+          {{/if}}
+          <div class="col-sm-12 {{#if viewShopItem.imageData.length}}col-md-5{{/if}}">
             <h3 class="no-margin-top">{{viewShopItem.short}}</h3>
             {{#if viewShopItem.brand}}<h5 class="text-muted">Brand: {{viewShopItem.brand}}</h5>{{/if}}
             {{#if viewShopItem.sku}}<h5 class="text-muted">SKU: {{viewShopItem.sku}}</h5>{{/if}}
@@ -219,37 +221,23 @@
 
           </div>
         </div>
+        {{#if viewShopItem.description}}
+          <div class="row">
+            <div class="col-sm-12">
+              <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li role="presentation" class="active"><a href="#desc" aria-controls="home" role="tab" data-toggle="tab"><strong>Description</strong></a></li>
+                {{#if viewShopItem.content}}<li role="presentation"><a href="#content" aria-controls="profile" role="tab" data-toggle="tab"><strong>Box Contents</strong></a></li>{{/if}}
+              </ul>
 
+              <br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-short">Short Description</label>
-                <input type="text" class="form-control" id="shop-short" placeholder="Short Description" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="viewShopItem.short" {{#if ../disableForm}}disabled{{/if}}>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="form-group">
-                <label for="shop-content">Box Content</label>
-                <input type="text" class="form-control" id="shop-content" placeholder="Box Content" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="viewShopItem.content" {{#if ../disableForm}}disabled{{/if}}>
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="desc">{{{viewShopItem.description}}}</div>
+                {{#if viewShopItem.content}}<div role="tabpanel" class="tab-pane" id="content">{{{viewShopItem.content}}}</div>{{/if}}
               </div>
             </div>
           </div>
-        </div>
+        {{/if}}
 
       </div>
     </div>
