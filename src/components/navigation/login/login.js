@@ -21,18 +21,16 @@ export const ViewModel = DefineMap.extend({
   },
   password: {
     type: 'string',
-    value: '',
-    set (value) {
-      this.passwordError = validate.password(value, {allowEmpty: 1})
-      return value
+    set (val) {
+      this.passwordError = validate.password(val, {allowEmpty: 1})
+      return val
     }
   },
   email: {
     type: 'string',
-    value: '',
-    set (value) {
-      this.emailError = validate.email(value, {allowEmpty: 1})
-      return value
+    set (val) {
+      this.emailError = validate.email(val, {allowEmpty: 1})
+      return val
     }
   },
   passwordVisible: {

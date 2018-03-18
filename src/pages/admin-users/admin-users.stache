@@ -38,7 +38,7 @@
               </tr>
               </thead>
               <tbody>
-              {{^if loadingUsers}}
+              {{^if ../loadingUsers}}
                 {{#if rows.length}}
                   {{#each rows}}
                     <tr>

@@ -22,7 +22,7 @@
               </tr>
               </thead>
               <tbody>
-              {{^if loadingFAQs}}
+              {{^if ../loadingFAQs}}
                 {{#if rows.length}}
                   {{#each rows}}
                     <tr>

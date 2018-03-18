@@ -21,7 +21,7 @@
               </tr>
               </thead>
               <tbody>
-              {{^if loadingShop}}
+              {{^if ../loadingShop}}
                 {{#if rows.length}}
                   {{#each rows}}
                     <tr>
@@ -117,7 +117,7 @@
             </div>
             <div class="form-group">
               <label for="shop-tags">Tags</label><br>
-              <select multiple tagsinput=10 id="shop-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
+              <select multiple tagsinput="10" id="shop-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
                 {{#each editShopItem.tags}}
                   <option value="{{this}}">{{this}}</option>
                 {{/each}}

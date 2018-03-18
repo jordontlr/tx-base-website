@@ -22,9 +22,9 @@ export const ViewModel = DefineMap.extend({
   },
   loadingProfile: {
     type: 'boolean',
-    value: true,
-    get () {
+    value () {
       this.loadPage()
+      return true
     }
   },
   session: {
@@ -46,30 +46,30 @@ export const ViewModel = DefineMap.extend({
     }
   },
   daysOfMonthList: {
-    get () {
+    get (val) {
       return new DefineList(new Array(31).fill(0).map((v, i) => i + 1))
     }
   },
   yearsList: {
-    get () {
+    get (val) {
       return new DefineList(new Array(this.countYears).fill(0).map((v, i) => i + this.startYear))
     }
   },
   countryListSearch: {
-    get () {
+    get (val) {
       return (this.countryList.length > this.dropDownSize)
     }
   },
   disableForm: 'boolean',
   processing: 'boolean',
   dayOfBirthString: {
-    get () {
+    get (val) {
       let s = '0' + this.dayOfBirth
       return s.substr(s.length - 2)
     }
   },
   monthOfBirthString: {
-    get () {
+    get (val) {
       let s = '0' + this.monthOfBirth
       return s.substr(s.length - 2)
     }

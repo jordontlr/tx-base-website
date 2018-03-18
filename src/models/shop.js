@@ -30,7 +30,10 @@ const Shop = DefineMap.extend('Shop', {
   imageId: [ 'string' ],
   imageData: {
     serialize: false,
-    type: [ 'string' ]
+    type: [ 'string' ],
+    value () {
+      return []
+    }
   },
   listed: 'boolean',
   updatedAt: 'date',

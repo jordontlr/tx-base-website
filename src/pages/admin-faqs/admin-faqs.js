@@ -19,9 +19,9 @@ export const ViewModel = DefineMap.extend({
   },
   loadingFAQs: {
     type: 'boolean',
-    value: true,
-    get () {
+    value () {
       this.loadPage()
+      return true
     }
   },
   rows: {
