@@ -8,6 +8,10 @@
       <div class="jumbotron">
         <h1>Shop</h1>
         <p>Some things to buy.</p>
+
+        {{#if filterTags}}
+          <p>For Posts with Tag <strong>{{filterTags}}</strong></p>
+        {{/if}}
       </div>
     </div>
   </div>
@@ -218,6 +222,14 @@
             </div>
 
             <hr>
+
+            {{#if viewShopItem.tags.length}}
+              <span>Tags: </span>
+              {{#each viewShopItem.tags}}
+                <a href="{{routeUrl page='shop' slug='tags' target=this}}" on:click="closeModal()">{{this}}</a>
+              {{/each}}
+              <hr>
+            {{/if}}
 
           </div>
         </div>

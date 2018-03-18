@@ -11,6 +11,7 @@ export const ViewModel = DefineMap.extend({
   isSsr: {
     value: typeof process === 'object' && {}.toString.call(process) === '[object process]'
   },
+  filterTags: 'string',
   viewShopItem: {
     Type: Shop,
     value () {
@@ -101,6 +102,12 @@ export const ViewModel = DefineMap.extend({
       })
     }
 
+    if (this.filterTags) {
+      query = Object.assign(query, {
+        tags: { $in: [ this.filterTags ] }
+      })
+    }
+
     if (this.sortDirection === 'down') {
       query = Object.assign(query, {
         $sort: {
@@ -167,6 +174,9 @@ export const ViewModel = DefineMap.extend({
     this.viewShopItem = shopItem
 
     $('#viewShopItem').modal('show')
+  },
+  closeModal () {
+    $('#viewShopItem').modal('hide')
   }
 })
 
