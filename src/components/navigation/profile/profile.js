@@ -8,7 +8,6 @@ import monthsData from './data/months'
 import countryData from './data/country'
 import 'bootstrap-select'
 import Profile from '~/models/profile'
-import Uploads from '~/models/uploads'
 
 export const ViewModel = DefineMap.extend({
   startYear: {
@@ -83,51 +82,22 @@ export const ViewModel = DefineMap.extend({
   save () {
     let $cropit = $('#image-cropper')
     $cropit.trigger('get-data')
+    this.currentProfile.imageData = $cropit.attr('data-image-data')
 
-    let imageData = $cropit.attr('data-image-data')
+    this.currentProfile.save()
+      .then(() => {
+        this.processing = false
+        this.disableForm = false
 
-    if (imageData !== 'undefined') {
-      let sendObj = {
-        uri: imageData
-      }
+        $('#profile-modal').modal('hide')
+      })
+      .catch(err => {
+        this.disableForm = false
+        this.processing = false
 
-      let imageUpload = new Uploads(sendObj)
-
-      imageUpload
-        .save()
-        .then(imageInfo => {
-          this.currentProfile.imageId = imageInfo._id
-          this.currentProfile.save()
-            .then(() => {
-              this.processing = false
-              this.disableForm = false
-
-              $('#profile-modal').modal('hide')
-            })
-            .catch(err => {
-              this.disableForm = false
-              this.processing = false
-
-              if (err.code === 401) this.session.error401()
-              else console.log(err)
-            })
-        })
-    } else {
-      this.currentProfile.save()
-        .then(() => {
-          this.processing = false
-          this.disableForm = false
-
-          $('#profile-modal').modal('hide')
-        })
-        .catch(err => {
-          this.disableForm = false
-          this.processing = false
-
-          if (err.code === 401) this.session.error401()
-          else console.log(err)
-        })
-    }
+        if (err.code === 401) this.session.error401()
+        else console.log(err)
+      })
   },
   loadPage () {
     this.loadingProfile = true
@@ -135,14 +105,6 @@ export const ViewModel = DefineMap.extend({
       .then(profile => {
         if (profile.length < 1) this.currentProfile = new Profile({})
         else this.currentProfile = profile[0]
-
-        if (this.currentProfile.imageId !== 'undefined' && this.currentProfile.imageId !== '' && this.currentProfile.imageId) {
-          Uploads
-            .get({ _id: this.currentProfile.imageId })
-            .then(imageData => {
-              $('#image-cropper').attr('data-current-image', imageData.uri)
-            })
-        }
 
         setTimeout(() => { this.loadingProfile = false }, 25)
       })

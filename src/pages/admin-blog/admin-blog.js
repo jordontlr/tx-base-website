@@ -6,7 +6,6 @@ import view from './admin-blog.stache'
 import Quill from 'quill'
 import Pagination from '~/models/pagination'
 import Blog from '~/models/blog'
-import Uploads from '~/models/uploads'
 
 export const ViewModel = DefineMap.extend({
   newEditBlog: {

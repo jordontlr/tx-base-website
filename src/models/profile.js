@@ -10,7 +10,7 @@ const Profile = DefineMap.extend('Profile', {
   _id: 'any',
   firstName: 'string',
   lastName: 'string',
-  imageId: 'string',
+  imageData: 'string',
   gender: 'string',
   countryCode: 'string',
   dayOfBirth: 'number',

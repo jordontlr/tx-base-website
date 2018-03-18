@@ -3,7 +3,6 @@ import DefineMap from 'can-define/map/map'
 import './blog-post.less'
 import view from './blog-post.stache'
 import Blog from '~/models/blog'
-import Uploads from '~/models/uploads'
 
 export const ViewModel = DefineMap.extend({
   blogPost: {
