@@ -57,6 +57,7 @@ export const ViewModel = DefineMap.extend({
   saveBlog () {
     this.processing = true
     this.disableForm = true
+    this.quill.enable(false)
 
     let $datetime = $('#blog-datetime')
 
@@ -102,7 +103,7 @@ export const ViewModel = DefineMap.extend({
   },
   editBlog (blog) {
     Blog.get(blog._id).then(data => {
-      this.quill.setContents(JSON.parse(data.delta))
+      this.quill.updateContents(JSON.parse(data.delta))
       this.newEditBlog = data
       if (this.newEditBlog.imageId !== 'undefined' && this.newEditBlog.imageId !== '' && this.newEditBlog.imageId) {
         Uploads
@@ -117,7 +118,7 @@ export const ViewModel = DefineMap.extend({
   clearForm () {
     this.newEditBlog = new Blog({})
     this.quill.enable(true)
-    this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
+    this.quill.updateContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#edit-modal').modal('hide')
   },
   initFileUpload () {
