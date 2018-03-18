@@ -11,7 +11,6 @@ export const ViewModel = DefineMap.extend({
   isSsr: {
     value: typeof process === 'object' && {}.toString.call(process) === '[object process]'
   },
-  filterTags: 'string',
   viewShopItem: {
     Type: Shop,
     value () {
@@ -25,6 +24,18 @@ export const ViewModel = DefineMap.extend({
       this.rowsPromise.then(resolve)
     }
   },
+  filterTags: 'string',
+  changeTags (to) {
+    this.filterTags = to
+    this.filterCategory = null
+    $('#viewShopItem').modal('hide')
+
+    this.loadPage(true)
+  },
+  clearFilterTags () {
+    this.filterTags = null
+    this.loadPage(true)
+  },
   filterCategory: 'string',
   changeCategory (to) {
     if (this.filterCategory !== to) this.filterCategory = to
@@ -36,7 +47,7 @@ export const ViewModel = DefineMap.extend({
   },
   changeSortType (to) {
     this.sortType = to
-    this.loadPage()
+    this.loadPage(true)
   },
   sortDirection: {
     value: 'down'
@@ -44,7 +55,7 @@ export const ViewModel = DefineMap.extend({
   changeSortDirection () {
     if (this.sortDirection === 'down') this.sortDirection = 'up'
     else this.sortDirection = 'down'
-    this.loadPage()
+    this.loadPage(true)
   },
   displayType: {
     value: 'list'
