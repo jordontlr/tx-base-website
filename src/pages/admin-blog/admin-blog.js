@@ -58,12 +58,6 @@ export const ViewModel = DefineMap.extend({
     this.processing = true
     this.disableForm = true
 
-    let $datetime = $('#blog-datetime')
-
-    if ($datetime.val() !== '') this.newEditBlog.datetime = Date.parse($datetime.val())
-
-    this.newEditBlog.tags = $('#blog-tags').val()
-
     if (this.imageData) {
       let sendObj = {
         uri: this.imageData
@@ -73,25 +67,25 @@ export const ViewModel = DefineMap.extend({
         .save()
         .then(imageInfo => {
           this.newEditBlog.imageId = imageInfo._id
-          this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
-          this.newEditBlog.post = $('.ql-editor').html()
-          this.newEditBlog.save()
-            .then(() => {
-              this.processing = false
-              this.disableForm = false
-              $('#edit-modal').modal('hide')
-            })
+          this.saveBlogFunction()
         })
     } else {
-      this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
-      this.newEditBlog.post = $('.ql-editor').html()
-      this.newEditBlog.save()
-        .then(() => {
-          this.processing = false
-          this.disableForm = false
-          $('#edit-modal').modal('hide')
-        })
+      this.saveBlogFunction()
     }
+  },
+  saveBlogFunction () {
+    let $datetime = $('#blog-datetime')
+    if ($datetime.val() !== '') this.newEditBlog.datetime = Date.parse($datetime.val())
+
+    this.newEditBlog.tags = $('#blog-tags').val()
+    this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
+    this.newEditBlog.post = $('.ql-editor').html()
+    this.newEditBlog.save()
+      .then(() => {
+        this.processing = false
+        this.disableForm = false
+        $('#edit-modal').modal('hide')
+      })
   },
   deleteBlog (blog) {
     blog.destroy()

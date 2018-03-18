@@ -13,7 +13,10 @@ const Blog = DefineMap.extend('Blog', {
   published: 'boolean',
   datetime: 'number',
   post: 'string',
-  delta: 'string',
+  delta: {
+    type: 'string',
+    value: '{"ops":[{"insert":"\\n"}]}'
+  },
   author: 'string',
   category: 'string',
   tags: [ 'string' ],

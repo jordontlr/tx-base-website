@@ -113,9 +113,6 @@ export const ViewModel = DefineMap.extend({
     this.processing = true
     this.disableForm = true
 
-    this.editShopItem.delta = JSON.stringify(this.quill.getContents())
-    this.editShopItem.description = $('.ql-editor').html()
-
     if (this.editShopItem.imageData.length > 0) {
       let promises = []
 
@@ -143,6 +140,8 @@ export const ViewModel = DefineMap.extend({
     }
   },
   saveShopItemFunction () {
+    this.editShopItem.delta = JSON.stringify(this.quill.getContents())
+    this.editShopItem.description = $('.ql-editor').html()
     this.editShopItem.tags = $('#shop-tags').val()
 
     this.editShopItem.save()
