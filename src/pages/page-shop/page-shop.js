@@ -26,11 +26,11 @@ export const ViewModel = DefineMap.extend({
   },
   filterTags: 'string',
   changeTags (to) {
+    this.pagination.skip = 0
     this.filterTags = to
     this.filterCategory = null
     $('#viewShopItem').modal('hide')
-
-    this.loadPage(true)
+    this.loadPage()
   },
   clearFilterTags () {
     this.filterTags = null
@@ -41,22 +41,24 @@ export const ViewModel = DefineMap.extend({
     this.pagination.skip = 0
     if (this.filterCategory !== to) this.filterCategory = to
     else this.filterCategory = null
-    this.loadPage(true)
+    this.loadPage()
   },
   sortType: {
     value: 'product'
   },
   changeSortType (to) {
+    this.pagination.skip = 0
     this.sortType = to
-    this.loadPage(true)
+    this.loadPage()
   },
   sortDirection: {
     value: 'down'
   },
   changeSortDirection () {
+    this.pagination.skip = 0
     if (this.sortDirection === 'down') this.sortDirection = 'up'
     else this.sortDirection = 'down'
-    this.loadPage(true)
+    this.loadPage()
   },
   displayType: {
     value: 'list'
@@ -97,7 +99,7 @@ export const ViewModel = DefineMap.extend({
     this.pagination.limit = to
     this.loadPage()
   },
-  loadPage (resetSkip) {
+  loadPage () {
     let pagination = this.pagination
 
     let query = {
@@ -105,8 +107,6 @@ export const ViewModel = DefineMap.extend({
       $limit: pagination.limit,
       listed: true
     }
-
-    if (resetSkip) query.$skip = 0
 
     if (this.filterCategory) {
       query = Object.assign(query, {
