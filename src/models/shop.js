@@ -27,9 +27,7 @@ const Shop = DefineMap.extend('Shop', {
   sku: 'string',
   brand: 'string',
   tags: [ 'string' ],
-  imageId: [ 'string' ],
   imageData: {
-    serialize: false,
     type: [ 'string' ],
     value () {
       return []
