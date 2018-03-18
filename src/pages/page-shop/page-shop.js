@@ -92,9 +92,7 @@ export const ViewModel = DefineMap.extend({
                 notFound = false
               }
             })
-            if (notFound) {
-              list.push({item: item.category, count: 1})
-            }
+            if (notFound) list.push({item: item.category, count: 1})
           }
           return list
         }, [])
