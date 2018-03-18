@@ -57,10 +57,12 @@ export const ViewModel = DefineMap.extend({
     value: 'product'
   },
   changeSortType (to) {
-    this.loadingShopList = true
-    this.pagination.skip = 0
-    this.sortType = to
-    this.loadPage()
+    if (this.sortType !== to) {
+      this.loadingShopList = true
+      this.pagination.skip = 0
+      this.sortType = to
+      this.loadPage()
+    }
   },
   sortDirection: {
     value: 'down'
@@ -117,10 +119,12 @@ export const ViewModel = DefineMap.extend({
     }
   },
   changeLimit (to) {
-    this.loadingShopList = true
-    this.pagination.skip = 0
-    this.pagination.limit = to
-    this.loadPage()
+    if (this.pagination.limit !== parseInt(to)) {
+      this.loadingShopList = true
+      this.pagination.skip = 0
+      this.pagination.limit = to
+      this.loadPage()
+    }
   },
   loadPage () {
     let pagination = this.pagination
