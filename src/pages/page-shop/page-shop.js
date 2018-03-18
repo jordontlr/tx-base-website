@@ -1,11 +1,22 @@
+import $ from 'jquery'
 import Component from 'can-component'
 import DefineMap from 'can-define/map/map'
 import './page-shop.less'
 import view from './page-shop.stache'
 import Pagination from '~/models/pagination'
 import Shop from '~/models/shop'
+import Uploads from '~/models/uploads'
 
 export const ViewModel = DefineMap.extend({
+  isSsr: {
+    value: typeof process === 'object' && {}.toString.call(process) === '[object process]'
+  },
+  viewShopItem: {
+    Type: Shop,
+    value () {
+      return new Shop({})
+    }
+  },
   loadingShop: {
     value: true,
     get (val, resolve) {
@@ -13,16 +24,30 @@ export const ViewModel = DefineMap.extend({
       this.rowsPromise.then(resolve)
     }
   },
+  filterTags: 'string',
+  changeTags (to) {
+    this.pagination.skip = 0
+    this.filterTags = to
+    this.filterCategory = null
+    $('#viewShopItem').modal('hide')
+    this.loadPage()
+  },
+  clearFilterTags () {
+    this.filterTags = null
+    this.loadPage(true)
+  },
   filterCategory: 'string',
   changeCategory (to) {
+    this.pagination.skip = 0
     if (this.filterCategory !== to) this.filterCategory = to
     else this.filterCategory = null
-    this.loadPage(true)
+    this.loadPage()
   },
   sortType: {
     value: 'product'
   },
   changeSortType (to) {
+    this.pagination.skip = 0
     this.sortType = to
     this.loadPage()
   },
@@ -30,6 +55,7 @@ export const ViewModel = DefineMap.extend({
     value: 'down'
   },
   changeSortDirection () {
+    this.pagination.skip = 0
     if (this.sortDirection === 'down') this.sortDirection = 'up'
     else this.sortDirection = 'down'
     this.loadPage()
@@ -73,7 +99,7 @@ export const ViewModel = DefineMap.extend({
     this.pagination.limit = to
     this.loadPage()
   },
-  loadPage (resetSkip) {
+  loadPage () {
     let pagination = this.pagination
 
     let query = {
@@ -82,11 +108,15 @@ export const ViewModel = DefineMap.extend({
       listed: true
     }
 
-    if (resetSkip) query.$skip = 0
-
     if (this.filterCategory) {
       query = Object.assign(query, {
         category: this.filterCategory
+      })
+    }
+
+    if (this.filterTags) {
+      query = Object.assign(query, {
+        tags: { $in: [ this.filterTags ] }
       })
     }
 
@@ -109,6 +139,40 @@ export const ViewModel = DefineMap.extend({
         this.rows = shop
         this.pagination.total = shop.total
 
+        if (!this.isSsr) {
+          this.rows.forEach((currentRow) => {
+            currentRow.imageData = []
+          })
+
+          let promises = []
+          this.rows.forEach((rowValue, shopIndex) => {
+            if (this.rows[shopIndex].imageId && this.rows[shopIndex].imageId.length > 0) {
+              this.rows[shopIndex].imageId.forEach((shopRow, imageIndex) => {
+                promises.push(
+                  new Promise((resolve) => {
+                    Uploads
+                      .get({_id: this.rows[shopIndex].imageId[imageIndex]})
+                      .then(imageData => {
+                        resolve({shopIndex, imageIndex, uri: imageData.uri, _id: imageData._id})
+                      })
+                  })
+                )
+              })
+            }
+          })
+
+          Promise.all(promises)
+            .then((values) => {
+              this.rows.forEach((currentShop) => {
+                values.forEach((currentValue) => {
+                  if (this.rows[currentValue.shopIndex] === currentShop) {
+                    currentShop.imageData.push(currentValue.uri)
+                  }
+                })
+              })
+            })
+        }
+
         setTimeout(() => { this.loadingShop = false }, 25)
 
         Shop.getList()
@@ -117,6 +181,20 @@ export const ViewModel = DefineMap.extend({
           })
       })
       .catch(err => console.log(err))
+  },
+  openShopModal (shopItem) {
+    this.viewShopItem = shopItem
+
+    $('#viewShopItem').modal('show')
+  },
+  closeModal () {
+    $('#viewShopItem').modal('hide')
+  },
+  quantityUp () {
+    this.viewShopItem.quantity += 1
+  },
+  quantityDown () {
+    if (this.viewShopItem.quantity > 0) this.viewShopItem.quantity -= 1
   }
 })
 

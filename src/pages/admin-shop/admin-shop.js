@@ -6,8 +6,12 @@ import view from './admin-shop.stache'
 import Quill from 'quill'
 import Pagination from '~/models/pagination'
 import Shop from '~/models/shop'
+import Uploads from '~/models/uploads'
 
 export const ViewModel = DefineMap.extend({
+  isSsr: {
+    value: typeof process === 'object' && {}.toString.call(process) === '[object process]'
+  },
   disableForm: {
     value: false
   },
@@ -44,12 +48,12 @@ export const ViewModel = DefineMap.extend({
   },
   openShopItem (shop) {
     this.editShopItem = shop
-    if (this.editShopItem.delta) this.quill.setContents(JSON.parse(this.editShopItem.delta))
+    this.quill.updateContents(JSON.parse(this.editShopItem.delta))
     $('#editShopItem').modal('show')
   },
   addNew () {
     this.editShopItem = new Shop({})
-    this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
+    this.quill.updateContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#editShopItem').modal('show')
   },
   deleteShopItem (shop) {
@@ -59,10 +63,45 @@ export const ViewModel = DefineMap.extend({
   loadPage () {
     this.loadingShop = true
     let pagination = this.pagination
-    Shop.getList({$skip: pagination.skip, $limit: pagination.limit})
+    Shop.getList({$skip: pagination.skip, $limit: pagination.limit, $sort: {createdAt: -1}})
       .then(shop => {
         this.rows = shop
         this.pagination.total = shop.total
+
+        if (!this.isSsr) {
+          this.rows.forEach((currentRow) => {
+            currentRow.imageData = []
+          })
+
+          let promises = []
+          this.rows.forEach((rowValue, shopIndex) => {
+            if (this.rows[shopIndex].imageId && this.rows[shopIndex].imageId.length > 0) {
+              this.rows[shopIndex].imageId.forEach((shopRow, imageIndex) => {
+                promises.push(
+                  new Promise((resolve) => {
+                    Uploads
+                      .get({_id: this.rows[shopIndex].imageId[imageIndex]})
+                      .then(imageData => {
+                        resolve({shopIndex, imageIndex, uri: imageData.uri, _id: imageData._id})
+                      })
+                  })
+                )
+              })
+            }
+          })
+
+          Promise.all(promises)
+            .then((values) => {
+              this.rows.forEach((currentShop) => {
+                values.forEach((currentValue) => {
+                  if (this.rows[currentValue.shopIndex] === currentShop) {
+                    currentShop.imageData.push(currentValue.uri)
+                  }
+                })
+              })
+            })
+        }
+
         setTimeout(() => { this.loadingShop = false }, 25)
       })
       .catch(err => {
@@ -74,8 +113,36 @@ export const ViewModel = DefineMap.extend({
     this.processing = true
     this.disableForm = true
 
+    if (this.editShopItem.imageData.length > 0) {
+      let promises = []
+
+      this.editShopItem.imageData.forEach((currentValue) => {
+        if (currentValue) {
+          promises.push(
+            new Promise((resolve) => {
+              let imageUpload = new Uploads({uri: currentValue})
+              imageUpload
+                .save()
+                .then(imageInfo => {
+                  resolve(imageInfo._id)
+                })
+            })
+          )
+        }
+      })
+
+      Promise.all(promises).then((values) => {
+        this.editShopItem.imageId = values
+        this.saveShopItemFunction()
+      })
+    } else {
+      this.saveShopItemFunction()
+    }
+  },
+  saveShopItemFunction () {
     this.editShopItem.delta = JSON.stringify(this.quill.getContents())
     this.editShopItem.description = $('.ql-editor').html()
+    this.editShopItem.tags = $('#shop-tags').val()
 
     this.editShopItem.save()
       .then(() => {
@@ -121,7 +188,7 @@ export default Component.extend({
         ['clean']
       ]
 
-      this.viewModel.quill = new Quill('#shop-description', {
+      this.viewModel.quill = new Quill('#shop-desc', {
         modules: {
           toolbar: toolbarOptions
         },

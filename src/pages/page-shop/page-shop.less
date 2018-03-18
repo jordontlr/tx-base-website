@@ -1,3 +1,6 @@
+@import "../../../node_modules/bootstrap/less/variables";
+@import "../../less/_variables";
+
 page-shop {
 	display: block;
 	.list-header {
@@ -21,5 +24,38 @@ page-shop {
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+	.background-image-css {
+		height: 100px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+	.hover-change-image {
+		.image-one {
+			display: block;
+		}
+		.image-two {
+			display: none;
+		}
+	}
+	.hover-change-image:hover {
+		.image-one {
+			display: none;
+		}
+		.image-two {
+			display: block;
+		}
+	}
+	.mouse-pointer {
+		cursor: pointer;
+	}
+	.hover-color:hover {
+		color: @brand-primary;
+	}
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
 	}
 }

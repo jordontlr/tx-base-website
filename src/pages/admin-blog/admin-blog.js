@@ -58,12 +58,6 @@ export const ViewModel = DefineMap.extend({
     this.processing = true
     this.disableForm = true
 
-    let $datetime = $('#blog-datetime')
-
-    if ($datetime.val() !== '') this.newEditBlog.datetime = Date.parse($datetime.val())
-
-    this.newEditBlog.tags = $('#blog-tags').val()
-
     if (this.imageData) {
       let sendObj = {
         uri: this.imageData
@@ -72,37 +66,33 @@ export const ViewModel = DefineMap.extend({
       imageUpload
         .save()
         .then(imageInfo => {
-          this.quill.enable(false)
           this.newEditBlog.imageId = imageInfo._id
-          this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
-          this.newEditBlog.post = $('.ql-editor').html()
-          this.newEditBlog.save()
-            .then(() => {
-              this.processing = false
-              this.disableForm = false
-              this.quill.enable(true)
-              $('#edit-modal').modal('hide')
-            })
+          this.saveBlogFunction()
         })
     } else {
-      this.quill.enable(false)
-      this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
-      this.newEditBlog.post = $('.ql-editor').html()
-      this.newEditBlog.save()
-        .then(() => {
-          this.processing = false
-          this.disableForm = false
-          this.quill.enable(true)
-          $('#edit-modal').modal('hide')
-        })
+      this.saveBlogFunction()
     }
+  },
+  saveBlogFunction () {
+    let $datetime = $('#blog-datetime')
+    if ($datetime.val() !== '') this.newEditBlog.datetime = Date.parse($datetime.val())
+
+    this.newEditBlog.tags = $('#blog-tags').val()
+    this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
+    this.newEditBlog.post = $('.ql-editor').html()
+    this.newEditBlog.save()
+      .then(() => {
+        this.processing = false
+        this.disableForm = false
+        $('#edit-modal').modal('hide')
+      })
   },
   deleteBlog (blog) {
     blog.destroy()
   },
   editBlog (blog) {
     Blog.get(blog._id).then(data => {
-      this.quill.setContents(JSON.parse(data.delta))
+      this.quill.updateContents(JSON.parse(data.delta))
       this.newEditBlog = data
       if (this.newEditBlog.imageId !== 'undefined' && this.newEditBlog.imageId !== '' && this.newEditBlog.imageId) {
         Uploads
@@ -116,7 +106,7 @@ export const ViewModel = DefineMap.extend({
   },
   clearForm () {
     this.newEditBlog = new Blog({})
-    this.quill.enable(true)
+    this.imageData = null
     this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#edit-modal').modal('hide')
   },

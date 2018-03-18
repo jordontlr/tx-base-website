@@ -29,7 +29,12 @@ const Shop = DefineMap.extend('Shop', {
   },
   listed: 'boolean',
   updatedAt: 'date',
-  createdAt: 'date'
+  createdAt: 'date',
+  quantity: {
+    serialize: false,
+    type: 'number',
+    value: 0
+  }
 })
 
 Shop.List = DefineList.extend({
