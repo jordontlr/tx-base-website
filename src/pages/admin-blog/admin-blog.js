@@ -57,7 +57,6 @@ export const ViewModel = DefineMap.extend({
   saveBlog () {
     this.processing = true
     this.disableForm = true
-    this.quill.enable(false)
 
     let $datetime = $('#blog-datetime')
 
@@ -73,7 +72,6 @@ export const ViewModel = DefineMap.extend({
       imageUpload
         .save()
         .then(imageInfo => {
-          this.quill.enable(false)
           this.newEditBlog.imageId = imageInfo._id
           this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
           this.newEditBlog.post = $('.ql-editor').html()
@@ -81,19 +79,16 @@ export const ViewModel = DefineMap.extend({
             .then(() => {
               this.processing = false
               this.disableForm = false
-              this.quill.enable(true)
               $('#edit-modal').modal('hide')
             })
         })
     } else {
-      this.quill.enable(false)
       this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
       this.newEditBlog.post = $('.ql-editor').html()
       this.newEditBlog.save()
         .then(() => {
           this.processing = false
           this.disableForm = false
-          this.quill.enable(true)
           $('#edit-modal').modal('hide')
         })
     }
@@ -117,8 +112,8 @@ export const ViewModel = DefineMap.extend({
   },
   clearForm () {
     this.newEditBlog = new Blog({})
-    this.quill.enable(true)
-    this.quill.updateContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
+    this.imageData = null
+    this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#edit-modal').modal('hide')
   },
   initFileUpload () {

@@ -45,7 +45,6 @@ export const ViewModel = DefineMap.extend({
   openFAQ (faq) {
     this.editFAQ = faq
     this.quill.setContents(JSON.parse(this.editFAQ.delta))
-
     $('#editFAQ').modal('show')
   },
   addNew () {

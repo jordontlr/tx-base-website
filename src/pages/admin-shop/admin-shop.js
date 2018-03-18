@@ -48,7 +48,6 @@ export const ViewModel = DefineMap.extend({
   },
   openShopItem (shop) {
     this.editShopItem = shop
-    this.quill.enable(true)
     if (this.editShopItem.delta) this.quill.updateContents(JSON.parse(this.editShopItem.delta))
     $('#editShopItem').modal('show')
   },
@@ -113,7 +112,6 @@ export const ViewModel = DefineMap.extend({
   saveShopItem () {
     this.processing = true
     this.disableForm = true
-    this.quill.enable(false)
 
     this.editShopItem.delta = JSON.stringify(this.quill.getContents())
     this.editShopItem.description = $('.ql-editor').html()
@@ -151,14 +149,12 @@ export const ViewModel = DefineMap.extend({
       .then(() => {
         this.processing = false
         this.disableForm = false
-        this.quill.enable(true)
 
         this.clearForm()
       })
       .catch(err => {
         this.processing = false
         this.disableForm = false
-        this.quill.enable(true)
 
         if (err.code === 401) this.session.error401()
         else console.log(err)
@@ -166,8 +162,7 @@ export const ViewModel = DefineMap.extend({
   },
   clearForm () {
     this.editShopItem = new Shop({})
-    this.quill.enable(true)
-    this.quill.updateContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
+    this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#editShopItem').modal('hide')
   },
   initFileUpload () {
