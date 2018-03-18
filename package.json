@@ -26,7 +26,8 @@
     "staging": "npm run release:staging:patch",
     "release:staging:patch": "npm test && npm run ready:staging && npm version patch && make release-staging",
     "test": "npm run lint && npm run testee",
-    "testee": "testee test.html --browsers firefox --reporter Spec"
+    "testee": "testee test.html --browsers firefox --reporter Spec",
+    "build": "node build"
   },
   "main": "tx/index.stache!done-autorender",
   "files": [
@@ -90,6 +91,7 @@
     "feathers-hooks": "^2.0.2",
     "feathers-rest": "^1.8.0",
     "feathers-socketio": "^2.0.0",
+    "fingerprintjs2": "^1.6.1",
     "font-awesome": "^4.7.0",
     "generator-donejs": "^1.0.7",
     "grid-component": "^0.10.2",

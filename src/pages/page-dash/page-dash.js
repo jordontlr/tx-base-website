@@ -17,6 +17,14 @@ export const ViewModel = DefineMap.extend({
   session: {
     type: 'any'
   }
+  // finger: {
+  //   value () {
+  //     new Fingerprint2().get(function(result, components) {
+  //       console.log(result)
+  //       console.log(components)
+  //     })
+  //   }
+  // }
 })
 
 export default Component.extend({

@@ -56,7 +56,7 @@ Shop.connection = connect([
   Map: Shop,
   List: Shop.List,
   feathersService: feathersClient.service('shop'),
-  name: 'faq',
+  name: 'shop',
   algebra
 })
 

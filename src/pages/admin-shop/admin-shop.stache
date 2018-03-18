@@ -168,7 +168,7 @@
                 <div class="thumbnail">
                   <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{this}})"></div>
                   <div class="caption">
-                    <div class="text-center"><button type="button" class="btn btn-danger" role="button">Delete</button></div>
+                    <div class="text-center"><button type="button" class="btn btn-danger" role="button" on:click="deleteImage(this)">Delete</button></div>
                   </div>
                 </div>
               </div>

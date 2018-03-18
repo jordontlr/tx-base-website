@@ -142,6 +142,7 @@ export const ViewModel = DefineMap.extend({
   saveShopItemFunction () {
     this.editShopItem.delta = JSON.stringify(this.quill.getContents())
     this.editShopItem.description = $('.ql-editor').html()
+    if (this.editShopItem.description === '<p><br></p>') this.editShopItem.description = ''
     this.editShopItem.tags = $('#shop-tags').val()
 
     this.editShopItem.save()
@@ -166,6 +167,13 @@ export const ViewModel = DefineMap.extend({
   },
   initFileUpload () {
     $('.image-input-btn').trigger('click')
+  },
+  deleteImage (imageData) {
+    this.editShopItem.imageData.forEach((currentValue, index) => {
+      if (currentValue === imageData) {
+        this.editShopItem.imageData[index] = null
+      }
+    })
   }
 })
 
