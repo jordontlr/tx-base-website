@@ -5,12 +5,16 @@ import feathersClient from './feathers-client'
 import feathersServiceBehavior from 'can-connect-feathers/service/service'
 import behaviors from './behaviors'
 import algebra from './algebra'
+import Shop from './shop'
 
 const Cart = DefineMap.extend('Cart', {
   _id: 'any',
   fingerprint: 'string',
   userId: 'any',
-
+  items: {
+    serialize: false,
+    Type: Shop.List
+  },
   updatedAt: 'date',
   createdAt: 'date'
 })

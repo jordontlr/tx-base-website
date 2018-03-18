@@ -5,6 +5,7 @@ import './page-shop.less'
 import view from './page-shop.stache'
 import Pagination from '~/models/pagination'
 import Shop from '~/models/shop'
+import Cart from '~/models/cart'
 
 export const ViewModel = DefineMap.extend({
   isSsr: {
@@ -15,6 +16,9 @@ export const ViewModel = DefineMap.extend({
     value () {
       return new Shop({})
     }
+  },
+  userCart: {
+    Type: Cart
   },
   loadingShop: {
     value: true,
@@ -80,7 +84,18 @@ export const ViewModel = DefineMap.extend({
     get () {
       if (this.allCategories) {
         return this.allCategories.reduce((list, item) => {
-          if (item.category !== '' && typeof item.category !== 'undefined' && !list.includes(item.category)) list.push(item.category)
+          if (item.category !== '' && typeof item.category !== 'undefined') {
+            let notFound = true
+            list.forEach((currentObj, index) => {
+              if (currentObj.item === item.category) {
+                list[index].count += 1
+                notFound = false
+              }
+            })
+            if (notFound) {
+              list.push({item: item.category, count: 1})
+            }
+          }
           return list
         }, [])
       } else {
