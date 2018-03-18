@@ -27,8 +27,13 @@ export const ViewModel = DefineMap.extend({
       this.rowsPromise.then(resolve)
     }
   },
+  loadingShopList: {
+    type: 'boolean',
+    value: false
+  },
   filterTags: 'string',
   changeTags (to) {
+    this.loadingShopList = true
     this.pagination.skip = 0
     this.filterTags = to
     this.filterCategory = null
@@ -36,11 +41,13 @@ export const ViewModel = DefineMap.extend({
     this.loadPage()
   },
   clearFilterTags () {
+    this.loadingShopList = true
     this.filterTags = null
     this.loadPage(true)
   },
   filterCategory: 'string',
   changeCategory (to) {
+    this.loadingShopList = true
     this.pagination.skip = 0
     if (this.filterCategory !== to) this.filterCategory = to
     else this.filterCategory = null
@@ -50,6 +57,7 @@ export const ViewModel = DefineMap.extend({
     value: 'product'
   },
   changeSortType (to) {
+    this.loadingShopList = true
     this.pagination.skip = 0
     this.sortType = to
     this.loadPage()
@@ -58,6 +66,7 @@ export const ViewModel = DefineMap.extend({
     value: 'down'
   },
   changeSortDirection () {
+    this.loadingShopList = true
     this.pagination.skip = 0
     if (this.sortDirection === 'down') this.sortDirection = 'up'
     else this.sortDirection = 'down'
@@ -108,6 +117,8 @@ export const ViewModel = DefineMap.extend({
     }
   },
   changeLimit (to) {
+    this.loadingShopList = true
+    this.pagination.skip = 0
     this.pagination.limit = to
     this.loadPage()
   },
@@ -152,6 +163,7 @@ export const ViewModel = DefineMap.extend({
         this.pagination.total = shop.total
 
         setTimeout(() => { this.loadingShop = false }, 25)
+        this.loadingShopList = false
 
         Shop.getList()
           .then(shop => {
