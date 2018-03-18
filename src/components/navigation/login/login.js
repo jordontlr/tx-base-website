@@ -61,7 +61,7 @@ export const ViewModel = DefineMap.extend({
     const session = Session.current
     this.session = session
 
-    feathersClient.authenticate({ strategy: 'local', email: email, password: password })
+    feathersClient.authenticate({ strategy: 'local', email, password })
       .then(({user, tmpPasswordUsed}) => {
         this.processing = false
         session.user = user

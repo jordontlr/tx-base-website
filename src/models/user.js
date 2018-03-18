@@ -14,6 +14,10 @@ const User = DefineMap.extend('User', {
     type: 'string',
     serialize: false
   },
+  isNewUser: {
+    type: 'boolean',
+    serialize: false
+  },
   setPassword: 'boolean',
   accountCreated: 'number',
   lastLogin: 'number',

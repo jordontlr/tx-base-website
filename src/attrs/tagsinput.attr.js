@@ -1,6 +1,6 @@
 import $ from 'jquery'
-import callback from 'can-view-callbacks'
 import 'bootstrap-tagsinput'
+import callback from 'can-view-callbacks'
 
 callback.attr('tagsinput', (el) => {
   let $el = $(el)
