@@ -58,25 +58,10 @@ export const ViewModel = DefineMap.extend({
     this.processing = true
     this.disableForm = true
 
-    if (this.imageData) {
-      let sendObj = {
-        uri: this.imageData
-      }
-      let imageUpload = new Uploads(sendObj)
-      imageUpload
-        .save()
-        .then(imageInfo => {
-          this.newEditBlog.imageId = imageInfo._id
-          this.saveBlogFunction()
-        })
-    } else {
-      this.saveBlogFunction()
-    }
-  },
-  saveBlogFunction () {
     let $datetime = $('#blog-datetime')
     if ($datetime.val() !== '') this.newEditBlog.datetime = Date.parse($datetime.val())
 
+    this.newEditBlog.imageData = this.imageData
     this.newEditBlog.tags = $('#blog-tags').val()
     this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
     this.newEditBlog.post = $('.ql-editor').html()
@@ -94,13 +79,6 @@ export const ViewModel = DefineMap.extend({
     Blog.get(blog._id).then(data => {
       this.quill.updateContents(JSON.parse(data.delta))
       this.newEditBlog = data
-      if (this.newEditBlog.imageId !== 'undefined' && this.newEditBlog.imageId !== '' && this.newEditBlog.imageId) {
-        Uploads
-          .get({ _id: this.newEditBlog.imageId })
-          .then(imageData => {
-            this.imageData = imageData.uri
-          })
-      }
       $('#edit-modal').modal('show')
     })
   },

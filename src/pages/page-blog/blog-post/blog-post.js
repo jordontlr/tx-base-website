@@ -37,13 +37,6 @@ export const ViewModel = DefineMap.extend({
             this.errorNotFound = true
           } else {
             this.blogPost = blog[0]
-            if (this.blogPost.imageId !== 'undefined' && this.blogPost.imageId !== '' && this.blogPost.imageId) {
-              Uploads
-                .get({ _id: this.blogPost.imageId })
-                .then(imageData => {
-                  this.blogPost.imageData = imageData.uri
-                })
-            }
             let query = {
               $limit: 3,
               $sort: {

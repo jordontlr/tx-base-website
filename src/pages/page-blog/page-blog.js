@@ -51,15 +51,6 @@ export const ViewModel = DefineMap.extend({
       return Blog.getList(query)
         .then(blog => {
           this.rows = blog
-          blog.forEach((currentValue) => {
-            if (currentValue.imageId !== 'undefined' && currentValue.imageId !== '' && currentValue.imageId) {
-              Uploads
-                .get({ _id: currentValue.imageId })
-                .then(imageData => {
-                  currentValue.imageData = imageData.uri
-                })
-            }
-          })
           this.pagination.total = blog.total
           setTimeout(() => { this.loadingBlog = false }, 25)
         })

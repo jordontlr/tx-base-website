@@ -92,8 +92,8 @@
 
           <div class="form-group">
             <label for="blog-title">Post Image</label>
-            {{#if ../imageData}}
-              <img src="{{../imageData}}" class="img-responsive img-rounded">
+            {{#if imageData}}
+              <img src="{{imageData}}" class="img-responsive img-rounded">
             {{/if}}
             <br>
             <button type="button" class="btn btn-warning btn-sm" on:click="initFileUpload()">Upload Image</button>
