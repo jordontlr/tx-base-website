@@ -24,16 +24,18 @@
 
       <grid-component rows:bind="rows" pagination:bind="pagination" on:onpage="loadPage()">
 
-        <div class="col-sm-3">
-          <div class="list-group">
-            <div class="list-header list-group-item h4 no-margin-top">Product Categories</div>
-            {{#each categories}}
-              <a href="javascript:void(0)" on:click="changeCategory(this)" class="list-group-item {{#eq ../filterCategory this}} active{{/eq}}">{{this}}</a>
-            {{/each}}
+        {{^if filterTags}}
+          <div class="col-sm-3">
+            <div class="list-group">
+              <div class="list-header list-group-item h4 no-margin-top">Product Categories</div>
+              {{#each categories}}
+                <a href="javascript:void(0)" on:click="changeCategory(this)" class="list-group-item {{#eq ../filterCategory this}} active{{/eq}}">{{this}}</a>
+              {{/each}}
+            </div>
           </div>
-        </div>
+        {{/if}}
 
-        <div class="col-sm-9">
+        <div class="{{^if filterTags}}col-sm-9{{else}}col-sm-12{{/if}}">
           {{#if ../filterCategory}}
             <h1 class="no-margin-top margin-bottom">{{../filterCategory}}</h1>
           {{/if}}
