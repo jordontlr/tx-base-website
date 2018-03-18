@@ -188,6 +188,12 @@ export const ViewModel = DefineMap.extend({
   },
   closeModal () {
     $('#viewShopItem').modal('hide')
+  },
+  quantityUp () {
+    this.viewShopItem.quantity += 1
+  },
+  quantityDown () {
+    if (this.viewShopItem.quantity > 0) this.viewShopItem.quantity -= 1
   }
 })
 
