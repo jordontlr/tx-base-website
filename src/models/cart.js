@@ -13,7 +13,10 @@ const Cart = DefineMap.extend('Cart', {
   userId: 'any',
   items: {
     serialize: false,
-    Type: Shop.List
+    Type: Shop.List,
+    value () {
+      return []
+    }
   },
   updatedAt: 'date',
   createdAt: 'date'

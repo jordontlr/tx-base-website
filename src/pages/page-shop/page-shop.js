@@ -18,7 +18,24 @@ export const ViewModel = DefineMap.extend({
     }
   },
   userCart: {
-    Type: Cart
+    Type: Cart,
+    value () {
+      return new Cart({})
+    }
+  },
+  addToCart (item) {
+    let found = false
+    this.userCart.items.forEach((currentVal) => {
+      if (currentVal === item) {
+        currentVal.quantity += 1
+        found = true
+      }
+    })
+    if (!found) {
+      if (item.quantity === 0) item.quantity = 1
+      item.addedToCart = true
+      this.userCart.items.push(item)
+    }
   },
   loadingShop: {
     value: true,
@@ -189,7 +206,22 @@ export const ViewModel = DefineMap.extend({
     this.viewShopItem.quantity += 1
   },
   quantityDown () {
-    if (this.viewShopItem.quantity > 0) this.viewShopItem.quantity -= 1
+    if (this.viewShopItem.quantity > 0) {
+      this.viewShopItem.quantity -= 1
+    }
+
+    if (this.viewShopItem.quantity === 0) {
+      this.quantityRemove()
+    }
+  },
+  quantityRemove () {
+    this.userCart.items.forEach((currentVal, index) => {
+      if (currentVal === this.viewShopItem) {
+        this.userCart.items.splice(index, 1)
+      }
+    })
+    this.viewShopItem.addedToCart = false
+    this.viewShopItem.quantity = 1
   }
 })
 

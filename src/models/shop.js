@@ -39,7 +39,12 @@ const Shop = DefineMap.extend('Shop', {
   quantity: {
     serialize: false,
     type: 'number',
-    value: 0
+    value: 1
+  },
+  addedToCart: {
+    serialize: false,
+    type: 'boolean',
+    value: false
   }
 })
 
