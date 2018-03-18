@@ -38,6 +38,7 @@ export const ViewModel = DefineMap.extend({
   },
   filterCategory: 'string',
   changeCategory (to) {
+    this.pagination.skip = 0
     if (this.filterCategory !== to) this.filterCategory = to
     else this.filterCategory = null
     this.loadPage(true)
