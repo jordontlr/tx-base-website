@@ -211,9 +211,9 @@
                   <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{viewShopItem.imageData[0]}})"></div>
                 </div>
               </div>
-            {{/if}}
+            {{/eq}}
           {{/if}}
-            <div class="col-sm-12 {{#if viewShopItem.imageData.length}}{{#eq viewShopItem.imageData.length 1}}col-md-6{{else}}col-md-5{{/if}}{{/if}}">
+            <div class="col-sm-12 {{#if viewShopItem.imageData.length}}{{#eq viewShopItem.imageData.length 1}}col-md-6{{else}}col-md-5{{/eq}}{{/if}}">
             <h3 class="no-margin-top">{{viewShopItem.short}}</h3>
             {{#if viewShopItem.brand}}<h5 class="text-muted">Brand: {{viewShopItem.brand}}</h5>{{/if}}
             {{#if viewShopItem.sku}}<h5 class="text-muted">SKU: {{viewShopItem.sku}}</h5>{{/if}}
