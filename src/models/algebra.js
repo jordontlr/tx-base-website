@@ -14,6 +14,12 @@ export default new set.Algebra(
     },
     '$filter': function () {
       return true
+    },
+    'tags': function () {
+      return true
+    },
+    'linkTitle': function () {
+      return true
     }
   }
 )

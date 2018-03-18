@@ -25,7 +25,7 @@
 
       <grid-component rows:bind="rows" pagination:bind="pagination" on:onpage="loadPage()">
 
-        {{^if filterTags}}
+        {{^if ../filterTags}}
           <div class="col-sm-3">
             <div class="list-group">
               <div class="list-header list-group-item h4 no-margin-top">Product Categories</div>
@@ -36,7 +36,7 @@
           </div>
         {{/if}}
 
-        <div class="{{^if filterTags}}col-sm-9{{else}}col-sm-12{{/if}}">
+        <div class="{{^if ../filterTags}}col-sm-9{{else}}col-sm-12{{/if}}">
           {{#if ../filterCategory}}
             <h1 class="no-margin-top margin-bottom">{{../filterCategory}}</h1>
           {{/if}}
