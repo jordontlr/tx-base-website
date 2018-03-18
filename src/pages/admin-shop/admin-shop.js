@@ -48,7 +48,7 @@ export const ViewModel = DefineMap.extend({
   },
   openShopItem (shop) {
     this.editShopItem = shop
-    if (this.editShopItem.delta) this.quill.updateContents(JSON.parse(this.editShopItem.delta))
+    this.quill.updateContents(JSON.parse(this.editShopItem.delta))
     $('#editShopItem').modal('show')
   },
   addNew () {
