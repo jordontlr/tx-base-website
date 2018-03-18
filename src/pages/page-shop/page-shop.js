@@ -127,6 +127,7 @@ export const ViewModel = DefineMap.extend({
     }
   },
   loadPage () {
+    this.loadingShopList = true
     let pagination = this.pagination
 
     let query = {
