@@ -8,10 +8,16 @@ import algebra from './algebra'
 
 const Shop = DefineMap.extend('Shop', {
   _id: 'any',
-  product: 'string',
+  product: {
+    type: 'string',
+    value: null
+  },
   category: 'string',
   price: 'number',
-  short: 'string',
+  short: {
+    type: 'string',
+    value: null
+  },
   description: 'string',
   delta: {
     type: 'string',
@@ -24,8 +30,7 @@ const Shop = DefineMap.extend('Shop', {
   imageId: [ 'string' ],
   imageData: {
     serialize: false,
-    type: [ 'string' ],
-    value: [ null ]
+    type: [ 'string' ]
   },
   listed: 'boolean',
   updatedAt: 'date',

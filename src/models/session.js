@@ -21,8 +21,10 @@ const Session = DefineMap.extend('Session', {
   // todo: consider passing the tmpPassword to set-password component directly.
   tmpPassword: String,
 
-  get isAdmin () {
-    return (this.user && (this.user.isAdmin === 1 || this.user.isAdmin)) || false
+  isAdmin: {
+    get (val) {
+      return (this.user && (this.user.isAdmin === 1 || this.user.isAdmin)) || false
+    }
   },
   get kycComplete () {
     return (this.user && (this.user.kycComplete === 1 || this.user.kycComplete)) || false

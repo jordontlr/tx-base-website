@@ -71,7 +71,7 @@
         {{#case 'author'}}
           {{#if target}}
             <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-              <page-blog filterAuthor:from="target" />
+              <page-blog filterAuthor:from="../target" />
             </can-import>
           {{else}}
             <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
@@ -82,7 +82,7 @@
         {{#case 'category'}}
           {{#if target}}
             <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-              <page-blog filterCategory:from="target" />
+              <page-blog filterCategory:from="../target" />
             </can-import>
           {{else}}
             <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
@@ -93,7 +93,7 @@
         {{#case 'tags'}}
           {{#if target}}
             <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-              <page-blog filterTags:from="target" />
+              <page-blog filterTags:from="../target" />
             </can-import>
           {{else}}
             <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
@@ -104,7 +104,7 @@
 
         {{#default}}
           <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
-            <blog-post slug:from="slug" />
+            <blog-post slug:from="../slug" />
           </can-import>
         {{/default}}
       {{/switch}}

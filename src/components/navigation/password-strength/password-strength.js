@@ -8,7 +8,7 @@ export const ViewModel = DefineMap.extend({
   password: 'string',
   passwordScore: {
     type: 'number',
-    get () {
+    get (val) {
       return this.password && (zxcvbn(this.password).score + 1)
     }
   }

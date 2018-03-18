@@ -64,12 +64,12 @@
             </div>
           </div>
         {{/if}}
-        {{#if categoryPosts}}
+        {{#if ../categoryPosts}}
           <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
               <hr>
               <strong>Other Posts In Category <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a></strong>
-              {{#each categoryPosts}}
+              {{#each ../categoryPosts}}
                 <p class="small">
                   <a href="{{routeUrl page='blog' slug=linkTitle}}">{{title}}</a> |
                   {{#if author}}

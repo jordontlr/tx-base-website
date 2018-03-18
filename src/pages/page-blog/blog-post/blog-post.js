@@ -10,7 +10,8 @@ export const ViewModel = DefineMap.extend({
     Type: Blog
   },
   slug: {
-    type: 'string'
+    type: 'string',
+    value: null
   },
   loadingBlogPost: {
     value: true,
