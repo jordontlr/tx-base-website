@@ -7,6 +7,7 @@ import Pagination from '~/models/pagination'
 import Shop from '~/models/shop'
 import Cart from '~/models/cart'
 import Fingerprint2 from 'fingerprintjs2'
+import * as Cookie from 'js-cookie'
 
 export const ViewModel = DefineMap.extend({
   isSsr: {
@@ -202,6 +203,16 @@ export const ViewModel = DefineMap.extend({
           .then(shop => {
             this.allCategories = shop
           })
+
+        let cartCookie = Cookie.get('cartId')
+        if (!this.userCart._id && cartCookie) {
+          this.userCart = Cart
+            .get({_id: cartCookie})
+            .then(data => {
+              // todo: check to make sure list matches available items
+              this.userCart = data
+            })
+        }
       })
       .catch(err => console.log(err))
   },
@@ -242,8 +253,8 @@ export const ViewModel = DefineMap.extend({
   },
   updateCartAPI () {
     this.userCart.save()
-      .then(() => {
-        console.log("updated")
+      .then(data => {
+        Cookie.set('cartId', data._id, { expires: 30 })
       })
   },
   checkout () {
