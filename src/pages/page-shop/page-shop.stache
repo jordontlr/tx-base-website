@@ -24,44 +24,51 @@
               Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </button>
           </p>
-        {{/if}}
-        <div class="collapse" id="shoppingCart">
-          <br>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-              <tr>
-                <th class="text-nowrap h4">Product Category / Name</th>
-                <th class="text-nowrap h4 text-center">Quantity</th>
-                <th class="text-nowrap h4 text-center">Edit</th>
-                <th class="text-nowrap h4 text-right">Total</th>
-              </tr>
-              </thead>
-              <tbody>
-              {{#each userCart.items}}
+
+          <div class="collapse" id="shoppingCart">
+            <br>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
                 <tr>
-                  <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
-                  <td class="text-center">{{quantity}}</td>
-                  <td class="text-center text-nowrap">
-                    <div class="btn-group" role="group" style="min-width: 66px;">
-                      <button class="btn btn-xs btn-default" type="button" on:click="quantityUp(this)">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                      </button>
-                      <button class="btn btn-xs btn-default" type="button" on:click="quantityDown(this)">
-                        <i class="fa fa-minus" aria-hidden="true"></i>
-                      </button>
-                      <button class="btn btn-xs btn-danger" type="button" on:click="quantityRemove(this)">
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                      </button>
-                    </div>
-                  </td>
-                  <td class="text-right">{{numberFormat total}}</td>
+                  <th class="text-nowrap h4">Product Category / Name</th>
+                  <th class="text-nowrap h4 text-center">Unit Price</th>
+                  <th class="text-nowrap h4 text-center">Quantity</th>
+                  <th class="text-nowrap h4 text-center">Edit</th>
+                  <th class="text-nowrap h4 text-right">Total</th>
                 </tr>
-              {{/each}}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                {{#each userCart.items}}
+                  <tr>
+                    <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
+                    <td class="text-center">{{numberFormat price}}</td>
+                    <td class="text-center">{{quantity}}</td>
+                    <td class="text-center text-nowrap">
+                      <div class="btn-group" role="group" style="min-width: 66px;">
+                        <button class="btn btn-xs btn-default" type="button" on:click="quantityUp(this)">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-xs btn-default" type="button" on:click="quantityDown(this)">
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-xs btn-danger" type="button" on:click="quantityRemove(this)">
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-right">{{numberFormat total}}</td>
+                  </tr>
+                {{/each}}
+                <tr>
+                  <td colspan="4" class="h4">&nbsp;</td>
+                  <td class="text-nowrap h4 text-right">{{numberFormat userCart.cartTotal}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        {{/if}}
 
       </div>
     </div>
@@ -310,7 +317,7 @@
                     <i class="fa fa-minus" aria-hidden="true"></i>
                   </button>
                   <button class="btn btn-sm btn-danger" type="button" on:click="quantityRemove()">
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
                   </button>
                 </div>
               </h4>

@@ -18,6 +18,14 @@ const Cart = DefineMap.extend('Cart', {
       return []
     }
   },
+  cartTotal: {
+    serialize: false,
+    get (val) {
+      return this.items.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.total || 0
+      }, 0)
+    }
+  },
   updatedAt: 'date',
   createdAt: 'date'
 })

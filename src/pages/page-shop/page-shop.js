@@ -202,26 +202,29 @@ export const ViewModel = DefineMap.extend({
   closeModal () {
     $('#viewShopItem').modal('hide')
   },
-  quantityUp () {
-    this.viewShopItem.quantity += 1
+  quantityUp (item) {
+    if (typeof item === 'undefined') item = this.viewShopItem
+    item.quantity += 1
   },
-  quantityDown () {
-    if (this.viewShopItem.quantity > 0) {
-      this.viewShopItem.quantity -= 1
+  quantityDown (item) {
+    if (typeof item === 'undefined') item = this.viewShopItem
+    if (item.quantity > 0) {
+      item.quantity -= 1
     }
 
-    if (this.viewShopItem.quantity === 0) {
-      this.quantityRemove()
+    if (item.quantity === 0) {
+      this.quantityRemove(item)
     }
   },
-  quantityRemove () {
+  quantityRemove (item) {
+    if (typeof item === 'undefined') item = this.viewShopItem
     this.userCart.items.forEach((currentVal, index) => {
-      if (currentVal === this.viewShopItem) {
+      if (currentVal === item) {
         this.userCart.items.splice(index, 1)
       }
     })
-    this.viewShopItem.addedToCart = false
-    this.viewShopItem.quantity = 1
+    item.addedToCart = false
+    item.quantity = 1
   }
 })
 
