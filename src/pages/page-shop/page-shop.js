@@ -199,9 +199,9 @@ export const ViewModel = DefineMap.extend({
         setTimeout(() => { this.loadingShop = false }, 25)
         this.loadingShopList = false
 
-        Shop.getList()
-          .then(shop => {
-            this.allCategories = shop
+        Shop.getList({ $select: [ 'category' ] })
+          .then(shopCategories => {
+            this.allCategories = shopCategories
           })
 
         let cartCookie = Cookie.get('cartId')
@@ -209,8 +209,11 @@ export const ViewModel = DefineMap.extend({
           this.userCart = Cart
             .get({_id: cartCookie})
             .then(data => {
-              // todo: check to make sure list matches available items
+              // todo: check to make sure list matches available items and populate items list in cart model
               this.userCart = data
+              this.userCart.cartItems.forEach(() => {
+                
+              })
             })
         }
       })
