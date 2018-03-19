@@ -204,17 +204,26 @@ export const ViewModel = DefineMap.extend({
             this.allCategories = shopCategories
           })
 
-        let cartCookie = Cookie.get('cartId')
-        if (!this.userCart._id && cartCookie) {
-          this.userCart = Cart
-            .get({_id: cartCookie})
-            .then(data => {
-              // todo: check to make sure list matches available items and populate items list in cart model
-              this.userCart = data
-              this.userCart.cartItems.forEach(() => {
-
+        if (!this.isSsr) {
+          let cartCookie = Cookie.get('cartId')
+          if (!this.userCart._id && cartCookie) {
+            this.userCart = Cart
+              .get({_id: cartCookie})
+              .then(data => {
+                this.userCart = data
+                // todo: check to make sure list matches available items and populate items list in cart model (I think this is working but needs testing)
+                this.userCart.cartItemsToLoad.forEach((cartItem) => {
+                  let foundItem = false
+                  this.rows.forEach((shopItem) => {
+                    if (!foundItem && cartItem.itemId === shopItem._id) {
+                      shopItem.quantity = cartItem.quantity
+                      this.userCart.items.push(shopItem)
+                      foundItem = true
+                    }
+                  })
+                })
               })
-            })
+          }
         }
       })
       .catch(err => console.log(err))
