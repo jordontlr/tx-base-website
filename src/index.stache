@@ -74,7 +74,7 @@
               <page-blog filterAuthor:from="../target" />
             </can-import>
           {{else}}
-            <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
+            <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
               <page-missing />
             </can-import>
           {{/if}}
@@ -85,7 +85,7 @@
               <page-blog filterCategory:from="../target" />
             </can-import>
           {{else}}
-            <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
+            <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
               <page-missing />
             </can-import>
           {{/if}}
@@ -96,7 +96,7 @@
               <page-blog filterTags:from="../target" />
             </can-import>
           {{else}}
-            <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
+            <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
               <page-missing />
             </can-import>
           {{/if}}
@@ -131,7 +131,7 @@
         <page-dash session:from="../session" />
       </can-import>
     {{else}}
-      <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
+      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
         <page-unauthorized />
       </can-import>
     {{/if}}
@@ -143,7 +143,7 @@
         <admin-users session:from="../session" />
       </can-import>
     {{else}}
-      <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
+      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
         <page-unauthorized />
       </can-import>
     {{/if}}
@@ -154,7 +154,7 @@
         <admin-blog session:from="../session" />
       </can-import>
     {{else}}
-      <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
+      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
         <page-unauthorized />
       </can-import>
     {{/if}}
@@ -165,7 +165,7 @@
         <admin-faqs session:from="../session" />
       </can-import>
     {{else}}
-      <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
+      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
         <page-unauthorized />
       </can-import>
     {{/if}}
@@ -176,7 +176,7 @@
         <admin-shop session:from="../session" />
       </can-import>
     {{else}}
-      <can-import from="~/pages/page-unauthorized.component" can-tag="tag-loading">
+      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
         <page-unauthorized />
       </can-import>
     {{/if}}
@@ -185,7 +185,7 @@
 
 
   {{#default}}
-    <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
+    <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
       <page-missing />
     </can-import>
   {{/default}}

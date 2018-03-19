@@ -66,7 +66,7 @@ export const ViewModel = DefineMap.extend({
     this.pagination.skip = 0
     this.filterTags = to
     this.filterCategory = null
-    $('#viewShopItem').modal('hide')
+    $('#view-item-details').modal('hide')
     this.loadPage()
   },
   clearFilterTags () {
@@ -231,10 +231,10 @@ export const ViewModel = DefineMap.extend({
   openShopModal (shopItem) {
     this.viewShopItem = shopItem
 
-    $('#viewShopItem').modal('show')
+    $('#view-item-details').modal('show')
   },
   closeModal () {
-    $('#viewShopItem').modal('hide')
+    $('#view-item-details').modal('hide')
   },
   quantityUp (item) {
     if (typeof item === 'undefined') item = this.viewShopItem

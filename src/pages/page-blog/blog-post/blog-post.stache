@@ -1,6 +1,6 @@
 {{^if loadingBlogPost}}
   {{#if errorNotFound}}
-    <can-import from="~/pages/page-missing.component" can-tag="tag-loading">
+    <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
       <page-missing />
     </can-import>
   {{else}}
