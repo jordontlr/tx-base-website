@@ -6,6 +6,7 @@ import view from './page-shop.stache'
 import Pagination from '~/models/pagination'
 import Shop from '~/models/shop'
 import Cart from '~/models/cart'
+import Fingerprint2 from 'fingerprintjs2'
 
 export const ViewModel = DefineMap.extend({
   isSsr: {
@@ -24,6 +25,15 @@ export const ViewModel = DefineMap.extend({
     }
   },
   addToCart (item) {
+    if (!this.userCart.fingerprint) {
+      new Fingerprint2().get((result) => {
+        this.userCart.fingerprint = result
+      })
+    }
+    if (this.session && this.session.loggedIn) {
+      this.userCart.userId = this.session.user._id
+    }
+
     let found = false
     this.userCart.items.forEach((currentVal) => {
       if (currentVal === item) {
@@ -225,6 +235,15 @@ export const ViewModel = DefineMap.extend({
     })
     item.addedToCart = false
     item.quantity = 1
+  },
+  updateCartAPI () {
+    this.userCart.save()
+      .then(() => {
+        console.log("updated")
+      })
+  },
+  checkout () {
+    this.updateCartAPI()
   }
 })
 

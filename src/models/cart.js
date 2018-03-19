@@ -26,6 +26,16 @@ const Cart = DefineMap.extend('Cart', {
       }, 0)
     }
   },
+  cartItems: {
+    type: [ { itemId: 'string', quantity: 'number' } ],
+    get (val) {
+      return this.items.reduce((list, item) => {
+        list.push({ itemId: item._id, quantity: item.quantity })
+        console.log(list)
+        return list
+      }, [])
+    }
+  },
   updatedAt: 'date',
   createdAt: 'date'
 })

@@ -20,7 +20,7 @@
             <button class="btn btn-primary btn-sm inline-block" type="button" data-toggle="collapse" data-target="#shoppingCart" aria-expanded="false">
               Toggle Cart Details <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </button>
-            <button class="btn btn-warning btn-sm inline-block" type="button">
+            <button class="btn btn-warning btn-sm inline-block" type="button" on:click="checkout()">
               Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </button>
           </p>

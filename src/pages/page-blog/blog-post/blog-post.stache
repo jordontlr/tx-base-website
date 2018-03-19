@@ -26,11 +26,13 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-8 col-sm-offset-2">
-            <div class="blog-image img-rounded" style="background-image: url({{imageData}})"></div>
+        {{#if imageData}}
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+              <div class="blog-image img-rounded" style="background-image: url({{imageData}})"></div>
+            </div>
           </div>
-        </div>
+        {{/if}}
         <div class="row">
           <div class="col-sm-8 col-sm-offset-2">
             {{{post}}}

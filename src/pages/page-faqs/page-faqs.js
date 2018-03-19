@@ -34,13 +34,13 @@ export const ViewModel = DefineMap.extend({
   },
   hasCategories: {
     value () {
-      return this.rows.filter(item => item.category !== '' && typeof item.category !== 'undefined').length
+      return this.rows.filter(item => item.category && String(item.category).trim() !== '' && typeof item.category !== 'undefined').length
     }
   },
   categories: {
     value () {
       return this.rows.reduce((list, item) => {
-        if (item.category !== '' && typeof item.category !== 'undefined' && !list.includes(item.category)) list.push(item.category)
+        if (item.category && String(item.category).trim() !== '' && typeof item.category !== 'undefined' && !list.includes(item.category)) list.push(item.category)
         return list
       }, [])
     }
