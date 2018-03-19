@@ -212,7 +212,7 @@ export const ViewModel = DefineMap.extend({
               // todo: check to make sure list matches available items and populate items list in cart model
               this.userCart = data
               this.userCart.cartItems.forEach(() => {
-                
+
               })
             })
         }

@@ -15,6 +15,9 @@ export default new set.Algebra(
     '$filter': function () {
       return true
     },
+    '$select': function () {
+      return true
+    },
     'tags': function () {
       return true
     },
