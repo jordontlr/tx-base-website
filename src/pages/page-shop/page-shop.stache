@@ -14,9 +14,55 @@
           <p><button class="btn btn-primary" type="button" on:click="clearFilterTags()">Clear Tag Filter</button></p>
         {{/if}}
 
-        {{#each userCart.items}}
-          <p>{{quantity}} - {{product}}</p>
-        {{/each}}
+        {{#if userCart.items.length}}
+          <p>
+            You currently have <strong>{{userCart.items.length}}</strong> products in your shopping cart.
+            <button class="btn btn-primary btn-sm inline-block" type="button" data-toggle="collapse" data-target="#shoppingCart" aria-expanded="false">
+              Toggle Cart Details <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-warning btn-sm inline-block" type="button">
+              Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </button>
+          </p>
+        {{/if}}
+        <div class="collapse" id="shoppingCart">
+          <br>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th class="text-nowrap h4">Product Category / Name</th>
+                <th class="text-nowrap h4 text-center">Quantity</th>
+                <th class="text-nowrap h4 text-center">Edit</th>
+                <th class="text-nowrap h4 text-right">Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              {{#each userCart.items}}
+                <tr>
+                  <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
+                  <td class="text-center">{{quantity}}</td>
+                  <td class="text-center text-nowrap">
+                    <div class="btn-group" role="group" style="min-width: 66px;">
+                      <button class="btn btn-xs btn-default" type="button" on:click="quantityUp(this)">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                      </button>
+                      <button class="btn btn-xs btn-default" type="button" on:click="quantityDown(this)">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                      </button>
+                      <button class="btn btn-xs btn-danger" type="button" on:click="quantityRemove(this)">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="text-right">{{numberFormat total}}</td>
+                </tr>
+              {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -148,7 +194,7 @@
                           <div class="hidden visible-md"><br></div>
                           <div class="text-right">
                             <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="openShopModal(this)">View Details</a>
-                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="addToCart(this)">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="addToCart(this)">Add 1 to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                           </div>
                         </div>
                       </div>
@@ -168,7 +214,7 @@
                           <p class="one-line">{{short}}</p>
                           <div class="btn-group btn-group-justified" role="group">
                             <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="openShopModal(this)">View Details</a>
-                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="addToCart(this)">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="addToCart(this)">Add 1 to Cart</a>
                           </div>
                         </div>
                       </div>

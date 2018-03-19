@@ -45,6 +45,14 @@ const Shop = DefineMap.extend('Shop', {
     serialize: false,
     type: 'boolean',
     value: false
+  },
+  total: {
+    serialize: false,
+    get (val) {
+      val = this.quantity * this.price
+
+      return val
+    }
   }
 })
 
