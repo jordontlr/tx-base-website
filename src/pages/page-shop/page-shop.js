@@ -46,6 +46,7 @@ export const ViewModel = DefineMap.extend({
       item.addedToCart = true
       this.userCart.items.push(item)
     }
+    this.updateCartAPI()
   },
   loadingShop: {
     value: true,
@@ -215,6 +216,7 @@ export const ViewModel = DefineMap.extend({
   quantityUp (item) {
     if (typeof item === 'undefined') item = this.viewShopItem
     item.quantity += 1
+    this.updateCartAPI()
   },
   quantityDown (item) {
     if (typeof item === 'undefined') item = this.viewShopItem
@@ -225,6 +227,7 @@ export const ViewModel = DefineMap.extend({
     if (item.quantity === 0) {
       this.quantityRemove(item)
     }
+    this.updateCartAPI()
   },
   quantityRemove (item) {
     if (typeof item === 'undefined') item = this.viewShopItem
@@ -235,6 +238,7 @@ export const ViewModel = DefineMap.extend({
     })
     item.addedToCart = false
     item.quantity = 1
+    this.updateCartAPI()
   },
   updateCartAPI () {
     this.userCart.save()

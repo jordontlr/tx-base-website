@@ -26,7 +26,7 @@ export const ViewModel = DefineMap.extend({
   rows: {
     Type: Blog.List
   },
-  imageData: 'string',
+  imageDataTemp: 'string',
   pagination: {
     Type: Pagination,
     value () {
@@ -60,7 +60,8 @@ export const ViewModel = DefineMap.extend({
     let $datetime = $('#blog-datetime')
     if ($datetime.val() !== '') this.newEditBlog.datetime = Date.parse($datetime.val())
 
-    this.newEditBlog.imageData = this.imageData
+    if (this.imageDataTemp) this.newEditBlog.imageData = this.imageDataTemp
+
     this.newEditBlog.tags = $('#blog-tags').val()
     this.newEditBlog.delta = JSON.stringify(this.quill.getContents())
     this.newEditBlog.post = $('.ql-editor').html()
@@ -68,6 +69,7 @@ export const ViewModel = DefineMap.extend({
       .then(() => {
         this.processing = false
         this.disableForm = false
+        this.clearForm()
         $('#edit-modal').modal('hide')
       })
   },
@@ -83,7 +85,7 @@ export const ViewModel = DefineMap.extend({
   },
   clearForm () {
     this.newEditBlog = new Blog({})
-    this.imageData = null
+    this.imageDataTemp = null
     this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#edit-modal').modal('hide')
   },
@@ -137,7 +139,7 @@ export default Component.extend({
       })
 
       reader.addEventListener('load', () => {
-        this.viewModel.imageData = reader.result
+        this.viewModel.imageDataTemp = reader.result
       }, false)
     }
   }
