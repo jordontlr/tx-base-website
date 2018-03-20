@@ -12,7 +12,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">{{#if viewShopItem.category}}{{viewShopItem.category}} / {{/if}} {{viewShopItem.product}}</h4>
+            <h3 class="modal-title" id="myModalLabel">Checkout</h3>
           </div>
           <div class="modal-body">
 
@@ -59,7 +59,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" on:click="clearForm()">Cancel</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
             <button type="button" class="btn btn-primary" on:click="checkout()" {{#if disableForm}}disabled{{/if}}>{{#if processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Checkout{{/if}}</button>
           </div>
         </div>
@@ -68,18 +68,20 @@
 
   </view>
   <script type="view-model">
+    import $ from 'jquery'
     import DefineMap from 'can-define/map/map'
-    import * as Cookie from 'js-cookie'
 
     const CheckoutViewModel = DefineMap.extend('CheckoutViewModel', {
       userCart: {
         type: 'any'
       },
+      disableForm: {
+      },
+      processing: {
+        value: false
+      },
       isSsr: {
         value: typeof process === "object" && {}.toString.call(process) === "[object process]"
-      },
-      clearForm () {
-
       },
       checkout () {
 
@@ -109,13 +111,15 @@
         })
         item.addedToCart = false
         item.quantity = 1
+
+        if (this.userCart.items.length === 0) {
+          $('#checkout-details').modal('hide')
+        }
+
         this.updateCartAPI()
       },
       updateCartAPI () {
         this.userCart.save()
-          .then(data => {
-            Cookie.set('cartId', data._id, { expires: 30 })
-          })
       }
     })
 
