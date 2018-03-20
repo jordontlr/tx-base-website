@@ -4,6 +4,7 @@ remove-build:
 release-staging:
 	-git branch -D staging
 	git checkout -b staging
+	donejs build
 	git add -f dist
 	git commit -m "Staging build"
 	git push -f origin staging

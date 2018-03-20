@@ -39,6 +39,7 @@ export const ViewModel = DefineMap.extend({
     this.userCart.items.forEach((currentVal) => {
       if (currentVal === item) {
         currentVal.quantity += 1
+        currentVal.addedToCart = true
         found = true
       }
     })
@@ -217,6 +218,7 @@ export const ViewModel = DefineMap.extend({
                   this.rows.forEach((shopItem) => {
                     if (!foundItem && cartItem.itemId === shopItem._id) {
                       shopItem.quantity = cartItem.quantity
+                      shopItem.addedToCart = true
                       this.userCart.items.push(shopItem)
                       foundItem = true
                     }
