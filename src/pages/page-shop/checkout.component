@@ -76,6 +76,7 @@
         type: 'any'
       },
       disableForm: {
+        value: false
       },
       processing: {
         value: false
