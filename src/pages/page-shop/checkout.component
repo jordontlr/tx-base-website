@@ -1,0 +1,126 @@
+<can-component tag="page-checkout">
+  <style type="less">
+    display: block;
+
+    p { font-weight: bold; }
+  </style>
+  <view>
+    <can-import from="~/attrs/modal-scrollstop.attr" />
+
+    <div class="modal fade" id="checkout-details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" modal-scrollstop>
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">{{#if viewShopItem.category}}{{viewShopItem.category}} / {{/if}} {{viewShopItem.product}}</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th class="text-nowrap h4">Product Category / Name</th>
+                  <th class="text-nowrap h4 text-center">Unit Price</th>
+                  <th class="text-nowrap h4 text-center">Quantity</th>
+                  <th class="text-nowrap h4 text-center">Edit</th>
+                  <th class="text-nowrap h4 text-right">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each userCart.items}}
+                  <tr>
+                    <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
+                    <td class="text-center">{{numberFormat price}}</td>
+                    <td class="text-center">{{quantity}}</td>
+                    <td class="text-center text-nowrap">
+                      <div class="btn-group" role="group" style="min-width: 66px;">
+                        <button class="btn btn-xs btn-default" type="button" on:click="quantityUp(this)">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-xs btn-default" type="button" on:click="quantityDown(this)">
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-xs btn-danger" type="button" on:click="quantityRemove(this)">
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </td>
+                    <td class="text-right">{{numberFormat total}}</td>
+                  </tr>
+                {{/each}}
+                <tr>
+                  <td colspan="4" class="h4">&nbsp;</td>
+                  <td class="text-nowrap h4 text-right">{{numberFormat userCart.cartTotal}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" on:click="clearForm()">Cancel</button>
+            <button type="button" class="btn btn-primary" on:click="checkout()" {{#if disableForm}}disabled{{/if}}>{{#if processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Checkout{{/if}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </view>
+  <script type="view-model">
+    import DefineMap from 'can-define/map/map'
+    import * as Cookie from 'js-cookie'
+
+    const CheckoutViewModel = DefineMap.extend('CheckoutViewModel', {
+      userCart: {
+        type: 'any'
+      },
+      isSsr: {
+        value: typeof process === "object" && {}.toString.call(process) === "[object process]"
+      },
+      clearForm () {
+
+      },
+      checkout () {
+
+      },
+      quantityUp (item) {
+        if (typeof item === 'undefined') item = this.viewShopItem
+        item.quantity += 1
+        this.updateCartAPI()
+      },
+      quantityDown (item) {
+        if (typeof item === 'undefined') item = this.viewShopItem
+        if (item.quantity > 0) {
+          item.quantity -= 1
+        }
+
+        if (item.quantity === 0) {
+          this.quantityRemove(item)
+        }
+        this.updateCartAPI()
+      },
+      quantityRemove (item) {
+        if (typeof item === 'undefined') item = this.viewShopItem
+        this.userCart.items.forEach((currentVal, index) => {
+          if (currentVal === item) {
+            this.userCart.items.splice(index, 1)
+          }
+        })
+        item.addedToCart = false
+        item.quantity = 1
+        this.updateCartAPI()
+      },
+      updateCartAPI () {
+        this.userCart.save()
+          .then(data => {
+            Cookie.set('cartId', data._id, { expires: 30 })
+          })
+      }
+    })
+
+    export default function (opt) {
+      return new CheckoutViewModel(opt)
+    }
+  </script>
+</can-component>

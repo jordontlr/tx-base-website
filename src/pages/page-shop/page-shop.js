@@ -270,6 +270,7 @@ export const ViewModel = DefineMap.extend({
       })
   },
   checkout () {
+    $('#checkout-details').modal('show')
     this.updateCartAPI()
   }
 })
