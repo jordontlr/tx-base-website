@@ -22,16 +22,16 @@
               </tr>
               </thead>
               <tbody>
-              {{^if ../loadingFAQs}}
+              {{^if scope.root.loadingFAQs}}
                 {{#if rows.length}}
-                  {{#each rows}}
+                  {{#each(rows)}}
                     <tr>
                       <td class="text-nowrap text-center">{{question}}</td>
                       <td class="text-nowrap text-center">{{stripHTML answer 50}}</td>
                       <td class="text-nowrap text-center">{{category}}</td>
                       <td class="text-nowrap text-center">
-                        <button class="btn btn-primary btn-sm" type="button" on:click="openFAQ(.)">Edit</button>
-                        <button class="btn btn-danger btn-sm" type="button" on:click="deleteFAQ(.)">Delete</button>
+                        <button class="btn btn-primary btn-sm" type="button" on:click="scope.root.openFAQ(.)">Edit</button>
+                        <button class="btn btn-danger btn-sm" type="button" on:click="scope.root.deleteFAQ(.)">Delete</button>
                       </td>
                     </tr>
                   {{/each}}
@@ -52,7 +52,7 @@
               <nav aria-label="Page navigation" class="pull-right">
                 <ul class="pagination">
                   <li class="{{^if isPrevActive}}disabled{{/if}}"><a href="" on:click="prev()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                  {{#each pages}}
+                  {{#each(pages)}}
                     <li class="{{#if isActive}}active{{/if}}"><a href="" on:click="changePage(pageNumber)">{{pageTitle}}</a></li>
                   {{/each}}
                   <li class="{{^if isNextActive}}disabled{{/if}}"><a href="" on:click="next()" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
@@ -89,7 +89,7 @@
             <div class="form-group no-margin-bottom">
               <div class="form-group">
                 <label for="question">Question</label>
-                <input type="text" class="form-control" id="question" placeholder="Question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.question" {{#if ../disableForm}}disabled{{/if}}>
+                <input type="text" class="form-control" id="question" placeholder="Question" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.question" {{#if scope.root.disableForm}}disabled{{/if}}>
               </div>
             </div>
             <div class="form-group no-margin-bottom">
@@ -101,14 +101,14 @@
             <div class="form-group no-margin-bottom">
               <div class="form-group">
                 <label for="category">Category</label>
-                <input type="text" class="form-control" id="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.category" {{#if ../disableForm}}disabled{{/if}}>
+                <input type="text" class="form-control" id="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="editFAQ.category" {{#if scope.root.disableForm}}disabled{{/if}}>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" on:click="saveFAQ()" {{#if ../disableForm}}disabled{{/if}}>{{#if ../processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Save{{/if}}</button>
+        <button type="button" class="btn btn-primary" on:click="saveFAQ()" {{#if scope.root.disableForm}}disabled{{/if}}>{{#if scope.root.processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Save{{/if}}</button>
       </div>
     </div>
   </div>

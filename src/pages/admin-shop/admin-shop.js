@@ -8,14 +8,11 @@ import Pagination from '~/models/pagination'
 import Shop from '~/models/shop'
 
 export const ViewModel = DefineMap.extend({
-  isSsr: {
-    value: typeof process === 'object' && {}.toString.call(process) === '[object process]'
-  },
   disableForm: {
-    value: false
+    default: false
   },
   processing: {
-    value: false
+    default: false
   },
   session: {
     type: 'any'
@@ -35,13 +32,13 @@ export const ViewModel = DefineMap.extend({
   },
   pagination: {
     Type: Pagination,
-    value () {
+    default () {
       return {skip: 0, limit: 20}
     }
   },
   editShopItem: {
     Type: Shop,
-    value () {
+    default () {
       return new Shop({})
     }
   },
@@ -111,49 +108,52 @@ export const ViewModel = DefineMap.extend({
         this.editShopItem.imageData.splice(index, 1)
       }
     })
+  },
+  connectedCallback (el) {
+
+    let imageUpload = (element) => {
+      let files = element.target.files
+      for (let i = 0; i < files.length; i++) {
+        ((file) => {
+          let reader = new window.FileReader()
+          reader.onload = (e) => {
+            this.editShopItem.imageData.push(e.target.result)
+          }
+          reader.readAsDataURL(file)
+        })(files[i])
+      }
+    }
+
+    let toolbarOptions = [
+      [{'header': [1, 2, 3, 4, 5, 6, false]}],
+      ['bold', 'italic', 'underline', 'strike'],
+      ['blockquote', 'image', 'code-block'],
+      [{'list': 'ordered'}, {'list': 'bullet'}],
+      [{'script': 'sub'}, {'script': 'super'}],
+      [{'indent': '-1'}, {'indent': '+1'}],
+      [{'color': []}, {'background': []}],
+      [{'align': []}],
+      ['link'],
+      ['clean']
+    ]
+
+    this.quill = new Quill('#shop-desc', {
+      modules: {
+        toolbar: toolbarOptions
+      },
+      theme: 'snow'
+    })
+
+    $(el).on('change', 'input.image-input-btn', imageUpload)
+
+    return () => {
+      $(el).off('change', 'input.image-input-btn', imageUpload)
+    }
   }
 })
 
 export default Component.extend({
   tag: 'admin-shop',
   ViewModel,
-  view,
-  events: {
-    inserted: function () {
-      let toolbarOptions = [
-        [{'header': [1, 2, 3, 4, 5, 6, false]}],
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'image', 'code-block'],
-        [{'list': 'ordered'}, {'list': 'bullet'}],
-        [{'script': 'sub'}, {'script': 'super'}],
-        [{'indent': '-1'}, {'indent': '+1'}],
-        [{'color': []}, {'background': []}],
-        [{'align': []}],
-        ['link'],
-        ['clean']
-      ]
-
-      this.viewModel.quill = new Quill('#shop-desc', {
-        modules: {
-          toolbar: toolbarOptions
-        },
-        theme: 'snow'
-      })
-
-      let _self = this
-      $('input.image-input-btn').change(function () {
-        let files = this.files
-
-        for (let i = 0; i < files.length; i++) {
-          ((file) => {
-            let reader = new window.FileReader()
-            reader.onload = (e) => {
-              _self.viewModel.editShopItem.imageData.push(e.target.result)
-            }
-            reader.readAsDataURL(file)
-          })(files[i])
-        }
-      })
-    }
-  }
+  view
 })
