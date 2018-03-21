@@ -13,7 +13,7 @@ export const ViewModel = DefineMap.extend({
   processing: 'boolean',
   disableForm: {
     type: 'boolean',
-    value: false
+    default: false
   },
   email: {
     type: 'string',

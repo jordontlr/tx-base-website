@@ -10,18 +10,18 @@ const Shop = DefineMap.extend('Shop', {
   _id: 'any',
   product: {
     type: 'string',
-    value: null
+    default: null
   },
   category: 'string',
   price: 'number',
   short: {
     type: 'string',
-    value: null
+    default: null
   },
   description: 'string',
   delta: {
     type: 'string',
-    value: '{"ops":[{"insert":"\\n"}]}'
+    default: '{"ops":[{"insert":"\\n"}]}'
   },
   content: 'string',
   sku: 'string',
@@ -29,7 +29,7 @@ const Shop = DefineMap.extend('Shop', {
   tags: [ 'string' ],
   imageData: {
     type: [ 'string' ],
-    value () {
+    default () {
       return []
     }
   },
@@ -39,12 +39,12 @@ const Shop = DefineMap.extend('Shop', {
   quantity: {
     serialize: false,
     type: 'number',
-    value: 1
+    default: 1
   },
   addedToCart: {
     serialize: false,
     type: 'boolean',
-    value: false
+    default: false
   },
   total: {
     serialize: false,

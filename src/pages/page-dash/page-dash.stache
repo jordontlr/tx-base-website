@@ -2,8 +2,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <div class="well">
-        <h3 class="no-margin-top no-margin-bottom">Coming Soon</h3>
+      <div class="jumbotron">
+        <h1>Dashboard</h1>
+        <p>Coming Soon</p>
       </div>
     </div>
   </div>

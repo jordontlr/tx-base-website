@@ -25,181 +25,181 @@
   <meta name="twitter:image" content="https://txbasewebsite.com/assets/social/twitter-share.png">
 </head>
 <body>
-<can-import from="~/app" export-as="viewModel" />
-<can-import from="~/styles.less" />
-<can-import from="~/components/loading.component!" />
-<can-import from="~/components/footer.component!" />
-<can-import from="~/components/session-error.component!" />
-<can-import from="~/components/navigation/" />
+    <can-import from="~/styles.less" />
+    <can-import from="~/app" export-as="viewModel" />
+    <can-import from="~/components/loading.component!" />
+    <can-import from="~/components/footer.component!" />
+    <can-import from="~/components/session-error.component!" />
+    <can-import from="~/components/navigation/" />
 
-<navigation-bar session:from="session" />
+    <navigation-bar session:from="session" />
 
-{{#if session.sessionError}}
-  <can-import from="~/components/session-error.component!" can-tag="tag-loading">
-    <session-error />
-  </can-import>
-{{/if}}
+    {{#switch page}}
 
-{{#if session.loggedIn}}
-  {{^if session.kycApproved}}
-    <can-import from="~/components/kyc-warnings.component!" can-tag="tag-loading">
-      <kyc-warnings kycComplete:from="session.kycComplete" />
-    </can-import>
-  {{/if}}
-{{/if}}
+      {{#case 'home'}}
+        <can-import from="~/pages/page-home/" can-tag="tag-loading">
+          <page-home />
+        </can-import>
+      {{/case}}
 
-{{#switch page}}
-  {{#case 'home'}}
-    <can-import from="~/pages/page-home/" can-tag="tag-loading">
-      <page-home />
-    </can-import>
-  {{/case}}
-  {{#case 'shop'}}
-    <can-import from="~/pages/page-shop/" can-tag="tag-loading">
-      <page-shop session:from="../session" />
-    </can-import>
-  {{/case}}
-  {{#case 'faqs'}}
-    <can-import from="~/pages/page-faqs/" can-tag="tag-loading">
-      <page-faqs />
-    </can-import>
-  {{/case}}
-  {{#case 'blog'}}
-    {{#if slug}}
-      {{#switch slug}}
+      {{#case 'shop'}}
+        <can-import from="~/pages/page-shop/" can-tag="tag-loading">
+          <page-shop session:from="../session" />
+        </can-import>
+      {{/case}}
 
-        {{#case 'author'}}
-          {{#if target}}
-            <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-              <page-blog filterAuthor:from="../target" />
-            </can-import>
-          {{else}}
-            <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
-              <page-missing />
-            </can-import>
-          {{/if}}
-        {{/case}}
-        {{#case 'category'}}
-          {{#if target}}
-            <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-              <page-blog filterCategory:from="../target" />
-            </can-import>
-          {{else}}
-            <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
-              <page-missing />
-            </can-import>
-          {{/if}}
-        {{/case}}
-        {{#case 'tags'}}
-          {{#if target}}
-            <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-              <page-blog filterTags:from="../target" />
-            </can-import>
-          {{else}}
-            <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
-              <page-missing />
-            </can-import>
-          {{/if}}
-        {{/case}}
+      {{#case 'faqs'}}
+        <can-import from="~/pages/page-faqs/" can-tag="tag-loading">
+          <page-faqs />
+        </can-import>
+      {{/case}}
 
-        {{#default}}
-          <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
-            <blog-post slug:from="../slug" />
+      {{#case 'blog'}}
+        {{#if slug}}
+          {{#switch slug}}
+
+            {{#case 'author'}}
+              {{#if target}}
+                <can-import from="~/pages/page-blog/" can-tag="tag-loading">
+                  <page-blog filterAuthor:from="../target" />
+                </can-import>
+              {{else}}
+                <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
+                  <page-missing />
+                </can-import>
+              {{/if}}
+            {{/case}}
+
+            {{#case 'category'}}
+              {{#if target}}
+                <can-import from="~/pages/page-blog/" can-tag="tag-loading">
+                  <page-blog filterCategory:from="../target" />
+                </can-import>
+              {{else}}
+                <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
+                  <page-missing />
+                </can-import>
+              {{/if}}
+            {{/case}}
+
+            {{#case 'tags'}}
+              {{#if target}}
+                <can-import from="~/pages/page-blog/" can-tag="tag-loading">
+                  <page-blog filterTags:from="../target" />
+                </can-import>
+              {{else}}
+                <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
+                  <page-missing />
+                </can-import>
+              {{/if}}
+            {{/case}}
+
+            {{#default}}
+              <can-import from="~/pages/page-blog/blog-post/" can-tag="tag-loading">
+                <blog-post slug:from="../slug" />
+              </can-import>
+            {{/default}}
+          {{/switch}}
+        {{else}}
+          <can-import from="~/pages/page-blog/" can-tag="tag-loading">
+            <page-blog />
           </can-import>
-        {{/default}}
-      {{/switch}}
-    {{else}}
-      <can-import from="~/pages/page-blog/" can-tag="tag-loading">
-        <page-blog />
-      </can-import>
-    {{/if}}
-  {{/case}}
-  {{#case 'terms'}}
-    <can-import from="~/pages/page-tos/" can-tag="tag-loading">
-      <page-tos />
-    </can-import>
-  {{/case}}
-  {{#case 'privacy'}}
-    <can-import from="~/pages/page-privacy/" can-tag="tag-loading">
-      <page-privacy />
-    </can-import>
-  {{/case}}
+        {{/if}}
+      {{/case}}
 
-  {{#case 'dash'}}
-    {{#if session.loggedIn}}
-      <can-import from="~/pages/page-dash/" can-tag="tag-loading">
-        <page-dash session:from="../session" />
-      </can-import>
-    {{else}}
-      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
-        <page-unauthorized />
-      </can-import>
-    {{/if}}
-  {{/case}}
+      {{#case 'terms'}}
+        <can-import from="~/pages/page-tos/" can-tag="tag-loading">
+          <page-tos />
+        </can-import>
+      {{/case}}
 
-  {{#case 'admin-users'}}
-    {{#if session.isAdmin}}
-      <can-import from="~/pages/admin-users/" can-tag="tag-loading">
-        <admin-users session:from="../session" />
-      </can-import>
-    {{else}}
-      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
-        <page-unauthorized />
-      </can-import>
-    {{/if}}
-  {{/case}}
-  {{#case 'admin-blog'}}
-    {{#if session.isAdmin}}
-      <can-import from="~/pages/admin-blog/" can-tag="tag-loading">
-        <admin-blog session:from="../session" />
-      </can-import>
-    {{else}}
-      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
-        <page-unauthorized />
-      </can-import>
-    {{/if}}
-  {{/case}}
-  {{#case 'admin-faqs'}}
-    {{#if session.isAdmin}}
-      <can-import from="~/pages/admin-faqs/" can-tag="tag-loading">
-        <admin-faqs session:from="../session" />
-      </can-import>
-    {{else}}
-      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
-        <page-unauthorized />
-      </can-import>
-    {{/if}}
-  {{/case}}
-  {{#case 'admin-shop'}}
-    {{#if session.isAdmin}}
-      <can-import from="~/pages/admin-shop/" can-tag="tag-loading">
-        <admin-shop session:from="../session" />
-      </can-import>
-    {{else}}
-      <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
-        <page-unauthorized />
-      </can-import>
-    {{/if}}
-  {{/case}}
+      {{#case 'privacy'}}
+        <can-import from="~/pages/page-privacy/" can-tag="tag-loading">
+          <page-privacy />
+        </can-import>
+      {{/case}}
 
+      {{! this is for logged in users }}
 
+      {{#case 'dash'}}
+        {{#if session.loggedIn}}
+          <can-import from="~/pages/page-dash/" can-tag="tag-loading">
+            <page-dash session:from="../session" />
+          </can-import>
+        {{else}}
+          <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
+            <page-unauthorized />
+          </can-import>
+        {{/if}}
+      {{/case}}
 
-  {{#default}}
-    <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
-      <page-missing />
-    </can-import>
-  {{/default}}
-{{/switch}}
+      {{! this is for admin users }}
 
-<page-footer />
+      {{#case 'admin-users'}}
+        {{#if session.isAdmin}}
+          <can-import from="~/pages/admin-users/" can-tag="tag-loading">
+            <admin-users session:from="../session" />
+          </can-import>
+        {{else}}
+          <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
+            <page-unauthorized />
+          </can-import>
+        {{/if}}
+      {{/case}}
 
-{{#switch env.NODE_ENV}}
-  {{#case "production"}}
-    <script src="{{joinBase 'steal.production.js'}}"></script>
-  {{/case}}
-  {{#default}}
-    <script src="/node_modules/steal/steal.js"></script>
-  {{/default}}
-{{/switch}}
-</body>
+      {{#case 'admin-blog'}}
+        {{#if session.isAdmin}}
+          <can-import from="~/pages/admin-blog/" can-tag="tag-loading">
+            <admin-blog session:from="../session" />
+          </can-import>
+        {{else}}
+          <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
+            <page-unauthorized />
+          </can-import>
+        {{/if}}
+      {{/case}}
+
+      {{#case 'admin-faqs'}}
+        {{#if session.isAdmin}}
+          <can-import from="~/pages/admin-faqs/" can-tag="tag-loading">
+            <admin-faqs session:from="../session" />
+          </can-import>
+        {{else}}
+          <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
+            <page-unauthorized />
+          </can-import>
+        {{/if}}
+      {{/case}}
+
+      {{#case 'admin-shop'}}
+        {{#if session.isAdmin}}
+          <can-import from="~/pages/admin-shop/" can-tag="tag-loading">
+            <admin-shop session:from="../session" />
+          </can-import>
+        {{else}}
+          <can-import from="~/pages/page-unauthorized.component!" can-tag="tag-loading">
+            <page-unauthorized />
+          </can-import>
+        {{/if}}
+      {{/case}}
+
+      {{#default}}
+        <can-import from="~/pages/page-missing.component!" can-tag="tag-loading">
+          <page-missing />
+        </can-import>
+      {{/default}}
+
+    {{/switch}}
+
+    <page-footer />
+
+    {{#switch env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="{{joinBase('steal.production.js')}}"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+  </body>
 </html>

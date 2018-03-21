@@ -28,20 +28,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#each userCart.items}}
+                {{#each(userCart.items)}}
                   <tr>
                     <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
                     <td class="text-center">{{numberFormat price}}</td>
                     <td class="text-center">{{quantity}}</td>
                     <td class="text-center text-nowrap">
                       <div class="btn-group" role="group" style="min-width: 66px;">
-                        <button class="btn btn-xs btn-default" type="button" on:click="quantityUp(this)">
+                        <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityUp(this)">
                           <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
-                        <button class="btn btn-xs btn-default" type="button" on:click="quantityDown(this)">
+                        <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityDown(this)">
                           <i class="fa fa-minus" aria-hidden="true"></i>
                         </button>
-                        <button class="btn btn-xs btn-danger" type="button" on:click="quantityRemove(this)">
+                        <button class="btn btn-xs btn-danger" type="button" on:click="scope.root.quantityRemove(this)">
                           <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                       </div>
@@ -71,18 +71,15 @@
     import $ from 'jquery'
     import DefineMap from 'can-define/map/map'
 
-    const CheckoutViewModel = DefineMap.extend('CheckoutViewModel', {
+    export default DefineMap.extend({
       userCart: {
         type: 'any'
       },
       disableForm: {
-        value: false
+        default: false
       },
       processing: {
-        value: false
-      },
-      isSsr: {
-        value: typeof process === "object" && {}.toString.call(process) === "[object process]"
+        default: false
       },
       checkout () {
 
@@ -123,9 +120,5 @@
         this.userCart.save()
       }
     })
-
-    export default function (opt) {
-      return new CheckoutViewModel(opt)
-    }
   </script>
 </can-component>

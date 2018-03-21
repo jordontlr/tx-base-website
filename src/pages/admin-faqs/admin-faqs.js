@@ -9,17 +9,17 @@ import Quill from 'quill'
 
 export const ViewModel = DefineMap.extend({
   processing: {
-    value: false
+    default: false
   },
   disableForm: {
-    value: false
+    default: false
   },
   session: {
     type: 'any'
   },
   loadingFAQs: {
     type: 'boolean',
-    value () {
+    default () {
       this.loadPage()
       return true
     }
@@ -32,13 +32,13 @@ export const ViewModel = DefineMap.extend({
   },
   pagination: {
     Type: Pagination,
-    value () {
+    default () {
       return {skip: 0, limit: 20}
     }
   },
   editFAQ: {
     Type: Faq,
-    value () {
+    default () {
       return new Faq({})
     }
   },
@@ -95,31 +95,31 @@ export const ViewModel = DefineMap.extend({
     this.editFAQ = new Faq({})
     this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#editFAQ').modal('hide')
+  },
+  connectedCallback (el) {
+    let toolbarOptions = [
+      ['bold', 'italic', 'underline'],
+      ['blockquote', 'code-block'],
+      [{'list': 'ordered'}, {'list': 'bullet'}],
+      [{'color': []}, {'background': []}],
+      [{'align': []}],
+      ['link'],
+      ['clean']
+    ]
+
+    this.quill = new Quill('#faq-answer', {
+      modules: {
+        toolbar: toolbarOptions
+      },
+      theme: 'snow'
+    })
+
+    return () => {}
   }
 })
 
 export default Component.extend({
   tag: 'admin-faqs',
   ViewModel,
-  view,
-  events: {
-    inserted: function () {
-      let toolbarOptions = [
-        ['bold', 'italic', 'underline'],
-        ['blockquote', 'code-block'],
-        [{'list': 'ordered'}, {'list': 'bullet'}],
-        [{'color': []}, {'background': []}],
-        [{'align': []}],
-        ['link'],
-        ['clean']
-      ]
-
-      this.viewModel.quill = new Quill('#faq-answer', {
-        modules: {
-          toolbar: toolbarOptions
-        },
-        theme: 'snow'
-      })
-    }
-  }
+  view
 })

@@ -5,7 +5,7 @@ import view from './page-privacy.stache'
 
 export const ViewModel = DefineMap.extend({
   message: {
-    value: 'This is the page-privacy component'
+    default: 'This is the page-privacy component'
   }
 })
 

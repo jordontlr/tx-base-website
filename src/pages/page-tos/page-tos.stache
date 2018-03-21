@@ -1,4 +1,5 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
+
 <br>
 <div class="container">
   <div class="row">

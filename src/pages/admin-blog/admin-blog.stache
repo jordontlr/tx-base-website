@@ -25,17 +25,17 @@
               </tr>
               </thead>
               <tbody>
-              {{^if ../loadingBlog}}
+              {{^if scope.root.loadingBlog}}
                 {{#if rows.length}}
-                  {{#each rows}}
+                  {{#each(rows)}}
                     <tr>
                       <td class="text-nowrap text-center">{{title}}</td>
                       <td class="text-nowrap text-center">{{author}}</td>
                       <td class="text-nowrap text-center">{{#if published}}<i class="fa fa-check text-success"></i>{{else}}<i class="fa fa-close text-danger"></i>{{/if}}</td>
                       <td class="text-nowrap text-center">{{timestampDetailed createdAt}}</td>
                       <td class="text-nowrap text-center">
-                        <button class="btn btn-primary btn-sm" type="button" on:click="editBlog(.)">Edit</button>
-                        <button class="btn btn-danger btn-sm" type="button" on:click="deleteBlog(.)">Delete</button>
+                        <button class="btn btn-primary btn-sm" type="button" on:click="scope.root.editBlog(.)">Edit</button>
+                        <button class="btn btn-danger btn-sm" type="button" on:click="scope.root.deleteBlog(.)">Delete</button>
                       </td>
                     </tr>
                   {{/each}}
@@ -56,7 +56,7 @@
               <nav aria-label="Page navigation" class="pull-right">
                 <ul class="pagination">
                   <li class="{{^if isPrevActive}}disabled{{/if}}"><a href="" on:click="prev()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                  {{#each pages}}
+                  {{#each(pages)}}
                     <li class="{{#if isActive}}active{{/if}}"><a href="" on:click="changePage(pageNumber)">{{pageTitle}}</a></li>
                   {{/each}}
                   <li class="{{^if isNextActive}}disabled{{/if}}"><a href="" on:click="next()" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
@@ -87,13 +87,13 @@
         {{#newEditBlog}}
           <div class="form-group">
             <label for="blog-title">Post Title</label>
-            <input type="text" class="form-control" id="blog-title" value:bind="title" placeholder="Post Title" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus {{#if ../disableForm}}disabled{{/if}}>
+            <input type="text" class="form-control" id="blog-title" value:bind="title" placeholder="Post Title" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus {{#if scope.root.disableForm}}disabled{{/if}}>
           </div>
 
           <div class="form-group">
             <label for="blog-title">Post Image</label>
-            {{#if ../imageDataTemp}}
-              <img src="{{../imageDataTemp}}" class="img-responsive img-rounded">
+            {{#if scope.root.imageDataTemp}}
+              <img src="{{scope.root.imageDataTemp}}" class="img-responsive img-rounded">
             {{else}}
               {{#if imageData}}
                 <img src="{{imageData}}" class="img-responsive img-rounded">
@@ -107,14 +107,14 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="blog-author">Post Author</label>
-                <input type="text" class="form-control" id="blog-author" value:bind="author" placeholder="Post Author" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
+                <input type="text" class="form-control" id="blog-author" value:bind="author" placeholder="Post Author" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if scope.root.disableForm}}disabled{{/if}}>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group text-center">
                 <label> </label>
                 <div class="checkbox checkbox-primary">
-                  <input type="checkbox" id="blog-published" checked:bind="published" {{#if ../disableForm}}disabled{{/if}}>
+                  <input type="checkbox" id="blog-published" checked:bind="published" {{#if scope.root.disableForm}}disabled{{/if}}>
                   <label for="blog-published">
                     Publish Post
                   </label>
@@ -124,7 +124,7 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="blog-datetime">Post Date / Time</label>
-                <input type="text" class="form-control" id="blog-datetime" datetimepicker="{{timestampTimeDatePicker datetime}}" placeholder="Post Date / Time" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
+                <input type="text" class="form-control" id="blog-datetime" datetimepicker="{{timestampTimeDatePicker datetime}}" placeholder="Post Date / Time" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if scope.root.disableForm}}disabled{{/if}}>
               </div>
             </div>
           </div>
@@ -133,15 +133,15 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <label for="blog-category">Category</label>
-                <input type="text" class="form-control" id="blog-category" value:bind="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
+                <input type="text" class="form-control" id="blog-category" value:bind="category" placeholder="Category" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if scope.root.disableForm}}disabled{{/if}}>
               </div>
             </div>
             <div class="col-sm-8">
               <div class="form-group">
                 <label for="blog-tags">Tags</label>
                 <br>
-                <select multiple tagsinput="10" id="blog-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if ../disableForm}}disabled{{/if}}>
-                  {{#each tags}}
+                <select multiple tagsinput="10" id="blog-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if scope.root.disableForm}}disabled{{/if}}>
+                  {{#each(tags)}}
                     <option value="{{this}}">{{this}}</option>
                   {{/each}}
                 </select>
@@ -151,7 +151,7 @@
 
           <div class="form-group">
             <label for="blog-title">Short Post</label>
-            <textarea class="form-control" id="blog-title" value:bind="shortPost" placeholder="Short Post" {{#if ../disableForm}}disabled{{/if}}></textarea>
+            <textarea class="form-control" id="blog-title" value:bind="shortPost" placeholder="Short Post" {{#if scope.root.disableForm}}disabled{{/if}}></textarea>
           </div>
         {{/newEditBlog}}
 
@@ -163,7 +163,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" on:click="clearForm()">Cancel</button>
-        <button type="button" class="btn btn-primary" on:click="saveBlog()" {{#if disableForm}}disabled{{/if}}>{{#if processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Save Blog Post{{/if}}</button>
+        <button type="button" class="btn btn-primary" on:click="saveBlog()" {{#if scope.root.disableForm}}disabled{{/if}}>{{#if scope.root.processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Save Blog Post{{/if}}</button>
       </div>
     </div>
   </div>

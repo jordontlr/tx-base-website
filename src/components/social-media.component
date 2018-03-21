@@ -115,15 +115,11 @@
   <script type="view-model">
     import DefineMap from 'can-define/map/map'
 
-    const SocialMediaModel = DefineMap.extend('SocialMediaModel', {
+    export default DefineMap.extend({
       size: {
         type: 'string',
-        value: 'normal'
+        default: 'normal'
       }
     })
-
-    export default function (opt) {
-      return new SocialMediaModel(opt)
-    }
   </script>
 </can-component>

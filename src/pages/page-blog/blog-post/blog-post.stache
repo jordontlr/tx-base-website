@@ -14,10 +14,10 @@
               <p>
                 <strong>
                   {{#if author}}
-                    <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
+                    <a href="{{routeUrl(page='blog' slug='author' target=author)}}">{{author}}</a> |
                   {{/if}}
                   {{#if category}}
-                    <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a> |
+                    <a href="{{routeUrl(page='blog' slug='category' target=category)}}">{{category}}</a> |
                   {{/if}}
                   {{timestampDetailed datetime}}
                 </strong>
@@ -43,21 +43,21 @@
             <div class="col-sm-8 col-sm-offset-2">
               <hr>
               <strong>Tags:</strong>
-              {{#each tags}}
-                <a href="{{routeUrl page='blog' slug='tags' target=this}}">{{this}}</a>
+              {{#each(tags)}}
+                <a href="{{routeUrl(page='blog' slug='tags' target=this)}}">{{this}}</a>
               {{/each}}
             </div>
           </div>
         {{/if}}
-        {{#if authorPosts}}
+        {{#if scope.root.authorPosts.length}}
           <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-              <strong>Other Posts By <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a></strong>
-              {{#each authorPosts}}
+              <strong>Other Posts By <a href="{{routeUrl(page='blog' slug='author' target=author)}}">{{author}}</a></strong>
+              {{#each(scope.root.authorPosts)}}
                 <p class="small">
-                <a href="{{routeUrl page='blog' slug=linkTitle}}">{{title}}</a> |
+                <a href="{{routeUrl(page='blog' slug=linkTitle)}}">{{title}}</a> |
                   {{#if category}}
-                    <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a> |
+                    <a href="{{routeUrl(page='blog' slug='category' target=category)}}">{{category}}</a> |
                   {{/if}}
                   {{timestamp datetime}}
                 </p>
@@ -66,16 +66,16 @@
             </div>
           </div>
         {{/if}}
-        {{#if ../categoryPosts}}
+        {{#if scope.root.categoryPosts.length}}
           <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
               <hr>
-              <strong>Other Posts In Category <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a></strong>
-              {{#each ../categoryPosts}}
+              <strong>Other Posts In Category <a href="{{routeUrl(page='blog' slug='category' target=category)}}">{{category}}</a></strong>
+              {{#each(scope.root.categoryPosts)}}
                 <p class="small">
-                  <a href="{{routeUrl page='blog' slug=linkTitle}}">{{title}}</a> |
+                  <a href="{{routeUrl(page='blog' slug=linkTitle)}}">{{title}}</a> |
                   {{#if author}}
-                    <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
+                    <a href="{{routeUrl(page='blog' slug='author' target=author)}}">{{author}}</a> |
                   {{/if}}
                   {{timestamp datetime}}
                 </p>

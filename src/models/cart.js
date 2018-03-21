@@ -14,7 +14,7 @@ const Cart = DefineMap.extend('Cart', {
   items: {
     serialize: false,
     Type: Shop.List,
-    value () {
+    default () {
       return []
     }
   },
@@ -45,7 +45,7 @@ const Cart = DefineMap.extend('Cart', {
   cartItemsToLoad: {
     serialize: false,
     type: [ { itemId: 'string', quantity: 'number' } ],
-    value () {
+    default () {
       return []
     }
   },

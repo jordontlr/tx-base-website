@@ -1,4 +1,5 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
+
 <br>
 <div class="container">
   <div class="row">
@@ -19,10 +20,10 @@
     </div>
   </div>
 </div>
-{{^if loadingBlog}}
+{{^if scope.root.loadingBlog}}
   <div class="container">
 
-    {{#each rows}}
+    {{#each(rows)}}
       <div class="row">
         {{#if imageData}}
           <div class="col-sm-8 col-sm-offset-2">
@@ -30,17 +31,17 @@
           </div>
         {{/if}}
         <div class="col-sm-8 col-sm-offset-2">
-          <div class="h3"><a href="{{routeUrl page='blog' slug=linkTitle}}">{{title}}</a></div>
+          <div class="h3"><a href="{{routeUrl(page='blog' slug=linkTitle)}}">{{title}}</a></div>
           <p>
             <strong>
               {{#if author}}
-                {{^if ../filterAuthor}}
-                  <a href="{{routeUrl page='blog' slug='author' target=author}}">{{author}}</a> |
+                {{^if scope.root.filterAuthor}}
+                  <a href="{{routeUrl(page='blog' slug='author' target=author)}}">{{author}}</a> |
                 {{/if}}
               {{/if}}
               {{#if category}}
-                {{^if ../filterCategory}}
-                  <a href="{{routeUrl page='blog' slug='category' target=category}}">{{category}}</a> |
+                {{^if scope.root.filterCategory}}
+                  <a href="{{routeUrl(page='blog' slug='category' target=category)}}">{{category}}</a> |
                 {{/if}}
               {{/if}}
               {{timestamp datetime}}

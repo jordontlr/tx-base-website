@@ -19,19 +19,19 @@
                     <div class="col-xs-6">
                       <div class="form-group">
                         <label for="profile-first-name">First Name</label>
-                        <input type="text" class="form-control" id="profile-first-name" placeholder="First Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus value:bind="firstName" {{#if ../disableForm}}disabled{{/if}}>
+                        <input type="text" class="form-control" id="profile-first-name" placeholder="First Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus value:bind="firstName" {{#if scope.root.disableForm}}disabled{{/if}}>
                       </div>
                     </div>
                     <div class="col-xs-6">
                       <div class="form-group">
                         <label for="profile-last-name">Last Name</label>
-                        <input type="text" class="form-control" id="profile-last-name" placeholder="Last Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="lastName" {{#if ../disableForm}}disabled{{/if}}>
+                        <input type="text" class="form-control" id="profile-last-name" placeholder="Last Name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value:bind="lastName" {{#if scope.root.disableForm}}disabled{{/if}}>
                       </div>
                     </div>
                     <div class="col-xs-6">
                       <div class="form-group">
                         <label for="profile-select-gender">Gender</label>
-                        <select id="profile-select-gender" selectpicker="btn btn-default" value:bind="gender" class="bootstrap-select form-control show-tick" {{#if ../disableForm}}disabled{{/if}}>
+                        <select id="profile-select-gender" selectpicker="btn btn-default" value:bind="gender" class="bootstrap-select form-control show-tick" {{#if scope.root.disableForm}}disabled{{/if}}>
                           <option value="M">Male</option>
                           <option value="F">Female</option>
                         </select>
@@ -40,10 +40,10 @@
                     <div class="col-xs-6">
                       <div class="form-group">
                         <label for="profile-country">Country</label>
-                        {{#if ../countryList}}
-                          <select id="profile-country" selectpicker="btn btn-default" value:bind="countryCode" class="bootstrap-select form-control show-tick" title="Select your Country" data-live-search="{{../countryListSearch}}" data-size="{{../dropDownSize}}" {{#if ../disableForm}}disabled{{/if}}>
+                        {{#if scope.root.countryList}}
+                          <select id="profile-country" selectpicker="btn btn-default" value:bind="countryCode" class="bootstrap-select form-control show-tick" title="Select your Country" data-live-search="{{scope.root.countryListSearch}}" data-size="{{scope.root.dropDownSize}}" {{#if scope.root.disableForm}}disabled{{/if}}>
                             <option data-hidden="true"></option>
-                            {{#each ../countryList}}
+                            {{#each{scope.root.countryList}}}
                               <option value="{{code}}">{{name}}</option>
                             {{/each}}
                           </select>
@@ -55,9 +55,9 @@
                     <div class="col-xs-6 col-sm-4">
                       <div class="form-group">
                         <label for="profile-select-dob">Day of Birth</label>
-                        {{#if ../daysOfMonthList}}
-                          <select id="profile-select-dob" selectpicker="btn btn-default" value:bind="dayOfBirth" class="bootstrap-select form-control show-tick" data-size="{{../dropDownSize}}" {{#if ../disableForm}}disabled{{/if}}>
-                            {{#each ../daysOfMonthList}}
+                        {{#if scope.root.daysOfMonthList}}
+                          <select id="profile-select-dob" selectpicker="btn btn-default" value:bind="dayOfBirth" class="bootstrap-select form-control show-tick" data-size="{{scope.root.dropDownSize}}" {{#if scope.root.disableForm}}disabled{{/if}}>
+                            {{#each(scope.root.daysOfMonthList)}}
                               <option>{{this}}</option>
                             {{/each}}
                           </select>
@@ -67,9 +67,9 @@
                     <div class="col-xs-6 col-sm-4">
                       <div class="form-group">
                         <label for="profile-select-mob">Month of Birth</label>
-                        {{#if ../monthsList}}
-                          <select id="profile-select-mob" selectpicker="btn btn-default" value:bind="monthOfBirth" class="bootstrap-select form-control show-tick" data-size="{{../dropDownSize}}" {{#if ../disableForm}}disabled{{/if}}>
-                            {{#each ../monthsList}}
+                        {{#if scope.root.monthsList}}
+                          <select id="profile-select-mob" selectpicker="btn btn-default" value:bind="monthOfBirth" class="bootstrap-select form-control show-tick" data-size="{{scope.root.dropDownSize}}" {{#if scope.root.disableForm}}disabled{{/if}}>
+                            {{#each(scope.root.monthsList)}}
                               <option value="{{number}}">{{full}}</option>
                             {{/each}}
                           </select>
@@ -79,9 +79,9 @@
                     <div class="col-xs-6 col-sm-4">
                       <div class="form-group">
                         <label for="profile-select-yob">Year of Birth</label>
-                        {{#if ../yearsList}}
-                          <select id="profile-select-yob" selectpicker="btn btn-default" value:bind="yearOfBirth" class="bootstrap-select form-control show-tick" data-size="{{../dropDownSize}}" {{#if ../disableForm}}disabled{{/if}}>
-                            {{#each ../yearsList}}
+                        {{#if scope.root.yearsList}}
+                          <select id="profile-select-yob" selectpicker="btn btn-default" value:bind="yearOfBirth" class="bootstrap-select form-control show-tick" data-size="{{scope.root.dropDownSize}}" {{#if scope.root.disableForm}}disabled{{/if}}>
+                            {{#each(scope.root.yearsList)}}
                               <option>{{this}}</option>
                             {{/each}}
                           </select>

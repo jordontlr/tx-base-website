@@ -20,17 +20,31 @@ export const ViewModel = DefineMap.extend({
     Type: Kyc
   },
   kycLoading: {
-    value: false
+    default: false
   },
   loadingUsers: {
-    value: true
+    type: 'boolean',
+    default () {
+      User.getList({ $skip: this.pagination.skip, $limit: this.pagination.limit })
+        .then(users => {
+          this.rows = users
+          this.pagination.total = users.total
+          setTimeout(() => { this.loadingUsers = false }, 25)
+        })
+        .catch(err => {
+          if (err.code === 401) this.session.error401()
+          else console.log(err)
+        })
+
+      return true
+    }
   },
   rows: {
     Type: User.List
   },
   pagination: {
     Type: Pagination,
-    value () {
+    default () {
       return {skip: 0, limit: 10}
     }
   },
@@ -85,20 +99,5 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'admin-users',
   ViewModel,
-  view,
-  events: {
-    inserted: function () {
-      let pagination = this.viewModel.pagination
-      User.getList({$skip: pagination.skip, $limit: pagination.limit})
-        .then(users => {
-          this.viewModel.rows = users
-          this.viewModel.pagination.total = users.total
-          setTimeout(() => { this.viewModel.loadingUsers = false }, 25)
-        })
-        .catch(err => {
-          if (err.code === 401) this.viewModel.session.error401()
-          else console.log(err)
-        })
-    }
-  }
+  view
 })

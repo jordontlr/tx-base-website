@@ -12,11 +12,11 @@ const Faq = DefineMap.extend('Faq', {
   answer: 'string',
   category: {
     type: 'string',
-    value: null
+    default: null
   },
   delta: {
     type: 'string',
-    value: '{"ops":[{"insert":"\\n"}]}'
+    default: '{"ops":[{"insert":"\\n"}]}'
   },
   updatedAt: 'date',
   createdAt: 'date'

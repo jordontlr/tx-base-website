@@ -41,20 +41,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#each userCart.items}}
+                {{#each(userCart.items)}}
                   <tr>
                     <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
                     <td class="text-center">{{numberFormat price}}</td>
                     <td class="text-center">{{quantity}}</td>
                     <td class="text-center text-nowrap">
                       <div class="btn-group" role="group" style="min-width: 66px;">
-                        <button class="btn btn-xs btn-default" type="button" on:click="quantityUp(this)">
+                        <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityUp(this)">
                           <i class="fa fa-plus" aria-hidden="true"></i>
                         </button>
-                        <button class="btn btn-xs btn-default" type="button" on:click="quantityDown(this)">
+                        <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityDown(this)">
                           <i class="fa fa-minus" aria-hidden="true"></i>
                         </button>
-                        <button class="btn btn-xs btn-danger" type="button" on:click="quantityRemove(this)">
+                        <button class="btn btn-xs btn-danger" type="button" on:click="scope.root.quantityRemove(this)">
                           <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                       </div>
@@ -77,19 +77,19 @@
   </div>
 </div>
 
-{{^if loadingShop}}
+{{^if scope.root.loadingShop}}
   <div class="container">
 
     <div class="row">
 
       <grid-component rows:bind="rows" pagination:bind="pagination" on:onpage="loadPage()">
 
-        {{^if ../filterTags}}
+        {{^if scope.root.filterTags}}
           <div class="col-sm-3">
             <div class="list-group">
               <div class="list-header list-group-item h4 no-margin-top">Product Categories</div>
-              {{#each ../categories}}
-                <a href="javascript:void(0)" on:click="changeCategory(item)" class="list-group-item {{#eq ../filterCategory item}} active{{/eq}}">
+              {{#each(scope.root.categories)}}
+                <a href="javascript:void(0)" on:click="scope.root.changeCategory(item)" class="list-group-item {{#eq scope.root.filterCategory item}} active{{/eq}}">
                   {{item}}
                   <span class="badge">{{count}}</span>
                 </a>
@@ -98,9 +98,9 @@
           </div>
         {{/if}}
 
-        <div class="{{^if ../filterTags}}col-sm-9{{else}}col-sm-12{{/if}}">
-          {{#if ../filterCategory}}
-            <h1 class="no-margin-top margin-bottom">{{../filterCategory}}</h1>
+        <div class="{{^if scope.root.filterTags}}col-sm-9{{else}}col-sm-12{{/if}}">
+          {{#if scope.root.filterCategory}}
+            <h1 class="no-margin-top margin-bottom">{{scope.root.filterCategory}}</h1>
           {{/if}}
           <div class="row">
 
@@ -108,27 +108,27 @@
             <div class="col-xs-8 col-sm-6 col-md-6 col-lg-3">
               <div class="btn-group dropdown">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Sort By {{capFirst ../sortType}} <span class="caret"></span>
+                  Sort By {{capFirst scope.root.sortType}} <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a href="javascript:void(0)" on:click="changeSortType('product')">Product</a></li>
-                  <li><a href="javascript:void(0)" on:click="changeSortType('price')">Price</a></li>
+                  <li><a href="javascript:void(0)" on:click="scope.root.changeSortType('product')">Product</a></li>
+                  <li><a href="javascript:void(0)" on:click="scope.root.changeSortType('price')">Price</a></li>
                 </ul>
               </div>
-              <button class="btn btn-default" on:click="../changeSortDirection()"><i class="fa fa-arrow-{{../sortDirection}}" aria-hidden="true"></i></button>
+              <button class="btn btn-default" on:click="scope.root.changeSortDirection()"><i class="fa fa-arrow-{{../sortDirection}}" aria-hidden="true"></i></button>
             </div>
 
             <!-- change display type -->
             <div class="hidden-md hidden-sm hidden-xs col-lg-3">
               <div class="text-center">
-                <button class="btn {{#eq ../displayType 'large'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('large')"><i class="fa fa-th-large" aria-hidden="true"></i></button>
-                <button class="btn {{#eq ../displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+                <button class="btn {{#eq scope.root.displayType 'large'}}btn-primary{{else}}btn-default{{/eq}}" on:click="scope.root.changeDisplayType('large')"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                <button class="btn {{#eq scope.root.displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="scope.root.changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="hidden-lg hidden-xs col-sm-6 col-md-6">
               <div class="text-right">
-                <button class="btn {{#eq ../displayType 'large'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('large')"><i class="fa fa-th-large" aria-hidden="true"></i></button>
-                <button class="btn {{#eq ../displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="../changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+                <button class="btn {{#eq scope.root.displayType 'large'}}btn-primary{{else}}btn-default{{/eq}}" on:click="scope.root.changeDisplayType('large')"><i class="fa fa-th-large" aria-hidden="true"></i></button>
+                <button class="btn {{#eq scope.root.displayType 'list'}}btn-primary{{else}}btn-default{{/eq}}" on:click="scope.root.changeDisplayType('list')"><i class="fa fa-th-list" aria-hidden="true"></i></button>
               </div>
             </div>
 
@@ -143,7 +143,7 @@
                 {{#if hasPages}}
                   <nav aria-label="Page navigation">
                     <button class="btn btn-default" {{^if isPrevActive}}disabled{{/if}} on:click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
-                    {{#each pages}}
+                    {{#each(pages)}}
                       <button class="btn {{#if isActive}}btn-primary{{else}}btn-default{{/if}}" on:click="changePage(pageNumber)">{{pageTitle}}</button>
                     {{/each}}
                     <button class="btn btn-default" {{^if isNextActive}}disabled{{/if}} on:click="next()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
@@ -155,7 +155,7 @@
               {{#if hasPages}}
                 <nav aria-label="Page navigation">
                   <button class="btn btn-default" {{^if isPrevActive}}disabled{{/if}} on:click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
-                  {{#each pages}}
+                  {{#each(pages)}}
                     <button class="btn {{#if isActive}}btn-primary{{else}}btn-default{{/if}}" on:click="changePage(pageNumber)">{{pageTitle}}</button>
                   {{/each}}
                   <button class="btn btn-default" {{^if isNextActive}}disabled{{/if}} on:click="next()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
@@ -168,12 +168,12 @@
               <div class="col-lg-3 col-xs-6 col-sm-6 col-md-6">
                 <div class="pull-right">
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    View {{../pagination.limit}} <span class="caret"></span>
+                    View {{scope.root.pagination.limit}} <span class="caret"></span>
                   </button>
                   <ul class="view-btn dropdown-menu">
-                    <li><a href="javascript:void(0)" on:click="changeLimit('6')">6</a></li>
-                    <li><a href="javascript:void(0)" on:click="changeLimit('12')">12</a></li>
-                    <li><a href="javascript:void(0)" on:click="changeLimit('24')">24</a></li>
+                    <li><a href="javascript:void(0)" on:click="scope.root.changeLimit('6')">6</a></li>
+                    <li><a href="javascript:void(0)" on:click="scope.root.changeLimit('12')">12</a></li>
+                    <li><a href="javascript:void(0)" on:click="scope.root.changeLimit('24')">24</a></li>
                   </ul>
                 </div>
               </div>
@@ -182,10 +182,10 @@
           </div>
           <hr>
           <div class="row">
-            {{^if ../loadingShopList}}
+            {{^if scope.root.loadingShopList}}
               {{#if rows.length}}
-                {{#each rows}}
-                  {{#eq ../displayType 'list'}}
+                {{#each(rows)}}
+                  {{#eq scope.root.displayType 'list'}}
                     <div class="col-sm-12">
                       <div class="row">
                         <div class="col-sm-3">
@@ -202,15 +202,15 @@
                           <div class="hidden visible-lg"><br><br></div>
                           <div class="hidden visible-md"><br></div>
                           <div class="text-right">
-                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="openShopModal(this)">View Details</a>
-                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="addToCart(this)">Add 1 to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="scope.root.openShopModal(this)">View Details</a>
+                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="scope.root.addToCart(this)">Add 1 to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                           </div>
                         </div>
                       </div>
                       <hr>
                     </div>
                   {{/eq}}
-                  {{#eq ../displayType 'large'}}
+                  {{#eq scope.root.displayType 'large'}}
                     <div class="col-sm-6 col-md-6 col-lg-4">
                       <div class="thumbnail">
                         <div class="mouse-pointer {{#if this.imageData[1]}}hover-change-image{{/if}}" on:click="openShopModal(this)">
@@ -222,8 +222,8 @@
                           <h4 class="one-line mouse-pointer hover-color" on:click="openShopModal(this)">{{product}}</h4>
                           <p class="one-line">{{short}}</p>
                           <div class="btn-group btn-group-justified" role="group">
-                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="openShopModal(this)">View Details</a>
-                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="addToCart(this)">Add 1 to Cart</a>
+                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="scope.root.openShopModal(this)">View Details</a>
+                            <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="scope.root.addToCart(this)">Add 1 to Cart</a>
                           </div>
                         </div>
                       </div>

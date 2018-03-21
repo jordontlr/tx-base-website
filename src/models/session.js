@@ -37,7 +37,7 @@ const Session = DefineMap.extend('Session', {
   },
 
   sessionError: {
-    value: false
+    default: false
   },
   authInterval: '*',
   setAuthInterval () {

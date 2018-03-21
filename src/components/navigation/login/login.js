@@ -34,12 +34,12 @@ export const ViewModel = DefineMap.extend({
     }
   },
   passwordVisible: {
-    value: false
+    default: false
   },
   processing: 'boolean',
   disableForm: {
     type: 'boolean',
-    value: false
+    default: false
   },
   hasErrors: {
     get (val) {
