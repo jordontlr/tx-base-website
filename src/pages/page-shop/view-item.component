@@ -127,15 +127,12 @@
     import DefineMap from 'can-define/map/map'
     import * as Cookie from 'js-cookie'
 
-    const ViewItemViewModel = DefineMap.extend('ViewItemViewModel', {
+    export default DefineMap.extend({
       viewShopItem: {
         type: 'any'
       },
       userCart: {
         type: 'any'
-      },
-      isSsr: {
-        value: typeof process === "object" && {}.toString.call(process) === "[object process]"
       },
       addToCart (item) {
         if (!this.userCart.fingerprint) {
@@ -195,9 +192,5 @@
           })
       }
     })
-
-    export default function (opt) {
-      return new ViewItemViewModel(opt)
-    }
   </script>
 </can-component>

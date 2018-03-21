@@ -1,3 +1,5 @@
+<can-import from="can-stache-route-helpers" />
+
 <br>
 <div class="container">
   <div class="row">

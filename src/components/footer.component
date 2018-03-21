@@ -5,7 +5,7 @@
     p { font-weight: bold; }
   </style>
   <view>
-    <can-import from="can-stache/helpers/route" />
+    <can-import from="can-stache-route-helpers" />
     <can-import from="~/components/social-media.component!" />
 
     <footer class="container-fluid bottom-padding margin-bottom-small">
@@ -15,28 +15,19 @@
       <div class="row">
         <div class="col-sm-12 text-center">{{{copyMessage}}}</div>
       </div>
-      {{^if isSsr}}
-        <div class="row">
-          <div class="col-xs-6 text-right"><a href="{{routeUrl page='terms'}}">Terms and Conditions</a></div>
-          <div class="col-xs-6 text-left"><a href="{{routeUrl page='privacy'}}">Privacy Policy</a></div>
-        </div>
-      {{/if}}
+      <div class="row">
+        <div class="col-xs-6 text-right"><a href="{{routeUrl(page='terms')}}">Terms and Conditions</a></div>
+        <div class="col-xs-6 text-left"><a href="{{routeUrl(page='privacy')}}">Privacy Policy</a></div>
+      </div>
     </footer>
   </view>
   <script type="view-model">
     import DefineMap from 'can-define/map/map'
 
-    const PageFooterViewModel = DefineMap.extend('PageFooterViewModel', {
+    export default DefineMap.extend({
       copyMessage: {
-        value: '&copy; Copyright 2017 <strong>Tx Universe</strong> All Rights Reserved'
-      },
-      isSsr: {
-        value: typeof process === "object" && {}.toString.call(process) === "[object process]"
+        default: '&copy; Copyright 2017 <strong>Tx Universe</strong> All Rights Reserved'
       }
     })
-
-    export default function (opt) {
-      return new PageFooterViewModel(opt)
-    }
   </script>
 </can-component>

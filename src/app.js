@@ -1,15 +1,15 @@
-// import '~/utils/polyfill'
 import '~/utils/helpers'
-// import '~/utils/analytics'
 import DefineMap from 'can-define/map/map'
 import route from 'can-route'
 import 'can-route-pushstate'
+import 'can-debug#?./is-dev'
 import 'jquery'
 import 'bootstrap'
 import Session from './models/session'
 
 const AppViewModel = DefineMap.extend({
-  '*': {
+  env: {
+    default: () => ({NODE_ENV: 'development'}),
     serialize: false
   },
   page: {
@@ -24,9 +24,26 @@ const AppViewModel = DefineMap.extend({
     type: 'string',
     serialize: true
   },
+  message: {
+    default: 'Hello World!',
+    serialize: false
+  },
+  title: {
+    serialize: false,
+    get () {
+      if (this.page === 'privacy') {
+        return 'Tx | Privacy Statement'
+      } else if (this.page === 'terms') {
+        return 'Tx | Terms of Service'
+      } else {
+        return 'Tx | Built with Blocks'
+      }
+    }
+  },
   session: {
+    serialize: false,
     Type: Session,
-    value: function () {
+    default: function () {
       const current = new Session()
       Session.current = current
       return current
@@ -39,22 +56,11 @@ const AppViewModel = DefineMap.extend({
         .catch(() => {})
       return val
     }
-  },
-  title: {
-    get () {
-      if (this.page === 'privacy') {
-        return 'Tx Base | Privacy Statement'
-      } else if (this.page === 'terms') {
-        return 'Tx Base | Terms of Service'
-      } else {
-        return 'Tx Base | Built with Blocks'
-      }
-    }
   }
 })
 
-route('{page}', { page: 'home' })
-route('{page}/{slug}', { slug: null })
-route('{page}/{slug}/{target}', { target: null })
+route.register('{page}', { page: 'home' })
+route.register('{page}/{slug}', { slug: null })
+route.register('{page}/{slug}/{target}', { target: null })
 
 export default AppViewModel

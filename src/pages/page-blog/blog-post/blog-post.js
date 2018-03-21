@@ -6,30 +6,39 @@ import Blog from '~/models/blog'
 
 export const ViewModel = DefineMap.extend({
   blogPost: {
-    Type: Blog
+    Type: Blog,
+    default () {
+      return new Blog({})
+    }
   },
   slug: {
     type: 'string',
-    value: null
+    default: null
   },
   loadingBlogPost: {
-    value: true,
+    default: true,
     get (val, resolve) {
       if (!val) { return val }
       this.blogPromise.then(resolve)
     }
   },
   authorPosts: {
-    Type: Blog.list
+    Type: Blog.list,
+    default () {
+      return []
+    }
   },
   categoryPosts: {
-    Type: Blog.list
+    Type: Blog.list,
+    default () {
+      return []
+    }
   },
   errorNotFound: {
-    value: false
+    default: false
   },
   blogPromise: {
-    value () {
+    default () {
       return Blog.getList({ 'linkTitle': this.slug, published: true })
         .then(blog => {
           if (blog.length === 0) {

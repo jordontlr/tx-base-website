@@ -1,11 +1,9 @@
 <can-component tag="tag-loading" leak-scope>
   <style type="less">
     display: block;
-
-    p { font-weight: bold; }
   </style>
   <view>
-    {{#eq ../state 'resolved'}}
+    {{#eq(state, "resolved")}}
       <content></content>
     {{else}}
       <div class="loading"></div>
@@ -14,11 +12,7 @@
   <script type="view-model">
     import DefineMap from 'can-define/map/map'
 
-    const TagLoading = DefineMap.extend('TagLoading', {
+    export default DefineMap.extend({
     })
-
-    export default function (opt) {
-      return new TagLoading(opt)
-    }
   </script>
 </can-component>

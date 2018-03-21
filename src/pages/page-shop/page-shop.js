@@ -10,18 +10,15 @@ import Fingerprint2 from 'fingerprintjs2'
 import * as Cookie from 'js-cookie'
 
 export const ViewModel = DefineMap.extend({
-  isSsr: {
-    value: typeof process === 'object' && {}.toString.call(process) === '[object process]'
-  },
   viewShopItem: {
     Type: Shop,
-    value () {
+    default () {
       return new Shop({})
     }
   },
   userCart: {
     Type: Cart,
-    value () {
+    default () {
       return new Cart({})
     }
   },
@@ -51,7 +48,7 @@ export const ViewModel = DefineMap.extend({
     this.updateCartAPI()
   },
   loadingShop: {
-    value: true,
+    default: true,
     get (val, resolve) {
       if (!val) { return val }
       this.rowsPromise.then(resolve)
@@ -59,9 +56,12 @@ export const ViewModel = DefineMap.extend({
   },
   loadingShopList: {
     type: 'boolean',
-    value: false
+    default: false
   },
-  filterTags: 'string',
+  filterTags: {
+    type: 'string',
+    default: null
+  },
   changeTags (to) {
     this.loadingShopList = true
     this.pagination.skip = 0
@@ -75,7 +75,10 @@ export const ViewModel = DefineMap.extend({
     this.filterTags = null
     this.loadPage(true)
   },
-  filterCategory: 'string',
+  filterCategory: {
+    type: 'string',
+    default: null
+  },
   changeCategory (to) {
     this.loadingShopList = true
     this.pagination.skip = 0
@@ -84,7 +87,8 @@ export const ViewModel = DefineMap.extend({
     this.loadPage()
   },
   sortType: {
-    value: 'product'
+    type: 'string',
+    default: 'product'
   },
   changeSortType (to) {
     if (this.sortType !== to) {
@@ -95,7 +99,8 @@ export const ViewModel = DefineMap.extend({
     }
   },
   sortDirection: {
-    value: 'down'
+    type: 'string',
+    default: 'down'
   },
   changeSortDirection () {
     this.loadingShopList = true
@@ -105,21 +110,28 @@ export const ViewModel = DefineMap.extend({
     this.loadPage()
   },
   displayType: {
-    value: 'list'
+    type: 'string',
+    default: 'list'
   },
   changeDisplayType (to) {
     this.displayType = to
   },
   rowsPromise: {
-    value () {
+    default () {
       return this.loadPage()
     }
   },
   rows: {
-    Type: Shop.List
+    Type: Shop.List,
+    default () {
+      return []
+    }
   },
   allCategories: {
-    Type: Shop.List
+    Type: Shop.List,
+    default () {
+      return []
+    }
   },
   categories: {
     get () {
@@ -144,7 +156,7 @@ export const ViewModel = DefineMap.extend({
   },
   pagination: {
     Type: Pagination,
-    value () {
+    default () {
       return {skip: 0, limit: 12}
     }
   },
@@ -205,27 +217,25 @@ export const ViewModel = DefineMap.extend({
             this.allCategories = shopCategories
           })
 
-        if (!this.isSsr) {
-          let cartCookie = Cookie.get('cartId')
-          if (!this.userCart._id && cartCookie) {
-            this.userCart = Cart
-              .get({_id: cartCookie})
-              .then(data => {
-                this.userCart = data
-                // todo: check to make sure list matches available items and populate items list in cart model (I think this is working but needs testing)
-                this.userCart.cartItemsToLoad.forEach((cartItem) => {
-                  let foundItem = false
-                  this.rows.forEach((shopItem) => {
-                    if (!foundItem && cartItem.itemId === shopItem._id) {
-                      shopItem.quantity = cartItem.quantity
-                      shopItem.addedToCart = true
-                      this.userCart.items.push(shopItem)
-                      foundItem = true
-                    }
-                  })
+        let cartCookie = Cookie.get('cartId')
+        if (!this.userCart._id && cartCookie) {
+          this.userCart = Cart
+            .get({_id: cartCookie})
+            .then(data => {
+              this.userCart = data
+              // todo: check to make sure list matches available items and populate items list in cart model (I think this is working but needs testing)
+              this.userCart.cartItemsToLoad.forEach((cartItem) => {
+                let foundItem = false
+                this.rows.forEach((shopItem) => {
+                  if (!foundItem && cartItem.itemId === shopItem._id) {
+                    shopItem.quantity = cartItem.quantity
+                    shopItem.addedToCart = true
+                    this.userCart.items.push(shopItem)
+                    foundItem = true
+                  }
                 })
               })
-          }
+            })
         }
       })
       .catch(err => console.log(err))

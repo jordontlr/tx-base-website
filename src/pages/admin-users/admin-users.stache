@@ -31,7 +31,6 @@
               <tr>
                 <th class="text-nowrap text-center">Email</th>
                 <th class="text-nowrap text-center">Unlocked</th>
-                <th class="text-nowrap text-center">KYC</th>
                 <th class="text-nowrap text-center">Last Login</th>
                 <th class="text-nowrap text-center">Account Created</th>
                 <th class="text-nowrap text-center">Actions</th>
@@ -40,29 +39,26 @@
               <tbody>
               {{^if ../loadingUsers}}
                 {{#if rows.length}}
-                  {{#each rows}}
+                  {{#each(rows)}}
                     <tr>
                       <td class="text-nowrap text-center"><a href="mailto:{{email}}">{{email}}</a></td>
-                      <td class="text-nowrap text-center">{{^if locked}}<i class="fa fa-check text-success"></i>{{else}}<i class="fa fa-close text-danger"></i>{{/if}}</td>
-                      <td class="text-nowrap text-center">{{#if kycApproved}}<i class="fa fa-check text-success"></i>{{else}}<i class="fa fa-close text-danger"></i>{{/if}}</td>
+                      <td class="text-nowrap text-center">{{^if userLocked}}<i class="fa fa-check text-success"></i>{{else}}<i class="fa fa-close text-danger"></i>{{/if}}</td>
                       <td class="text-nowrap text-center">{{timestampDetailed updatedAt}}</td>
                       <td class="text-nowrap text-center">{{timestampDetailed createdAt}}</td>
                       <td class="text-nowrap text-center">
-                        <button class="btn btn-primary btn-sm" type="button" on:click="openUser(.)">Edit</button>
-                        {{#if kycComplete}}<button class="btn btn-info btn-sm" type="button" on:click="openUserKYC(.)">{{#if kycUserLoading}}<i class="fa fa-spin fa-spinner"></i>{{else}}KYC{{/if}}</button>{{/if}}
-                        {{#if locked}}<button class="btn btn-danger btn-sm" type="button" on:click="deleteUser(.)">Delete</button>{{/if}}
-                        {{^if lastLogin}}{{^if locked}}<button class="btn btn-danger btn-sm" type="button" on:click="deleteUser(.)">Delete</button>{{/if}}{{/if}}
+                        <button class="btn btn-primary btn-sm" type="button" on:click="scope.root.openUser(.)">Edit</button>
+                        {{#if userLocked}}<button class="btn btn-danger btn-sm" type="button" on:click="scope.root.deleteUser(.)">Delete</button>{{/if}}
                       </td>
                     </tr>
                   {{/each}}
                 {{else}}
                   <tr class="no-hover no-bg">
-                    <td colspan="6" class="text-center"><h3>There are currently no users</h3></td>
+                    <td colspan="5" class="text-center"><h3>There are currently no users</h3></td>
                   </tr>
                 {{/if}}
               {{else}}
                 <tr class="no-hover no-bg">
-                  <td colspan="6"><div class="text-center top-bottom-padding"><i class="fa fa-spin fa-spinner fa-5x"></i></div></td>
+                  <td colspan="5"><div class="text-center top-bottom-padding"><i class="fa fa-spin fa-spinner fa-5x"></i></div></td>
                 </tr>
               {{/if}}
               </tbody>
@@ -72,7 +68,7 @@
               <nav aria-label="Page navigation" class="pull-right">
                 <ul class="pagination">
                   <li class="{{^if isPrevActive}}disabled{{/if}}"><a href="" on:click="prev()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                  {{#each pages}}
+                  {{#each(pages)}}
                     <li class="{{#if isActive}}active{{/if}}"><a href="" on:click="changePage(pageNumber)">{{pageTitle}}</a></li>
                   {{/each}}
                   <li class="{{^if isNextActive}}disabled{{/if}}"><a href="" on:click="next()" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
@@ -90,4 +86,4 @@
 </div>
 
 <edit-user editUser:bind="editUser" session:from="session"/>
-<kyc-user editUser:bind="editUser" kyc:bind="kycUser"/>
+<!--<kyc-user editUser:bind="editUser" kyc:bind="kycUser"/>-->

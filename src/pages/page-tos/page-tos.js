@@ -5,7 +5,7 @@ import view from './page-tos.stache'
 
 export const ViewModel = DefineMap.extend({
   message: {
-    value: 'This is the page-tos component'
+    default: 'This is the page-tos component'
   }
 })
 

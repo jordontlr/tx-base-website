@@ -13,14 +13,10 @@
   <script type="view-model">
     import DefineMap from 'can-define/map/map'
 
-    const ValidationMessageViewModel = DefineMap.extend('ValidationMessageViewModel', {
+    export default DefineMap.extend({
       message: {
-        value: null
+        default: null
       }
     })
-
-    export default function (opt) {
-      return new ValidationMessageViewModel(opt)
-    }
   </script>
 </can-component>

@@ -11,17 +11,17 @@ import Profile from '~/models/profile'
 
 export const ViewModel = DefineMap.extend({
   startYear: {
-    value: 1940
+    default: 1940
   },
   countYears: {
-    value: 77
+    default: 77
   },
   dropDownSize: {
-    value: 12
+    default: 12
   },
   loadingProfile: {
     type: 'boolean',
-    value () {
+    default () {
       this.loadPage()
       return true
     }
@@ -34,13 +34,13 @@ export const ViewModel = DefineMap.extend({
   },
   countryList: {
     Type: DefineList,
-    value () {
+    default () {
       return countryData
     }
   },
   monthsList: {
     Type: DefineList,
-    value () {
+    default () {
       return monthsData
     }
   },
@@ -59,8 +59,14 @@ export const ViewModel = DefineMap.extend({
       return (this.countryList.length > this.dropDownSize)
     }
   },
-  disableForm: 'boolean',
-  processing: 'boolean',
+  disableForm: {
+    type: 'boolean',
+    default: false
+  },
+  processing: {
+    type: 'boolean',
+    default: false
+  },
   dayOfBirthString: {
     get (val) {
       let s = '0' + this.dayOfBirth

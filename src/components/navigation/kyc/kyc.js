@@ -17,13 +17,13 @@ import Kyc from '~/models/kyc'
 
 export const ViewModel = DefineMap.extend({
   startYear: {
-    value: 1940
+    default: 1940
   },
   countYears: {
-    value: 77
+    default: 77
   },
   dropDownSize: {
-    value: 12
+    default: 12
   },
   currentUser: {
     Type: User
@@ -33,13 +33,13 @@ export const ViewModel = DefineMap.extend({
   },
   countryList: {
     Type: DefineList,
-    value () {
+    default () {
       return countryData
     }
   },
   provStateListData: {
     Type: DefineList,
-    value () {
+    default () {
       return provStateData
     }
   },
@@ -57,13 +57,13 @@ export const ViewModel = DefineMap.extend({
   },
   monthsList: {
     Type: DefineList,
-    value () {
+    default () {
       return monthsData
     }
   },
   streetTypeList: {
     Type: DefineList,
-    value () {
+    default () {
       return streetTypeData
     }
   },
@@ -78,7 +78,7 @@ export const ViewModel = DefineMap.extend({
     }
   },
   provStateListHidden: {
-    value: true,
+    default: true,
     set (val) {
       if (val) $('#kyc-province-state-select').selectpicker('hide')
       else $('#kyc-province-state-select').selectpicker('show')

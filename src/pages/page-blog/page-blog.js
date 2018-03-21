@@ -6,18 +6,27 @@ import Pagination from '~/models/pagination'
 import Blog from '~/models/blog'
 
 export const ViewModel = DefineMap.extend({
+  filterAuthor: {
+    type: 'string',
+    default: null
+  },
+  filterCategory: {
+    type: 'string',
+    default: null
+  },
+  filterTags: {
+    type: 'string',
+    default: null
+  },
   loadingBlog: {
-    value: true,
+    default: true,
     get (val, resolve) {
       if (!val) { return val }
       this.rowsPromise.then(resolve)
     }
   },
-  filterAuthor: 'string',
-  filterCategory: 'string',
-  filterTags: 'string',
   rowsPromise: {
-    value () {
+    default () {
       let pagination = this.pagination
 
       let query = {
@@ -57,11 +66,14 @@ export const ViewModel = DefineMap.extend({
     }
   },
   rows: {
-    Type: Blog.List
+    Type: Blog.List,
+    default () {
+      return []
+    }
   },
   pagination: {
     Type: Pagination,
-    value () {
+    default () {
       return {skip: 0, limit: 10}
     }
   }

@@ -13,14 +13,14 @@ export const ViewModel = DefineMap.extend({
   passwordVisible: 'boolean',
   processing: 'boolean',
   disableForm: {
-    value: false
+    default: false
   },
   password: 'string',
   passwordError: 'string',
   newEmail: 'string',
   newEmailError: 'string',
   verificationCodeVisible: {
-    value: false
+    default: false
   },
   emailCode: 'string',
   hasErrors: {

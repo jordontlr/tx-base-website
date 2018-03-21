@@ -5,7 +5,7 @@ import view from './page-home.stache'
 
 export const ViewModel = DefineMap.extend({
   message: {
-    value: 'This is the page-home component'
+    default: 'This is the page-home component'
   }
 })
 

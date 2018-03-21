@@ -6,14 +6,14 @@ import Faq from '~/models/faq'
 
 export const ViewModel = DefineMap.extend({
   loadingFAQs: {
-    value: true,
+    default: true,
     get (val, resolve) {
       if (!val) { return val }
       this.rowsPromise.then(resolve)
     }
   },
   rowsPromise: {
-    value () {
+    default () {
       return Faq.getList()
         .then(faqs => {
           this.rows = faqs
@@ -24,7 +24,10 @@ export const ViewModel = DefineMap.extend({
     }
   },
   rows: {
-    Type: Faq.List
+    Type: Faq.List,
+    default () {
+      return []
+    }
   },
   filteredRows: {
     Type: Faq.List
@@ -33,12 +36,12 @@ export const ViewModel = DefineMap.extend({
     type: 'string'
   },
   hasCategories: {
-    value () {
+    default () {
       return this.rows.filter(item => item.category && String(item.category).trim() !== '' && typeof item.category !== 'undefined').length
     }
   },
   categories: {
-    value () {
+    default () {
       return this.rows.reduce((list, item) => {
         if (item.category && String(item.category).trim() !== '' && typeof item.category !== 'undefined' && !list.includes(item.category)) list.push(item.category)
         return list

@@ -19,9 +19,10 @@ const User = DefineMap.extend('User', {
     serialize: false
   },
   setPassword: 'boolean',
-  accountCreated: 'number',
-  lastLogin: 'number',
-  locked: 'boolean',
+  userLocked: {
+    type: 'boolean',
+    default: false
+  },
   isAdmin: 'boolean',
   tmpPasswordTimestampExpiry: 'number',
   signUp (email) {
@@ -35,7 +36,9 @@ const User = DefineMap.extend('User', {
   },
   changeEmail (password, newEmail, emailCode) {
     return feathersClient.service('users').patch(this._id, {password, newEmail, emailCode})
-  }
+  },
+  updatedAt: 'date',
+  createdAt: 'date'
 })
 
 User.List = DefineList.extend('Users', {

@@ -8,10 +8,7 @@ import 'can-route-pushstate'
 
 export const ViewModel = DefineMap.extend({
   listenerAdded: {
-    value: false
-  },
-  isSsr: {
-    value: typeof process === 'object' && {}.toString.call(process) === '[object process]'
+    default: false
   },
   session: {
     type: 'any'
@@ -21,7 +18,7 @@ export const ViewModel = DefineMap.extend({
   },
   email: {
     type: 'string',
-    value () {
+    default () {
       if (this.session.user) {
         return this.session.user.email
       } else {

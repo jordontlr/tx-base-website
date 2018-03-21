@@ -14,7 +14,7 @@ export const ViewModel = DefineMap.extend({
   newPasswordError: 'string',
   disableForm: {
     type: 'boolean',
-    value: false
+    default: false
   },
   clearPassword: 'string',
   oldPassword: 'string',

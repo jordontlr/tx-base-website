@@ -8,9 +8,13 @@ import '~/models/fixtures/kyc'
 
 export const ViewModel = DefineMap.extend({
   disableForm: {
-    value: false
+    type: 'boolean',
+    default: false
   },
-  processing: 'boolean',
+  processing: {
+    type: 'boolean',
+    default: false
+  },
   kyc: {
     Type: Kyc
   },
