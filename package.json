@@ -1,6 +1,7 @@
 {
   "name": "tx",
   "version": "0.0.9",
+  "version": "0.1.0",
   "description": "An awesome DoneJS app",
   "homepage": "",
   "engines": {
@@ -80,7 +81,6 @@
     "can-stache-route-helpers": "^0.1.4",
     "can-view-autorender": "^4.0.0",
     "can-zone": "^0.6.13",
-    "chai": "^4.1.2",
     "cropit": "git+https://git@github.com/MarcGodard/cropit.git",
     "done-autorender": "^2.0.0",
     "done-component": "^2.0.0",
@@ -107,9 +107,9 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
-    "can-fixture": "^1.1.1",
     "can-debug": "^1.0.0",
     "can-fixture": "^2.0.2",
+    "chai": "^4.1.2",
     "donejs-cli": "^2.0.0",
     "funcunit": "^3.2.0",
     "standard": "^10.0.3",
