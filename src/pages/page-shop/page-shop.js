@@ -48,6 +48,7 @@ export const ViewModel = DefineMap.extend({
     this.updateCartAPI()
   },
   loadingShop: {
+    type: 'boolean',
     default: true,
     get (val, resolve) {
       if (!val) { return val }
