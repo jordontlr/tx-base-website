@@ -37,6 +37,7 @@ const User = DefineMap.extend('User', {
   changeEmail (password, newEmail, emailCode) {
     return feathersClient.service('users').patch(this._id, {password, newEmail, emailCode})
   },
+  roles: 'string',
   updatedAt: 'date',
   createdAt: 'date'
 })
