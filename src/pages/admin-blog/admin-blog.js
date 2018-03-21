@@ -104,7 +104,6 @@ export const ViewModel = DefineMap.extend({
     $('.image-input-btn').trigger('click')
   },
   connectedCallback (el) {
-
     let fileChange = (element) => {
       const reader = new window.FileReader()
       let file = element.target.files[0]

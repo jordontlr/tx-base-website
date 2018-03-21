@@ -97,7 +97,6 @@ export const ViewModel = DefineMap.extend({
     $('#editFAQ').modal('hide')
   },
   connectedCallback (el) {
-
     let toolbarOptions = [
       ['bold', 'italic', 'underline'],
       ['blockquote', 'code-block'],

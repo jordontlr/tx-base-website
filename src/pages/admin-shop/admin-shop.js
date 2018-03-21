@@ -110,7 +110,6 @@ export const ViewModel = DefineMap.extend({
     })
   },
   connectedCallback (el) {
-
     let imageUpload = (element) => {
       let files = element.target.files
       for (let i = 0; i < files.length; i++) {
