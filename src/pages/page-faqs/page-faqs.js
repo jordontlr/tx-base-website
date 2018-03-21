@@ -6,6 +6,7 @@ import Faq from '~/models/faq'
 
 export const ViewModel = DefineMap.extend({
   loadingFAQs: {
+    type: 'boolean',
     default: true,
     get (val, resolve) {
       if (!val) { return val }

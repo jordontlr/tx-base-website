@@ -10,7 +10,7 @@
   </div>
 </div>
 
-{{^if loadingFAQs}}
+{{^if scope.root.loadingFAQs}}
   <div class="container">
 
     {{#if hasCategories}}

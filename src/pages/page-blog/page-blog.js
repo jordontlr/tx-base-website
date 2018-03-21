@@ -19,6 +19,7 @@ export const ViewModel = DefineMap.extend({
     default: null
   },
   loadingBlog: {
+    type: 'boolean',
     default: true,
     get (val, resolve) {
       if (!val) { return val }

@@ -20,7 +20,7 @@
     </div>
   </div>
 </div>
-{{^if loadingBlog}}
+{{^if scope.root.loadingBlog}}
   <div class="container">
 
     {{#each(rows)}}
