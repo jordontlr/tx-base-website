@@ -73,6 +73,8 @@
     "can-connect": "^2.0.2",
     "can-connect-feathers": "^4.0.1",
     "can-define": "^2.0.1",
+    "can-dom-events": "^1.1.4",
+    "can-event-dom-enter": "^2.1.1",
     "can-route": "^4.1.0",
     "can-route-pushstate": "^4.0.1",
     "can-set": "^1.5.1",

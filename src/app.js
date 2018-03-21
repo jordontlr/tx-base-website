@@ -1,3 +1,4 @@
+import '~/utils/global'
 import '~/utils/helpers'
 import DefineMap from 'can-define/map/map'
 import route from 'can-route'
