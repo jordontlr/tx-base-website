@@ -20,13 +20,6 @@ export const ViewModel = DefineMap.extend({
   },
   loadingBlog: {
     type: 'boolean',
-    default: true,
-    get (val, resolve) {
-      if (!val) { return val }
-      this.rowsPromise.then(resolve)
-    }
-  },
-  rowsPromise: {
     default () {
       let pagination = this.pagination
 
@@ -57,13 +50,15 @@ export const ViewModel = DefineMap.extend({
         })
       }
 
-      return Blog.getList(query)
+      Blog.getList(query)
         .then(blog => {
           this.rows = blog
           this.pagination.total = blog.total
           setTimeout(() => { this.loadingBlog = false }, 25)
         })
         .catch(err => console.log(err))
+
+      return true
     }
   },
   rows: {

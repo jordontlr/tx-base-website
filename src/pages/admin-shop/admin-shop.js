@@ -25,7 +25,7 @@ export const ViewModel = DefineMap.extend({
   },
   loadingShop: {
     type: 'boolean',
-    value () {
+    default () {
       this.loadPage()
       return true
     }

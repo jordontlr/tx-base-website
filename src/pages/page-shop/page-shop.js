@@ -50,9 +50,9 @@ export const ViewModel = DefineMap.extend({
   loadingShop: {
     type: 'boolean',
     default: true,
-    get (val, resolve) {
-      if (!val) { return val }
-      this.rowsPromise.then(resolve)
+    get (val) {
+      this.loadPage()
+      return val
     }
   },
   loadingShopList: {
@@ -116,11 +116,6 @@ export const ViewModel = DefineMap.extend({
   },
   changeDisplayType (to) {
     this.displayType = to
-  },
-  rowsPromise: {
-    default () {
-      return this.loadPage()
-    }
   },
   rows: {
     Type: Shop.List,

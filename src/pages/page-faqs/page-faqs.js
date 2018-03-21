@@ -7,21 +7,16 @@ import Faq from '~/models/faq'
 export const ViewModel = DefineMap.extend({
   loadingFAQs: {
     type: 'boolean',
-    default: true,
-    get (val, resolve) {
-      if (!val) { return val }
-      this.rowsPromise.then(resolve)
-    }
-  },
-  rowsPromise: {
     default () {
-      return Faq.getList()
+      Faq.getList()
         .then(faqs => {
           this.rows = faqs
           this.filteredRows = faqs
           setTimeout(() => { this.loadingFAQs = false }, 25)
         })
         .catch(err => console.log(err))
+
+      return true
     }
   },
   rows: {
