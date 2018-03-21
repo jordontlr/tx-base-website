@@ -1,13 +1,13 @@
 remove-build:
 	-rm -rf dist
 
-release-staging:
-	-git branch -D staging
-	git checkout -b staging
+deploy:
+    git remote set-url heroku https://git.heroku.com/tx-base-website.git/
+	git branch -D deploy
+	git checkout -b deploy
 	donejs build
 	git add -f dist
-	git commit -m "Staging build"
-	git push -f origin staging
-	git checkout -
-	git push
-	git push --tags
+	git commit -m "deploy with build artifacts"
+	git push heroku deploy:master
+	git checkout master
+	git branch -D deploy
