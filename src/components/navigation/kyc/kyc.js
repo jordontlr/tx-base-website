@@ -269,16 +269,16 @@ export const ViewModel = DefineMap.extend({
       this.processing = false
       $bs.trigger('reset-select-picker')
     }
+  },
+  connectedCallback (el) {
+    $('[data-toggle="popover"]').popover()
+
+    return () => {}
   }
 })
 
 export default Component.extend({
   tag: 'kyc-modal',
   ViewModel,
-  view,
-  events: {
-    inserted: function () {
-      $('[data-toggle="popover"]').popover()
-    }
-  }
+  view
 })
