@@ -23,15 +23,9 @@ export const ViewModel = DefineMap.extend({
     default: false
   },
   loadingUsers: {
-    default: true,
-    get (val, resolve) {
-      if (!val) { return val }
-      this.rowsPromise.then(resolve)
-    }
-  },
-  rowsPromise: {
+    type: 'boolean',
     default () {
-      return User.getList({ $skip: this.pagination.skip, $limit: this.pagination.limit })
+      User.getList({ $skip: this.pagination.skip, $limit: this.pagination.limit })
         .then(users => {
           this.rows = users
           this.pagination.total = users.total
@@ -41,6 +35,8 @@ export const ViewModel = DefineMap.extend({
           if (err.code === 401) this.session.error401()
           else console.log(err)
         })
+
+      return true
     }
   },
   rows: {
