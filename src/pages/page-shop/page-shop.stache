@@ -1,5 +1,4 @@
 <can-import from="~/pages/page-shop/checkout.component!" />
-<can-import from="~/pages/page-shop/view-item.component!" />
 <can-import from="grid-component" />
 <can-import from="~/attrs/modal-scrollstop.attr" />
 
@@ -246,5 +245,120 @@
   <div class="text-center top-bottom-padding"><i class="fa fa-spin fa-spinner fa-5x"></i></div>
 {{/if}}
 
+<div class="modal fade" id="view-item-details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" modal-scrollstop>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{#if viewShopItem.category}}{{viewShopItem.category}} / {{/if}} {{viewShopItem.product}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          {{#if viewShopItem.imageData.length}}
+            {{#eq viewShopItem.imageData.length 1}}
+              <div class="hidden-xs col-sm-12 col-md-6">
+                <div class="thumbnail {{^if viewShopItem.description}}no-margin-bottom{{/if}}">
+                  <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{viewShopItem.imageData[0]}})"></div>
+                </div>
+              </div>
+            {{else}}
+              <div class="col-sm-4 col-md-2">
+                {{#each viewShopItem.imageData}}
+                  {{#if this}}
+                    <div class="thumbnail">
+                      <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{this}})"></div>
+                    </div>
+                  {{/if}}
+                {{/each}}
+              </div>
+              <div class="hidden-xs col-sm-8 col-md-5">
+                <div class="thumbnail {{^if viewShopItem.description}}no-margin-bottom{{/if}}">
+                  <div class="embed-responsive embed-responsive-4by3 img-rounded background-image-css" style="background-image: url({{viewShopItem.imageData[0]}})"></div>
+                </div>
+              </div>
+            {{/eq}}
+          {{/if}}
+          <div class="col-sm-12 {{#if viewShopItem.imageData.length}}{{#eq viewShopItem.imageData.length 1}}col-md-6{{else}}col-md-5{{/eq}}{{/if}}">
+            <h3 class="no-margin-top">{{viewShopItem.short}}</h3>
+            {{#if viewShopItem.brand}}<h5 class="text-muted">Brand: {{viewShopItem.brand}}</h5>{{/if}}
+            {{#if viewShopItem.sku}}<h5 class="text-muted">SKU: {{viewShopItem.sku}}</h5>{{/if}}
+            <h1 class="text-primary">{{numberFormat viewShopItem.price}}</h1>
+
+            <hr>
+
+            {{^if viewShopItem.addedToCart}}
+              <div class="row">
+                <div class="col-xs-6">
+                  <div class="input-group">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" on:click="quantityUp()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                          </button>
+                        </span>
+                    <input type="number" class="form-control" placeholder="Quantity" value:bind="viewShopItem.quantity">
+                    <span class="input-group-btn">
+                          <button class="btn btn-default" type="button" on:click="quantityDown()">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                          </button>
+                        </span>
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <button type="button" class="btn btn-primary btn-block" role="button" on:click="addToCart(viewShopItem)">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            {{else}}
+              <h4>
+                You Have <strong class="text-primary">{{viewShopItem.quantity}}</strong> in Your Cart
+                <div class="btn-group inline-block" role="group">
+                  <button class="btn btn-sm btn-default" type="button" on:click="quantityUp()">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-sm btn-default" type="button" on:click="quantityDown()">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger" type="button" on:click="quantityRemove()">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </h4>
+            {{/if}}
+
+            <hr>
+
+            {{#if viewShopItem.tags.length}}
+              <span>Tags: </span>
+              {{#each viewShopItem.tags}}
+                <a href="javascript:void(0)" on:click="scope.root.changeTags(this)">{{this}}</a>
+              {{/each}}
+              <hr>
+            {{/if}}
+
+          </div>
+        </div>
+        {{#if viewShopItem.description}}
+          <div class="well no-margin-bottom">
+            <div class="row">
+              <div class="col-sm-12">
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                  <li role="presentation" class="active"><a href="#desc" aria-controls="home" role="tab" data-toggle="tab"><strong>Description</strong></a></li>
+                  {{#if viewShopItem.content}}<li role="presentation"><a href="#content" aria-controls="profile" role="tab" data-toggle="tab"><strong>Box Contents</strong></a></li>{{/if}}
+                </ul>
+
+                <br>
+
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="desc">{{{viewShopItem.description}}}</div>
+                  {{#if viewShopItem.content}}<div role="tabpanel" class="tab-pane" id="content">{{{viewShopItem.content}}}</div>{{/if}}
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <page-checkout userCart:from="userCart" />
-<view-item userCart:from="userCart" viewShopItem:from="viewShopItem" />
