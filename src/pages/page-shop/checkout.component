@@ -18,7 +18,9 @@
                   <th class="text-nowrap h4">Product Category / Name</th>
                   <th class="text-nowrap h4 text-center">Unit Price</th>
                   <th class="text-nowrap h4 text-center">Quantity</th>
-                  <th class="text-nowrap h4 text-center">Edit</th>
+                  {{^if userCart.initiatedPayment}}
+                    <th class="text-nowrap h4 text-center">Edit</th>
+                  {{/if}}
                   <th class="text-nowrap h4 text-right">Total</th>
                 </tr>
                 </thead>
@@ -28,24 +30,26 @@
                     <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
                     <td class="text-center">{{numberFormat price}}</td>
                     <td class="text-center">{{quantity}}</td>
-                    <td class="text-center text-nowrap">
-                      <div class="btn-group" role="group" style="min-width: 66px;">
-                        <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityUp(this)">
-                          <i class="fa fa-plus" aria-hidden="true"></i>
-                        </button>
-                        <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityDown(this)">
-                          <i class="fa fa-minus" aria-hidden="true"></i>
-                        </button>
-                        <button class="btn btn-xs btn-danger" type="button" on:click="scope.root.quantityRemove(this)">
-                          <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                      </div>
-                    </td>
+                    {{^if scope.root.userCart.initiatedPayment}}
+                      <td class="text-center text-nowrap">
+                        <div class="btn-group" role="group" style="min-width: 66px;">
+                          <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityUp(this)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                          </button>
+                          <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityDown(this)">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                          </button>
+                          <button class="btn btn-xs btn-danger" type="button" on:click="scope.root.quantityRemove(this)">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </button>
+                        </div>
+                      </td>
+                    {{/if}}
                     <td class="text-right">{{numberFormat total}}</td>
                   </tr>
                 {{/each}}
                 <tr>
-                  <td colspan="4" class="h4">&nbsp;</td>
+                  <td colspan="{{^if scope.root.userCart.initiatedPayment}}4{{else}}3{{/if}}" class="h4">&nbsp;</td>
                   <td class="text-nowrap h4 text-right">{{numberFormat userCart.cartTotal}}</td>
                 </tr>
                 </tbody>
