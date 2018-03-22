@@ -57,7 +57,7 @@
                         <label for="profile-select-dob">Day of Birth</label>
                         {{#if scope.root.daysOfMonthList}}
                           <select id="profile-select-dob" selectpicker="btn btn-default" value:bind="dayOfBirth" class="bootstrap-select form-control show-tick" data-size="{{scope.root.dropDownSize}}" {{#if scope.root.disableForm}}disabled{{/if}}>
-                            {{#each(scope.root.daysOfMonthList)}}
+                            {{#each (scope.root.daysOfMonthList)}}
                               <option>{{this}}</option>
                             {{/each}}
                           </select>
@@ -69,7 +69,7 @@
                         <label for="profile-select-mob">Month of Birth</label>
                         {{#if scope.root.monthsList}}
                           <select id="profile-select-mob" selectpicker="btn btn-default" value:bind="monthOfBirth" class="bootstrap-select form-control show-tick" data-size="{{scope.root.dropDownSize}}" {{#if scope.root.disableForm}}disabled{{/if}}>
-                            {{#each(scope.root.monthsList)}}
+                            {{#each (scope.root.monthsList)}}
                               <option value="{{number}}">{{full}}</option>
                             {{/each}}
                           </select>
@@ -81,7 +81,7 @@
                         <label for="profile-select-yob">Year of Birth</label>
                         {{#if scope.root.yearsList}}
                           <select id="profile-select-yob" selectpicker="btn btn-default" value:bind="yearOfBirth" class="bootstrap-select form-control show-tick" data-size="{{scope.root.dropDownSize}}" {{#if scope.root.disableForm}}disabled{{/if}}>
-                            {{#each(scope.root.yearsList)}}
+                            {{#each (scope.root.yearsList)}}
                               <option>{{this}}</option>
                             {{/each}}
                           </select>

@@ -40,7 +40,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#each(userCart.items)}}
+                {{#each (userCart.items)}}
                   <tr>
                     <td><span class="mouse-pointer hover-color" on:click="scope.root.openShopModal(this)">{{#if category}}{{category}} / {{/if}} {{product}}</span></td>
                     <td class="text-center">{{numberFormat price}}</td>
@@ -87,7 +87,7 @@
           <div class="col-sm-3">
             <div class="list-group">
               <div class="list-header list-group-item h4 no-margin-top">Product Categories</div>
-              {{#each(scope.root.categories)}}
+              {{#each (scope.root.categories)}}
                 <a href="javascript:void(0)" on:click="scope.root.changeCategory(item)" class="list-group-item {{#eq scope.root.filterCategory item}} active{{/eq}}">
                   {{item}}
                   <span class="badge">{{count}}</span>
@@ -142,7 +142,7 @@
                 {{#if hasPages}}
                   <nav aria-label="Page navigation">
                     <button class="btn btn-default" {{^if isPrevActive}}disabled{{/if}} on:click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
-                    {{#each(pages)}}
+                    {{#each (pages)}}
                       <button class="btn {{#if isActive}}btn-primary{{else}}btn-default{{/if}}" on:click="changePage(pageNumber)">{{pageTitle}}</button>
                     {{/each}}
                     <button class="btn btn-default" {{^if isNextActive}}disabled{{/if}} on:click="next()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
@@ -154,7 +154,7 @@
               {{#if hasPages}}
                 <nav aria-label="Page navigation">
                   <button class="btn btn-default" {{^if isPrevActive}}disabled{{/if}} on:click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>
-                  {{#each(pages)}}
+                  {{#each (pages)}}
                     <button class="btn {{#if isActive}}btn-primary{{else}}btn-default{{/if}}" on:click="changePage(pageNumber)">{{pageTitle}}</button>
                   {{/each}}
                   <button class="btn btn-default" {{^if isNextActive}}disabled{{/if}} on:click="next()"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
@@ -183,7 +183,7 @@
           <div class="row">
             {{^if scope.root.loadingShopList}}
               {{#if rows.length}}
-                {{#each(rows)}}
+                {{#each (rows)}}
                   {{#eq scope.root.displayType 'list'}}
                     <div class="col-sm-12">
                       <div class="row">

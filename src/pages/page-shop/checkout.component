@@ -1,9 +1,4 @@
 <can-component tag="page-checkout">
-  <style type="less">
-    display: block;
-
-    p { font-weight: bold; }
-  </style>
   <view>
     <can-import from="~/attrs/modal-scrollstop.attr" />
 
@@ -28,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#each(userCart.items)}}
+                {{#each (userCart.items)}}
                   <tr>
                     <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
                     <td class="text-center">{{numberFormat price}}</td>
@@ -59,8 +54,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">Cancel</button>
-            <button type="button" class="btn btn-primary" on:click="checkout()" {{#if disableForm}}disabled{{/if}}>{{#if processing}}<i class="fa fa-spin fa-spinner"></i>{{else}}Checkout{{/if}}</button>
+            <div id="paypal-button"></div>
           </div>
         </div>
       </div>
@@ -70,6 +64,7 @@
   <script type="view-model">
     import $ from 'jquery'
     import DefineMap from 'can-define/map/map'
+    import loader from '@loader'
 
     export default DefineMap.extend({
       userCart: {
@@ -118,6 +113,57 @@
       },
       updateCartAPI () {
         this.userCart.save()
+      },
+      connectedCallback (el) {
+
+        if (loader.payments.paypal) {
+          // start paypal
+          $.getScript('//www.paypalobjects.com/api/checkout.js', () => {
+            paypal.Button.render({
+              env: 'sandbox', // Or 'production',
+              commit: true,
+              style: {
+                color: 'blue',
+                size: 'medium',
+                shape: 'rect',
+                tagline: false
+              },
+              payment: function() {
+                this.userCart.initiatedPayment = true
+                this.userCart.paymentType = 'paypal'
+
+                return this.userCart
+                  .save()
+                  .then(data => {
+                    return data.paypal.paymentID
+                  })
+              },
+              onAuthorize: function(data, actions) {
+                var data = {
+                  paymentID: data.paymentID,
+                  payerID: data.payerID
+                }
+              },
+              onCancel: function(data, actions) {
+                this.userCart.initiatedPayment = false
+                return this.userCart.save()
+              },
+              onError: function(err) {
+                this.userCart.initiatedPayment = false
+                return this.userCart.save()
+              }
+            }, '#paypal-button')
+          })
+          // end paypal
+        }
+
+        if (loader.payments.stripe) {
+          // start stripe
+
+          // end stripe
+        }
+
+        return () => {}
       }
     })
   </script>

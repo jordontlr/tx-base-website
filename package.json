@@ -1,7 +1,7 @@
 {
   "name": "tx",
   "version": "0.1.0",
-  "description": "An awesome DoneJS app",
+  "description": "",
   "homepage": "",
   "engines": {
     "node": "9.3.0"
@@ -13,7 +13,7 @@
   "author": {
     "name": "Marc Godard",
     "email": "me@marcgodard.com",
-    "url": ""
+    "url": "http://marcgodard.com"
   },
   "private": true,
   "scripts": {
@@ -60,7 +60,11 @@
         "renderingBaseURL": "https://txbasewebsite.firebaseapp.com/"
       }
     },
-    "serviceBaseURL": ""
+    "serviceBaseURL": "api.txbasewebsite.com",
+    "payments": {
+      "paypal": false,
+      "stripe": false
+    }
   },
   "standard": {
     "env": [

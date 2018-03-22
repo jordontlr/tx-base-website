@@ -27,7 +27,7 @@
               <tbody>
               {{^if scope.root.loadingBlog}}
                 {{#if rows.length}}
-                  {{#each(rows)}}
+                  {{#each (rows)}}
                     <tr>
                       <td class="text-nowrap text-center">{{title}}</td>
                       <td class="text-nowrap text-center">{{author}}</td>
@@ -56,7 +56,7 @@
               <nav aria-label="Page navigation" class="pull-right">
                 <ul class="pagination">
                   <li class="{{^if isPrevActive}}disabled{{/if}}"><a href="" on:click="prev()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                  {{#each(pages)}}
+                  {{#each (pages)}}
                     <li class="{{#if isActive}}active{{/if}}"><a href="" on:click="changePage(pageNumber)">{{pageTitle}}</a></li>
                   {{/each}}
                   <li class="{{^if isNextActive}}disabled{{/if}}"><a href="" on:click="next()" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
@@ -141,7 +141,7 @@
                 <label for="blog-tags">Tags</label>
                 <br>
                 <select multiple tagsinput="10" id="blog-tags" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" {{#if scope.root.disableForm}}disabled{{/if}}>
-                  {{#each(tags)}}
+                  {{#each (tags)}}
                     <option value="{{this}}">{{this}}</option>
                   {{/each}}
                 </select>
