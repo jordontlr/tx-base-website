@@ -42,7 +42,7 @@
                 <tbody>
                 {{#each(userCart.items)}}
                   <tr>
-                    <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
+                    <td><span class="mouse-pointer hover-color" on:click="scope.root.openShopModal(this)">{{#if category}}{{category}} / {{/if}} {{product}}</span></td>
                     <td class="text-center">{{numberFormat price}}</td>
                     <td class="text-center">{{quantity}}</td>
                     <td class="text-center text-nowrap">
