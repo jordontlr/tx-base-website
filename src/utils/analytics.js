@@ -1,6 +1,7 @@
 import $ from 'jquery'
 
 $.getScript('//www.google-analytics.com/analytics.js')
+
 window.ga = window.ga || function () {
   (window.ga.q = window.ga.q || []).push(arguments)
 }

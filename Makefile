@@ -2,8 +2,8 @@ remove-build:
 	-rm -rf dist
 
 heroku-setup:
-    -donejs add heroku
-    heroku config:set NODE_ENV=production
+	-donejs add heroku
+	heroku config:set NODE_ENV=production
 
 heroku-remote:
 	-git remote add heroku https://git.heroku.com/tx-base-website.git/

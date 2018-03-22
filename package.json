@@ -27,7 +27,9 @@
     "release:staging:patch": "npm test && npm run ready:staging && npm version patch && make release-staging",
     "test": "npm run lint && npm run testee",
     "testee": "testee test.html --browsers firefox --reporter Spec",
-    "build": "node build"
+    "build": "node build",
+    "deploy": "firebase deploy && make heroku-deploy",
+    "deploy:ci": "firebase deploy --token \"$FIREBASE_TOKEN\""
   },
   "main": "tx/index.stache!done-autorender",
   "files": [
@@ -55,7 +57,7 @@
     ],
     "envs": {
       "server-production": {
-        "renderingBaseURL": "/dist"
+        "renderingBaseURL": "https://txbasewebsite.firebaseapp.com/"
       }
     },
     "serviceBaseURL": ""
@@ -87,6 +89,7 @@
     "done-component": "^2.0.0",
     "done-css": "^3.0.2",
     "done-serve": "^2.0.0",
+    "donejs-firebase": "^1.0.1",
     "donejs-heroku": "^1.0.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "feathers": "^2.2.0",
@@ -113,6 +116,7 @@
     "can-fixture": "^2.0.2",
     "chai": "^4.1.2",
     "donejs-cli": "^2.0.0",
+    "firebase-tools": "^3.17.7",
     "funcunit": "^3.2.0",
     "standard": "^10.0.3",
     "steal-conditional": "^1.0.0",

@@ -15,13 +15,6 @@ export const ViewModel = DefineMap.extend({
     type: 'string',
     default: null
   },
-  loadingBlogPost: {
-    default: true,
-    get (val, resolve) {
-      if (!val) { return val }
-      this.blogPromise.then(resolve)
-    }
-  },
   authorPosts: {
     Type: Blog.list,
     default () {
@@ -37,9 +30,10 @@ export const ViewModel = DefineMap.extend({
   errorNotFound: {
     default: false
   },
-  blogPromise: {
+  loadingBlogPost: {
+    type: 'boolean',
     default () {
-      return Blog.getList({ 'linkTitle': this.slug, published: true })
+      Blog.getList({ 'linkTitle': this.slug, published: true })
         .then(blog => {
           if (blog.length === 0) {
             this.errorNotFound = true
@@ -72,6 +66,8 @@ export const ViewModel = DefineMap.extend({
           }
         })
         .catch(err => console.log(err))
+
+      return true
     }
   }
 })
