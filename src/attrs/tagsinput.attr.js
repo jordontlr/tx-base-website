@@ -11,5 +11,5 @@ callback.attr('tagsinput', (el) => {
       tagClass: 'label label-primary',
       maxTags: value
     })
-  }, 50)
+  }, 250)
 })
