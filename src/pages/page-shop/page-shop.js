@@ -208,7 +208,7 @@ export const ViewModel = DefineMap.extend({
         setTimeout(() => { this.loadingShop = false }, 25)
         this.loadingShopList = false
 
-        Shop.getList({ $select: [ 'category' ] })
+        Shop.getList({ $select: [ 'category' ], $sort: { category: 1 } })
           .then(shopCategories => {
             this.allCategories = shopCategories
           })
