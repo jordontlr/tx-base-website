@@ -71,6 +71,9 @@ export const ViewModel = DefineMap.extend({
         else console.log(err)
       })
   },
+  updateListed (item) {
+    item.save()
+  },
   saveShopItem () {
     this.processing = true
     this.disableForm = true

@@ -16,8 +16,11 @@
             <table class="table table-striped">
               <thead>
               <tr>
-                <th class="text-nowrap text-center">Item Name</th>
+                <th class="text-nowrap text-center">Listed</th>
                 <th class="text-nowrap text-center">Category</th>
+                <th class="text-nowrap text-center">Item Name</th>
+                <th class="text-nowrap text-center">Price</th>
+                <th class="text-nowrap text-center">Short</th>
               </tr>
               </thead>
               <tbody>
@@ -25,8 +28,16 @@
                 {{#if rows.length}}
                   {{#each(rows)}}
                     <tr>
-                      <td class="text-nowrap text-center">{{product}}</td>
+                      <td class="text-nowrap text-center">
+                        <div class="checkbox checkbox-primary">
+                          <input id="list-{{_id}}" type="checkbox" checked:bind="listed" on:change="scope.root.updateListed(this)">
+                          <label for="list-{{_id}}"></label>
+                        </div>
+                      </td>
                       <td class="text-nowrap text-center">{{category}}</td>
+                      <td class="text-nowrap text-center">{{product}}</td>
+                      <td class="text-nowrap text-center">{{price}}</td>
+                      <td class="text-nowrap text-center">{{shorten short 30}}</td>
                       <td class="text-nowrap text-center">
                         <button class="btn btn-primary btn-sm" type="button" on:click="scope.root.openShopItem(.)">Edit</button>
                         <button class="btn btn-danger btn-sm" type="button" on:click="scope.root.deleteShopItem(.)">Delete</button>
