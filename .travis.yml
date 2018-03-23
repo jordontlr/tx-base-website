@@ -22,7 +22,7 @@ before_deploy:
   - node build
   - git add dist/ --force
   - git commit -m "Updating build."
-  - 'npm run deploy:ci'
+  - node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
 env:
   global:
     - secure: >-
