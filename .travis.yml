@@ -1,12 +1,29 @@
 language: node_js
 node_js: 7.3
 addons:
-  firefox: "latest-esr"
+  firefox: latest-esr
   apt:
     packages:
       - dbus-x11
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
 notifications:
-  slack: txuniverse:O1XW4GuJH91iHr71md4n7rsl
+  slack: 'txuniverse:O1XW4GuJH91iHr71md4n7rsl'
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  app: tx-base-website
+  api_key: >-
+    RtSJyKp+WPHtzWROKLb4wRCRZak0k6oIIq14uHhWPZsz1ypS6iNB6CBuAgaEaK5TtnvbnDkUd5XqjwlV2qCsLWYUfjdNI3iTchyZOa1qtuDVF1XwwGSCAboScRxwBFYrNcVnUg0DLZJKvq+mTRntWZuGPIZ/qzYp0SAbPXphEkcpLQQ1dZbOz36N5BykKH6f2e1jg6cAKAJQl+2siP6Zg65gxK7XrR0rUoBwzpv5854rWiHhq2JH4fdG5/FXdOKZJA4OoOlKVuDIzFpoKc4TD53XnkEhSjsfCeMr81DOI7FzVN/5TlOX69Xi07C7J6LDKaqYk72wbF3F5V+KF5wjqK/bAD0Z5v+Df5V4DsVSG9g2GP/tO5G7t+Nmr0EhDumosqpqJH6MR4xh2gspIqM8PQzA0e/dwsmUqj/OlGb/FcInjKhS45d8ngr9t72CdLQlXVqace9W6f5weXPp9O6gg74rQhQdv2ZTJZnsaJ1aa4XZNSZ7y/I6aAcCp1kWAjRfXfzFaXLWP+8QRtmUZvyOg1aDOJ3ANsfyWwYVOpFjCq2VK5LhLmZWlii10k3eeVlCwDNHFyLL8ZiRz+yZDGSi/d0sWSprYUnh7A0jfAh1h5Yp3S01FQTWUOlZc9xtRTT01etFZs8OtAaChScvpqhxZDUOJxuVCM6WRPCyv0ETZyo=
+before_deploy:
+  - git config --global user.email "me@example.com"
+  - git config --global user.name "deploy bot"
+  - node build
+  - git add dist/ --force
+  - git commit -m "Updating build."
+  - 'npm run deploy:ci'
+env:
+  global:
+    - secure: >-
+        sfHGEU3JDaipZvkjuy4r6FarzAMCYRKAvq3t+G89u3CBk1y0Xec8pKgpP14owbUTZzXXvu8v8SiFO9WJ+H2qoW1mFo9kkF357Hs3aSMx1hXyZWBj0MppHMEsdWFtfDbv688Qdzw0gITfbrCqLaiVLYymrPVMc1UFTK2JBR0GNXOf4La2ziDkCvwN6TbI6UDwvb6lshqgSy97i7zum7fDrYoFCG1uD47X0jox0ecO+2tk2Fldiy88nGNk2pHehwosRd/DCmHGEy1/r7BHJ1ZQFQ2Z8QGNl3nClOjpMX04DQg3o0VSgmgCdYIl2L1HD76d2/t5NhoPLechwM5fpyldzk/OmMln+PDEAopIVPG0RnoJId57DC/KnlMyhDhmB74t2v1KLqb+0DdXQosWse1SnnwZKpIxMsMfqIVO7ldYHzw3sZFCTpI+ykwNSIMgLOFc1sUymFcu/8WTPGOlw0gdyAQP6ujbbrpv7F0TDebhNK/t3bmu0KvbLUKHhUF5bwn/IUmOLpskYrINH946bYY5/ye/vdHI3Ae91vwL+nyh42N5TgWhWKX65eCp1F35cM9foi3TugqTyhwmW0vc0tsApOCvHy1e7BqUxgErEf0Hzkmlk2/Pc7CdQDVkZyAI/oNm3VLhls9W7YR1IusA/jOxXl7oJQQ6NnTqORrqpBgML5A=
