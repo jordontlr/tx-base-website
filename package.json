@@ -28,7 +28,7 @@
     "test": "npm run lint && npm run testee",
     "testee": "testee test.html --browsers firefox --reporter Spec",
     "build": "node build",
-    "deploy": "firebase deploy && make heroku-deploy",
+    "deploy": "node build && firebase deploy && make heroku-deploy",
     "deploy:ci": "firebase deploy --token \"$FIREBASE_TOKEN\""
   },
   "main": "tx/index.stache!done-autorender",

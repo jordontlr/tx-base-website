@@ -22,3 +22,8 @@ before_deploy:
   - node build
   - git add dist/ --force
   - git commit -m "Updating build."
+  - 'npm run deploy:ci'
+env:
+  global:
+    - secure: >-
+        aKjfLW/cY5UkbzEhFAA4TeM6aNe9Vx2XjP9BjoajbXbDGK5TWiXkBGDAX0GW2nM/3p0ckODRITK4q3KVrwIwnc7haDwrEvp8j284GvU8pwySRbPJiMElzNHlV1gLGnDGADxhSi+8Dwv0TTqd0j5ts5kDhCwr7dXAj6NmMRDnYKz0NDGHifbFZ4c6B/m+lwTiNA2i+reIhnfHvns4nrfF4yCMT52tY4JS5PcZkTYJndLHp9/7bxQ1ZONMediy90XTp73GSA6U3+XxMYHCi1d7MiNYM5j9COH2CwwDq/J2ZNNKOf7pQNE8Qiac8IIl5DGuT+yHbOgZnWNultGVQVBxJX0KlchRjJlxB+0C36/PRB2R5ZulMQQJSQ8ZhpbNQnAtLP2dbP3unENprdbp38PlECL6j4alz0YgGFiyfGj+dnE/MvCvJ72f24k8ZjmdxRMBGAIs9LSxXqrBn7i1WNVtrdw+L98hnCIntsmGcEkNtAQdQ64XMKh1hgBjF0Lkb19TGclJxFO+/0S+2pQ9VHeWLREqUuyFK3NzcfIj1Vd/wTA55abaqGM2oOVHEmkEOoHzuzNDA9GMNlmIgwf/QB7KqB6kBb6exPecdELWHG66iiR9FA8K3mWkucXx/A6g8odeRi8bbYrXyKJeRSmqNGMSQ/H6yHjII1x4ZK481TsSuT4=
