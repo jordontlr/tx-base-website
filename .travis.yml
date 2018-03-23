@@ -1,12 +1,24 @@
 language: node_js
 node_js: 7.3
 addons:
-  firefox: "latest-esr"
+  firefox: latest-esr
   apt:
     packages:
       - dbus-x11
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
 notifications:
-  slack: txuniverse:O1XW4GuJH91iHr71md4n7rsl
+  slack: 'txuniverse:O1XW4GuJH91iHr71md4n7rsl'
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  app: tx-base-website
+  api_key: >-
+    E4MesS4cwhccYwIdZIfuHjA6N0oB4ug/oAsuVk8rK/s5HHs9HHDBKzBiErNdbBhVANCtcc1Ec5k6lFCMToCwYHPsSL7Xd8HLIsX41HsBdy8RNpxenphJow/IQDHMoRdarwqZU7De8+W11oHafV1Igsq0uLl6xMKBnrRtYtt7J20gzTKWp7oXuhVCNiSxiad98mz1Dshw6qVePk784MB2P498ztpYej1ZFk7BPc2tzNivnU5/UrFkN1HC5Q928iuuu3IOkVCf3o6dvpUvcqRcYlm+WX4UaYMI+1X38fdFXaCYgTGKopIfOx1IEz+t6mU+ZGVYsdk1F27eARjjN4AFutxRd/+itzk+oSTXUAlyqisQmGb798DG3hYwmAwYMYkisTie44LW5V/S1k+hah46tKmCqQRQREcTCRe96mFb0kLkby3jX7FtRHwxX2CCGS/RsdD4hFnpTt/qthdGfTl35yaOlF44m8EjxGY8+yzPjHJqfBGuntvtcuA7TVT617+ExSy86B/0dlenxqglQ7u6YyjOymK0Ug9zXCKCRA9utytnttpY6A8EpleuJln385EpOiIqHgnxcmdKj2gm5OiNxBMdpfudQc3O5dLTDi9L2NNdFeJnFikG0K1CPvg/XsIBjzmJjWDn2YrSnOUfBxojg0TJQFIY8nUjw+BWGS4PaZo=
+before_deploy:
+  - git config --global user.email "me@example.com"
+  - git config --global user.name "deploy bot"
+  - node build
+  - git add dist/ --force
+  - git commit -m "Updating build."
