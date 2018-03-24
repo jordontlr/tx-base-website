@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "",
   "engines": {
-    "node": "9.3.0"
+    "node": "9.9.0"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,7 @@
     "start": "done-serve --port $PORT",
     "test": "npm run lint && npm run testee",
     "testee": "testee test.html --browsers firefox --reporter Spec",
-    "build": "node build",
-    "deploy:ci": "firebase deploy --debug --non-interactive --token \"$FIREBASE_TOKEN\""
+    "build": "node build"
   },
   "main": "tx/index.stache!done-autorender",
   "files": [
@@ -52,7 +51,7 @@
     ],
     "envs": {
       "server-production": {
-        "renderingBaseURL": "https://txbasewebsite.firebaseapp.com/"
+        "renderingBaseURL": "https://txbasewebsite.com/"
       }
     },
     "serviceBaseURL": "api.txbasewebsite.com",
@@ -88,9 +87,7 @@
     "done-component": "^2.0.0",
     "done-css": "^3.0.2",
     "done-serve": "^2.0.0",
-    "donejs-firebase": "^1.0.1",
     "donejs-heroku": "^1.0.0",
-    "donejs-travis-deploy-to-firebase": "^1.0.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "feathers": "^2.2.0",
     "feathers-authentication-client": "^0.3.3",
@@ -116,7 +113,6 @@
     "can-fixture": "^2.0.2",
     "chai": "^4.1.2",
     "donejs-cli": "^2.0.0",
-    "firebase-tools": "^3.17.7",
     "funcunit": "^3.2.0",
     "standard": "^11.0.1",
     "steal-conditional": "^1.0.0",

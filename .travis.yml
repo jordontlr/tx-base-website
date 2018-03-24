@@ -1,5 +1,5 @@
 language: node_js
-node_js: 9.3
+node_js: 9.9
 addons:
   firefox: latest-esr
   apt:
@@ -22,8 +22,3 @@ before_deploy:
   - node build
   - git add dist/ --force
   - git commit -m "Updating build."
-  - node_modules/.bin/firebase deploy --debug --token $FIREBASE_TOKEN
-env:
-  global:
-    - secure: >-
-        akPtliPV4bA1qLDZ+FyLwib0X4rz7ZoaKlKraxsyYLzr2e8pRZSOQc4anw4n24LAozLsb/LaFFJ8JEiCD34PUIhSNeb5Q6mbfPfm65/2M4U9WP4kqMXOEdcxQ8Q5OnPkJGqqpQV1LtHjbVIsSoKKvKJQDUklyi9KxX6VjlCB7QimilSV2jfSHtWCIFKVXVqyGXEvN3an9IA8FoCWKYpnnwGWY/6dIQLtWFnWSqokUpNa4o4itHMxgSgqaEOPiHWcBZQ4cAyxMYGERTLMmJRvdkb7sSVs8ojP51MvmifYyPSoTh+lcJaTB4UROiW6vRZDgaYrU8oVkmDaMCljTkg5LXZafJtnpM/Pd0ZHtj31iUWDexsWDUkhH7ctU0nBhXckT1UpNQlSsNFjvh6k66AnmRRhYWRTJ/PBoOdSrptoqBH4KPA72prHDix2yLq102lnulRKRvBtZzIiUUSm3dD3hbooTQAbYZSpUQbMmqbAKvK5F//MuncnDeUuzQQxdLbluFIOsyAFOGluvjhFy2rZ/hsCvqnADYzm+PBQWZwccAAOK2zbiAbqYj2BvL5KNeLXejTHIA1AHyoA5kF0VOYgElu+FUZc/JLwxRiXnFIZgj94LAT9Zj09lYPiOHZWQoIkj0z0iExCKq9IaUeVV3brIt1Q7TJrb5tqDWh769WkfGk=
