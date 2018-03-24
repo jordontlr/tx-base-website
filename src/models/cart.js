@@ -16,6 +16,8 @@ const Cart = DefineMap.extend('Cart', {
     default: false
   },
   paymentType: 'string',
+  paymentClientId: 'string',
+  paymentProcessId: 'string',
   items: {
     serialize: false,
     Type: Shop.List,
