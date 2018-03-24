@@ -10,15 +10,3 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 notifications:
   slack: 'txuniverse:O1XW4GuJH91iHr71md4n7rsl'
-deploy:
-  skip_cleanup: true
-  provider: heroku
-  app: tx-base-website
-  api_key: >-
-    MbdGm4m2Y6fa74cxZEu8BxfrVxcLGAwT7PvtBBDA8pZxKzfmaW6EvXeNEKgm/zEUfZWYxAl0aDFozA1GFgdMtX8BBLqjmr1VP8DScWNozUTzLX9qbUInfH9B9jVT+6iYcnfBktxmeSO3jYuq68LYfRR3j+B4WhHvmzVAcGFt2yqpxjCqByGrnYNc42EFTHSeTBlRkJXcJdySmnbmepmyeOn8t+wtjECEdulQWxk/qf+xtRF262Yqjda9l9FUQJK1XGEr5BQMIFDm9LSo2Fonef68Mtv5JsCHB+XmkY0V9wyC4VWVxjto2hHDl3Me54Fud0hA6sVZuz5XHw9OHv3KZoKSXPj8FQ0o2jEwbZKNqSqVCsCWI3BKaHw/umCPzUQa8O1pzgBnUbId3fDjsXdmS2lO5nJOvTWbTWqejlVAYThk8TbVh+mKBqZPDBkBRXBZ5Lvx6S25Le5yr4iWypJpDtupGixsu4TFYKbWskVrB5r2RKxzhCMwWXoN2/bKvIed0/7LlKDspOvWrFwOUv6vueRqa0azht7AOCdqTL68TUKEaRigaZ4ANU4RL03TNEaxODTFqFtesHMvcHceHettIvjwV/oI3lKj7e9Njkr1xzkbrELrm/hddy12mfn3XMpQHfc4QpJkRbTZk7aH71iwKrqfpUQsaw57i6hRdY+wKZM=
-before_deploy:
-  - git config --global user.email "me@example.com"
-  - git config --global user.name "deploy bot"
-  - node build
-  - git add dist/ --force
-  - git commit -m "Updating build."
