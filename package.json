@@ -51,7 +51,7 @@
     ],
     "envs": {
       "server-production": {
-        "renderingBaseURL": "https://txbasewebsite.com/"
+        "renderingBaseURL": "/dist"
       }
     },
     "serviceBaseURL": "api.txbasewebsite.com",
