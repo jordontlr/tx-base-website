@@ -88,6 +88,7 @@
     "done-css": "^3.0.2",
     "done-serve": "^2.0.0",
     "donejs-heroku": "^1.0.0",
+    "donejs-travis-deploy-to-heroku": "^1.0.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "feathers": "^2.2.0",
     "feathers-authentication-client": "^0.3.3",
