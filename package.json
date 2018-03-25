@@ -58,7 +58,7 @@
     },
     "serviceBaseURL": "api.txbasewebsite.com",
     "payments": {
-      "paypal": false,
+      "paypal": true,
       "stripe": false
     }
   },

@@ -15,6 +15,11 @@ export const ViewModel = DefineMap.extend({
   processing: {
     default: false
   },
+  paymentConfig: {
+    default () {
+      return loader.payments
+    }
+  },
   checkout () {
 
   },
@@ -54,8 +59,8 @@ export const ViewModel = DefineMap.extend({
     this.userCart.save()
   },
   connectedCallback (el) {
-    if (loader.payments.paypal) {
-      // start paypal
+    // start paypal
+    if (this.paymentConfig.paypal) {
       $.getScript('//www.paypalobjects.com/api/checkout.js', () => {
         window.paypal.Button.render({
           env: 'sandbox', // Or 'production',
@@ -66,45 +71,47 @@ export const ViewModel = DefineMap.extend({
             shape: 'rect',
             tagline: false
           },
-          payment: function () {
+          payment: () => {
             this.userCart.initiatedPayment = true
             this.userCart.paymentType = 'paypal'
 
             return this.userCart
               .save()
               .then(data => {
-                return data.paypal.paymentID
+                console.log("payment:", data)
+                return data.payPal.paymentID
               })
           },
-          onAuthorize: function (data) {
+          onAuthorize: (data) => {
             this.userCart.paymentProcessId = data.paymentID
             this.userCart.paymentClientId = data.payerID
 
             return this.userCart
               .save()
               .then(data => {
-                return data.paypal.paymentID
+                console.log("Authorized:", data)
+                return data.payPal.paymentID
               })
           },
-          onCancel: function () {
+          onCancel: () => {
             this.userCart.initiatedPayment = false
             return this.userCart.save()
           },
-          onError: function (err) {
+          onError: (err) => {
             this.userCart.initiatedPayment = false
             this.userCart.save()
             console.log(err)
           }
         }, '#paypal-button')
       })
-      // end paypal
     }
+    // end paypal
 
-    if (loader.payments.stripe) {
-      // start stripe
+    // start stripe
+    if (this.paymentConfig.stripe) {
 
-      // end stripe
     }
+    // end stripe
 
     return () => {}
   }

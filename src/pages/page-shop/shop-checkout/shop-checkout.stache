@@ -55,9 +55,11 @@
         </div>
 
       </div>
-      <div class="modal-footer">
-        <div id="paypal-button"></div>
-      </div>
+      {{#if paymentConfig.paypal}}
+        <div class="modal-footer">
+          <div id="paypal-button"></div>
+        </div>
+      {{/if}}
     </div>
   </div>
 </div>
