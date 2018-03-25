@@ -78,7 +78,7 @@ export const ViewModel = DefineMap.extend({
             return this.userCart
               .save()
               .then(data => {
-                console.log("payment:", data)
+                console.log('payment:', data)
                 return data.payPal.paymentID
               })
           },
@@ -89,7 +89,7 @@ export const ViewModel = DefineMap.extend({
             return this.userCart
               .save()
               .then(data => {
-                console.log("Authorized:", data)
+                console.log('Authorized:', data)
                 return data.payPal.paymentID
               })
           },
