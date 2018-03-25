@@ -60,6 +60,9 @@
     "payments": {
       "paypal": true,
       "stripe": false
+    },
+    "analytics": {
+      "google": "UA-106618490-2"
     }
   },
   "standard": {

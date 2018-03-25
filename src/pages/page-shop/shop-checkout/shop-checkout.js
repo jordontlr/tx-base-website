@@ -60,50 +60,48 @@ export const ViewModel = DefineMap.extend({
   },
   connectedCallback (el) {
     // start paypal
-    if (this.paymentConfig.paypal) {
-      $.getScript('//www.paypalobjects.com/api/checkout.js', () => {
-        window.paypal.Button.render({
-          env: 'sandbox', // Or 'production',
-          commit: true,
-          style: {
-            color: 'blue',
-            size: 'medium',
-            shape: 'rect',
-            tagline: false
-          },
-          payment: () => {
-            this.userCart.initiatedPayment = true
-            this.userCart.paymentType = 'paypal'
+    if (this.paymentConfig.paypal && window.paypal) {
+      window.paypal.Button.render({
+        env: 'sandbox', // Or 'production',
+        commit: true,
+        style: {
+          color: 'blue',
+          size: 'medium',
+          shape: 'rect',
+          tagline: false
+        },
+        payment: () => {
+          this.userCart.initiatedPayment = true
+          this.userCart.paymentType = 'paypal'
 
-            return this.userCart
-              .save()
-              .then(data => {
-                console.log('payment:', data)
-                return data.payPal.paymentID
-              })
-          },
-          onAuthorize: (data) => {
-            this.userCart.paymentProcessId = data.paymentID
-            this.userCart.paymentClientId = data.payerID
+          return this.userCart
+            .save()
+            .then(data => {
+              console.log('payment:', data)
+              return data.payPal.paymentID
+            })
+        },
+        onAuthorize: (data) => {
+          this.userCart.paymentProcessId = data.paymentID
+          this.userCart.paymentClientId = data.payerID
 
-            return this.userCart
-              .save()
-              .then(data => {
-                console.log('Authorized:', data)
-                return data.payPal.paymentID
-              })
-          },
-          onCancel: () => {
-            this.userCart.initiatedPayment = false
-            return this.userCart.save()
-          },
-          onError: (err) => {
-            this.userCart.initiatedPayment = false
-            this.userCart.save()
-            console.log(err)
-          }
-        }, '#paypal-button')
-      })
+          return this.userCart
+            .save()
+            .then(data => {
+              console.log('Authorized:', data)
+              return data.payPal.paymentID
+            })
+        },
+        onCancel: () => {
+          this.userCart.initiatedPayment = false
+          return this.userCart.save()
+        },
+        onError: (err) => {
+          this.userCart.initiatedPayment = false
+          this.userCart.save()
+          console.log(err)
+        }
+      }, '#paypal-button')
     }
     // end paypal
 
