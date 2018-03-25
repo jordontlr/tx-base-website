@@ -1,5 +1,5 @@
 import '~/utils/global'
-import '~/utils/global-config'
+// import { trackPage } from '~/utils/global-config'
 import '~/utils/helpers'
 import DefineMap from 'can-define/map/map'
 import route from 'can-route'
