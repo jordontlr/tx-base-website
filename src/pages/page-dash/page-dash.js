@@ -4,11 +4,8 @@ import './page-dash.less'
 import view from './page-dash.stache'
 
 export const ViewModel = DefineMap.extend({
-  disableForm: {
-    default: false
-  },
-  session: {
-    type: 'any'
+  message: {
+    default: 'This is the page-dash component'
   }
 })
 
