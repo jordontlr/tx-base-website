@@ -7,6 +7,10 @@ import behaviors from './behaviors'
 import algebra from './algebra'
 
 const User = DefineMap.extend('User', {
+  login (email, password) {
+    return feathersClient.authenticate({ strategy: 'local', email, password })
+  }
+}, {
   _id: 'any',
   email: 'string',
   // We never send password when saving User.
