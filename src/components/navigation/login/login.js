@@ -8,6 +8,7 @@ import validate from '~/utils/validators'
 import route from 'can-route'
 import 'can-route-pushstate'
 import Session from '~/models/session'
+import User from '~/models/user'
 
 export const ViewModel = DefineMap.extend({
   loginError: 'boolean',
@@ -51,6 +52,57 @@ export const ViewModel = DefineMap.extend({
   toggleType () {
     this.passwordVisible = !this.passwordVisible
   },
+
+  // todo: finish refactoring and test.
+  handleLogin2 (ev, email, password) {
+    ev.preventDefault()
+    if (this.hasErrors) {
+      return false
+    }
+
+    this.clearErrors()
+    return User.login(email, password)
+      .then(({user, tmpPasswordUsed}) => this.saveSession(user, password, tmpPasswordUsed))
+      .then(args => this.hideModal(args))
+      .then(({tmpPasswordUsed}) => this.openSetPasswordModal(tmpPasswordUsed))
+      .then(() => this.routeHome())
+      .then(() => this.clearForm())
+      .catch(e => this.showError(e))
+  },
+  clearErrors () {
+    this.loginError = false
+    this.processing = true
+    this.disableForm = true
+  },
+  saveSession (user, password, tmpPasswordUsed) {
+    const session = Session.current
+    session.user = user
+    session.loggedIn = true
+    if (tmpPasswordUsed || user.isNewUser) {
+      this.session.tmpPassword = password
+    }
+    this.session = session
+  },
+  hideModal (args) {
+    $('#login-modal').modal('hide')
+    return args
+  },
+  openSetPasswordModal (tmpPasswordUsed) {
+    if (tmpPasswordUsed) {
+      $('#set-password-modal').modal('show')
+    }
+  },
+  routeHome () {
+    route.data.set({page: 'dash'}, true)
+  },
+  showError () {
+    this.loginError = true
+    this.processing = false
+    this.disableForm = false
+    this.session.loggedIn = false
+  },
+
+  // todo: replace with the above when its finished.
   handleLogin (ev, email, password) {
     ev.preventDefault()
     if (this.hasErrors) return false

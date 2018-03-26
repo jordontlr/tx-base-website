@@ -1,3 +1,6 @@
+import './pages/test.js'
+
+// VM tests:
 import 'steal-mocha'
 import AppVM from './app'
 
