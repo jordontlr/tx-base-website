@@ -1,5 +1,6 @@
 import 'steal-mocha'
 import { ViewModel } from './page-blog'
+// import blogStore from '~/models/fixtures/blog'
 
 // This is faster for browser:
 import chai from 'chai/chai'

@@ -1,5 +1,6 @@
 import 'steal-mocha'
 import { ViewModel } from './page-faqs'
+// import faqsStore from '~/models/fixtures/faq'
 
 // This is faster for browser:
 import chai from 'chai/chai'
