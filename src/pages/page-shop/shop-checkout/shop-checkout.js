@@ -2,7 +2,9 @@ import Component from 'can-component'
 import DefineMap from 'can-define/map/map'
 import './shop-checkout.less'
 import view from './shop-checkout.stache'
+import Cart from '~/models/cart'
 import $ from 'jquery'
+import * as Cookie from 'js-cookie'
 import loader from '@loader'
 
 export const ViewModel = DefineMap.extend({
@@ -73,33 +75,34 @@ export const ViewModel = DefineMap.extend({
               tagline: false
             },
             payment: () => {
-              this.userCart.initiatedPayment = true
+              this.userCart.paymentInitiated = true
               this.userCart.paymentType = 'paypal'
 
               return this.userCart
                 .save()
                 .then(data => {
                   console.log('payment:', data)
-                  return data.payPal.paymentID
+                  return data.payPal.paymentId
                 })
             },
             onAuthorize: (data) => {
-              this.userCart.paymentProcessId = data.paymentID
-              this.userCart.paymentClientId = data.payerID
+              this.userCart.payPal.paymentId = data.paymentID
+              this.userCart.payPal.payerId = data.payerID
 
               return this.userCart
                 .save()
                 .then(data => {
                   console.log('Authorized:', data)
-                  return data.payPal.paymentID
+                  Cookie.remove('cartId')
+                  this.userCart = new Cart({})
                 })
             },
             onCancel: () => {
-              this.userCart.initiatedPayment = false
+              this.userCart.paymentInitiated = false
               return this.userCart.save()
             },
             onError: (err) => {
-              this.userCart.initiatedPayment = false
+              this.userCart.paymentInitiated = false
               this.userCart.save()
               console.log(err)
             }
