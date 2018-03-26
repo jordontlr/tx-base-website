@@ -1,10 +1,13 @@
-import QUnit from 'steal-qunit'
+import 'steal-mocha'
 import { ViewModel } from './blog-post'
 
-// ViewModel unit tests
-QUnit.module('tx/pages/page-blog/blog-post')
+// This is faster for browser:
+import chai from 'chai/chai'
+const assert = chai.assert
 
-QUnit.test('Has message', function () {
-  var vm = new ViewModel()
-  QUnit.equal(vm.message, 'This is the blog-post component')
+describe('tx/pages/page-blog/blog-post', function () {
+  it('should set the correct message', function () {
+    const vm = new ViewModel()
+    assert.equal(vm.message, 'This is the blog-post component')
+  })
 })
