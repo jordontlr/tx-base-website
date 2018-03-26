@@ -81,28 +81,28 @@ export const ViewModel = DefineMap.extend({
               return this.userCart
                 .save()
                 .then(data => {
-                  console.log('payment:', data)
-                  return data.payPal.paymentId
+                  return data.payPal.paymentID
                 })
             },
             onAuthorize: (data) => {
-              this.userCart.payPal.paymentId = data.paymentID
-              this.userCart.payPal.payerId = data.payerID
+              this.userCart.payPal = data
 
-              return this.userCart
+              this.userCart
                 .save()
                 .then(data => {
-                  console.log('Authorized:', data)
                   Cookie.remove('cartId')
                   this.userCart = new Cart({})
+                  $('#checkout-details').modal('hide')
                 })
             },
             onCancel: () => {
               this.userCart.paymentInitiated = false
+              this.userCart.paymentAuthorized = false
               return this.userCart.save()
             },
             onError: (err) => {
               this.userCart.paymentInitiated = false
+              this.userCart.paymentAuthorized = false
               this.userCart.save()
               console.log(err)
             }

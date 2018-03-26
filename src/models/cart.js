@@ -18,9 +18,7 @@ const Cart = DefineMap.extend('Cart', {
   paymentAuthorized: 'boolean',
   paymentComplete: 'boolean',
   paymentType: 'string',
-  payPal: {
-    type: { paymentId: 'string', payerId: 'number' }
-  },
+  payPal: 'any',
   public: 'boolean',
   items: {
     serialize: false,

@@ -232,6 +232,10 @@ export const ViewModel = DefineMap.extend({
                 })
               })
             })
+            .catch(() => {
+              Cookie.remove('cartId')
+              this.userCart = new Cart({})
+            })
         }
       })
       .catch(err => console.log(err))
