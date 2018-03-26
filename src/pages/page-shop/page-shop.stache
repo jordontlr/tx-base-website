@@ -16,7 +16,7 @@
           <p><button class="btn btn-primary" type="button" on:click="clearFilterTags()">Clear Tag Filter</button></p>
         {{/if}}
 
-        {{#if scope.root.userCart.initiatedPayment}}
+        {{#if scope.root.userCart.paymentInitiated}}
           <p class="text-danger">Payment is being processed. You can no longer edit your shopping cart until payment is complete.</p>
         {{/if}}
 
@@ -40,7 +40,7 @@
                   <th class="text-nowrap h4">Product Category / Name</th>
                   <th class="text-nowrap h4 text-center">Unit Price</th>
                   <th class="text-nowrap h4 text-center">Quantity</th>
-                    {{^if scope.root.userCart.initiatedPayment}}
+                    {{^if scope.root.userCart.paymentInitiated}}
                       <th class="text-nowrap h4 text-center">Edit</th>
                     {{/if}}
                   <th class="text-nowrap h4 text-right">Total</th>
@@ -52,7 +52,7 @@
                     <td><span class="mouse-pointer hover-color" on:click="scope.root.openShopModal(this)">{{#if category}}{{category}} / {{/if}} {{product}}</span></td>
                     <td class="text-center">{{numberFormat price}}</td>
                     <td class="text-center">{{quantity}}</td>
-                    {{^if scope.root.userCart.initiatedPayment}}
+                    {{^if scope.root.userCart.paymentInitiated}}
                       <td class="text-center text-nowrap">
                         <div class="btn-group" role="group" style="min-width: 66px;">
                           <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityUp(this)">
@@ -71,7 +71,7 @@
                   </tr>
                 {{/each}}
                 <tr>
-                  <td colspan="{{^if scope.root.userCart.initiatedPayment}}4{{else}}3{{/if}}" class="h4">&nbsp;</td>
+                  <td colspan="{{^if scope.root.userCart.paymentInitiated}}4{{else}}3{{/if}}" class="h4">&nbsp;</td>
                   <td class="text-nowrap h4 text-right">{{numberFormat userCart.cartTotal}}</td>
                 </tr>
                 </tbody>
@@ -157,7 +157,7 @@
                           <div class="hidden visible-md"><br></div>
                           <div class="text-right">
                             <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="scope.root.openShopModal(this)">View Details</a>
-                            {{^if scope.root.userCart.initiatedPayment}}
+                            {{^if scope.root.userCart.paymentInitiated}}
                               <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="scope.root.addToCart(this)">Add 1 to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                             {{/if}}
                           </div>
@@ -179,7 +179,7 @@
                           <p class="one-line">{{short}}</p>
                           <div class="btn-group btn-group-justified" role="group">
                             <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="scope.root.openShopModal(this)">View Details</a>
-                            {{^if scope.root.userCart.initiatedPayment}}
+                            {{^if scope.root.userCart.paymentInitiated}}
                               <a href="javascript:void(0)" class="btn btn-primary" role="button" on:click="scope.root.addToCart(this)">Add 1 to Cart</a>
                             {{/if}}
                           </div>
@@ -278,7 +278,7 @@
             <h1 class="text-primary">{{numberFormat viewShopItem.price}}</h1>
 
             {{^if viewShopItem.addedToCart}}
-              {{^if userCart.initiatedPayment}}
+              {{^if userCart.paymentInitiated}}
                 <hr>
                 <div class="row">
                   <div class="col-xs-6">
@@ -305,7 +305,7 @@
               <hr>
               <h4>
                 You Have <strong class="text-primary">{{viewShopItem.quantity}}</strong> in Your Cart
-                {{^if userCart.initiatedPayment}}
+                {{^if userCart.paymentInitiated}}
                   <div class="btn-group inline-block" role="group">
                     <button class="btn btn-sm btn-default" type="button" on:click="quantityUp()">
                       <i class="fa fa-plus" aria-hidden="true"></i>

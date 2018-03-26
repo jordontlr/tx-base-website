@@ -11,7 +11,10 @@ const Cart = DefineMap.extend('Cart', {
   _id: 'any',
   fingerprint: 'string',
   userId: 'any',
-  paymentInitiated: 'boolean',
+  paymentInitiated: {
+    type: 'boolean',
+    default: false
+  },
   paymentAuthorized: 'boolean',
   paymentComplete: 'boolean',
   paymentType: 'string',

@@ -16,7 +16,7 @@
               <th class="text-nowrap h4">Product Category / Name</th>
               <th class="text-nowrap h4 text-center">Unit Price</th>
               <th class="text-nowrap h4 text-center">Quantity</th>
-              {{^if userCart.initiatedPayment}}
+              {{^if userCart.paymentInitiated}}
                 <th class="text-nowrap h4 text-center">Edit</th>
               {{/if}}
               <th class="text-nowrap h4 text-right">Total</th>
@@ -28,7 +28,7 @@
                 <td>{{#if category}}{{category}} / {{/if}} {{product}}</td>
                 <td class="text-center">{{numberFormat price}}</td>
                 <td class="text-center">{{quantity}}</td>
-                {{^if scope.root.userCart.initiatedPayment}}
+                {{^if scope.root.userCart.paymentInitiated}}
                   <td class="text-center text-nowrap">
                     <div class="btn-group" role="group" style="min-width: 66px;">
                       <button class="btn btn-xs btn-default" type="button" on:click="scope.root.quantityUp(this)">
@@ -47,7 +47,7 @@
               </tr>
             {{/each}}
             <tr>
-              <td colspan="{{^if scope.root.userCart.initiatedPayment}}4{{else}}3{{/if}}" class="h4">&nbsp;</td>
+              <td colspan="{{^if scope.root.userCart.paymentInitiated}}4{{else}}3{{/if}}" class="h4">&nbsp;</td>
               <td class="text-nowrap h4 text-right">{{numberFormat userCart.cartTotal}}</td>
             </tr>
             </tbody>

@@ -21,6 +21,11 @@ const store = fixture.store([{
   question: 'Some Question?',
   answer: 'Some Answer!',
   category: 'Some Filler Stuff'
+}, {
+  id: 5,
+  question: 'With HTML?',
+  answer: '<b>Some</b> Answer!',
+  category: 'Some Filler Stuff'
 }], Faq.connection.algebra)
 
 fixture('/faq/{id}', store)
