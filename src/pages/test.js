@@ -10,7 +10,7 @@
 // import './page-blog/page-blog-test'
 // import './page-blog/blog-post/blog-post-test'
 import './page-dash/page-dash-test'
-import './page-faqs/page-faqs-test'
+// import './page-faqs/page-faqs-test'
 import './page-home/page-home-test'
 import './page-privacy/page-privacy-test'
 // import './page-shop/page-shop-test'
