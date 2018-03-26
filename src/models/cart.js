@@ -16,10 +16,8 @@ const Cart = DefineMap.extend('Cart', {
     default: false
   },
   paymentType: 'string',
-  paymentClientId: 'string',
-  paymentProcessId: 'string',
   payPal: {
-    type: [ { paymentID: 'string', payerID: 'number' } ]
+    type: { paymentID: 'string', payerID: 'number' }
   },
   public: 'boolean',
   items: {
