@@ -21,8 +21,9 @@
     "lint": "standard",
     "lint:fix": "standard --fix",
     "start": "done-serve --port $PORT",
-    "test": "npm run lint && npm run testee",
-    "testee": "testee test.html --browsers firefox --reporter Spec",
+    "test": "npm run lint && npm run testee:headless",
+    "testee": "testee test.html --config testee.json",
+    "testee:headless": "testee test.html --config testee-headless.json",
     "build": "node build",
     "deploy": "firebase deploy",
     "deploy:ci": "firebase deploy --token \"$FIREBASE_TOKEN\""
