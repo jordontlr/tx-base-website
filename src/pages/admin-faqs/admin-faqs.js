@@ -36,6 +36,12 @@ export const ViewModel = DefineMap.extend({
       return {skip: 0, limit: 20}
     }
   },
+  originalFAQ: {
+    Type: Faq,
+    default () {
+      return new Faq({})
+    }
+  },
   editFAQ: {
     Type: Faq,
     default () {
@@ -43,7 +49,8 @@ export const ViewModel = DefineMap.extend({
     }
   },
   openFAQ (faq) {
-    this.editFAQ = faq
+    this.editFAQ = new Faq(faq.serialize())
+    this.originalFAQ = faq
     this.quill.updateContents(JSON.parse(this.editFAQ.delta))
     $('#editFAQ').modal('show')
   },
@@ -76,7 +83,11 @@ export const ViewModel = DefineMap.extend({
     this.editFAQ.delta = JSON.stringify(this.quill.getContents())
     this.editFAQ.answer = $('.ql-editor').html()
 
-    this.editFAQ.save()
+    let original4Error = new Faq(this.originalFAQ.serialize())
+
+    this.originalFAQ.set(this.editFAQ.serialize())
+
+    this.originalFAQ.save()
       .then(() => {
         this.processing = false
         this.disableForm = false
@@ -84,6 +95,7 @@ export const ViewModel = DefineMap.extend({
         this.clearForm()
       })
       .catch(err => {
+        this.originalFAQ.set(original4Error.serialize())
         this.processing = false
         this.disableForm = false
 
@@ -93,6 +105,7 @@ export const ViewModel = DefineMap.extend({
   },
   clearForm () {
     this.editFAQ = new Faq({})
+    this.originalFAQ = new Faq({})
     this.quill.setContents(JSON.parse('{"ops":[{"insert":"\\n"}]}'))
     $('#editFAQ').modal('hide')
   },
