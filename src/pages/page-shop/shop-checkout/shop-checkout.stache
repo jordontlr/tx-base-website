@@ -55,11 +55,32 @@
         </div>
 
       </div>
-      {{#if paymentConfig.paypal}}
-        <div class="modal-footer">
-          <div id="paypal-button"></div>
+      <div class="modal-footer">
+        <div class="row">
+          {{#if paymentConfig.paypal}}
+            <div class="col-sm-7 col-md-8 {{^if paymentConfig.stripe}}col-offset-sm-5 col-md-offset-4{{/if}}">
+              <div class="inline">
+                <div id="paypal-button"></div>
+              </div>
+            </div>
+          {{/if}}
+          {{#if paymentConfig.paypal}}
+            {{#if paymentConfig.stripe}}
+              <div class="visible-xs col-xs-12">
+                <br>
+              </div>
+            {{/if}}
+          {{/if}}
+          {{#if paymentConfig.stripe}}
+            <div class="visible-xs col-xs-12">
+              <button class="btn btn-primary" id="customButton" style="height: 34px; width: 250px;">Credit Card Checkout</button>
+            </div>
+            <div class="hidden-xs col-sm-5 col-md-4 {{^if paymentConfig.paypal}}col-offset-sm-7 col-md-offset-8{{/if}}">
+              <button class="btn btn-primary btn-block" id="customButton" style="height: 34px">Credit Card Checkout</button>
+            </div>
+          {{/if}}
         </div>
-      {{/if}}
+      </div>
     </div>
   </div>
 </div>

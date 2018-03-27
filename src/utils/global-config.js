@@ -24,7 +24,7 @@ function trackPage (path, title) {
 }
 
 if (loader.payments.paypal) $.getScript('//www.paypalobjects.com/api/checkout.js')
-if (loader.payments.stripe) $.getScript('')
+if (loader.payments.stripe) $.getScript('//checkout.stripe.com/checkout.js')
 
 export { trackEvent }
 export { trackPage }

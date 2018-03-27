@@ -115,12 +115,43 @@ export const ViewModel = DefineMap.extend({
     // end paypal
 
     // start stripe
+    let stripFunction = null
     if (this.paymentConfig.stripe) {
+      let stripIntegration = setInterval(() => {
+        if (typeof window.StripeCheckout !== 'undefined') {
+          let handler = window.StripeCheckout.configure({
+            key: 'pk_test_j3aZnOel1pwJ00ejLkDpelNv',
+            image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            locale: 'auto',
+            token: function (token) {
+              console.log(token)
+            }
+          })
 
+          stripFunction = e => {
+            // Open Checkout with further options:
+            handler.open({
+              name: this.paymentConfig.company,
+              description: '',
+              currency: this.paymentConfig.currency,
+              amount: (this.userCart.cartTotal * 100)
+            })
+            e.preventDefault()
+          }
+
+          $('body').on('click', '#customButton', stripFunction)
+
+          clearInterval(stripIntegration)
+        }
+      }, 500)
     }
     // end stripe
 
-    return () => {}
+    return () => {
+      if (this.paymentConfig.stripe && typeof stripFunction === 'function') {
+        $('body').off('click', '#customButton', stripFunction)
+      }
+    }
   }
 })
 
