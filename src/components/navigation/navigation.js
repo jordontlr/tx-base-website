@@ -5,6 +5,7 @@ import './navigation.less'
 import view from './navigation.stache'
 import route from 'can-route'
 import 'can-route-pushstate'
+import loader from '@loader'
 
 export const ViewModel = DefineMap.extend({
   listenerAdded: {
@@ -15,6 +16,11 @@ export const ViewModel = DefineMap.extend({
   },
   page: {
     type: 'any'
+  },
+  websiteName: {
+    default () {
+      return loader.websiteName
+    }
   },
   email: {
     type: 'string',

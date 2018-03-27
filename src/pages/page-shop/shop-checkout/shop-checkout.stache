@@ -13,7 +13,7 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th class="text-nowrap h4">Product Category / Name</th>
+              <th class="text-nowrap h4">Category / Name</th>
               <th class="text-nowrap h4 text-center">Unit Price</th>
               <th class="text-nowrap h4 text-center">Quantity</th>
               {{^if userCart.paymentInitiated}}

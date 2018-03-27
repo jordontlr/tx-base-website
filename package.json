@@ -58,11 +58,12 @@
       }
     },
     "serviceBaseURL": "api.txbasewebsite.com",
+    "websiteName": "Base",
     "payments": {
       "company": "Tx Base Website Inc.",
       "paypal": true,
       "stripe": true,
-      "currency": "USD"
+      "currency": "CAD"
     },
     "analytics": {
       "google": "UA-106618490-2"

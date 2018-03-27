@@ -22,9 +22,6 @@ export const ViewModel = DefineMap.extend({
       return loader.payments
     }
   },
-  checkout () {
-
-  },
   quantityUp (item) {
     if (typeof item === 'undefined') item = this.viewShopItem
     item.quantity += 1
@@ -124,7 +121,11 @@ export const ViewModel = DefineMap.extend({
             image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
             locale: 'auto',
             token: function (token) {
-              console.log(token)
+              this.userCart.stripe = { token }
+              this.userCart.paymentInitiated = true
+              this.userCart.paymentType = 'stripe'
+
+              return this.userCart.save()
             }
           })
 
