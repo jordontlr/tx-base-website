@@ -57,7 +57,7 @@
         "renderingBaseURL": "/dist"
       }
     },
-    "serviceBaseURL": "https://accesswebwatcher-api.herokuapp.com/",
+    "serviceBaseURL": "accesswebwatcher-api.herokuapp.com",
     "websiteName": "Watcher",
     "payments": {
       "company": "Tx Base Website Inc.",
