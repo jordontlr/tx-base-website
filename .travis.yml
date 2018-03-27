@@ -8,18 +8,14 @@ addons:
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-notifications:
-  slack: txuniverse:O1XW4GuJH91iHr71md4n7rsl
 deploy:
   skip_cleanup: true
   provider: heroku
-  app: tx-base-website
   api_key:
-    secure: BR44Oi6bDAgsDujOT6CnO6NmvHOllEwusG8JZI/MCs8K4HmglV2+gA2PDFlxhhhvjmrC94EwXjLcG59gsj/8K4x2tH0R3LwLj4436ZmO9JhfOVNbUV6TXR7/zIaLX3QOYxOJl0+aeXMb0pPwfpWdJBAExKgkfOtVJ8TZ6c03TaJ7xdWXzNPS5SgnzsPXH48DFHR2rw59TpMVdqJL/0XFwcCNQTa/WdeAUT1/bl4GuYw6Jk/L2t9DvD19JiJwxcBe6nzfCt7PtHDfzBsZe/uDYA+rGHfyO2nD6A6UsB5X1MRv4wG4WoDl3ZVvzONCEK+Ui8qpLfVOIkYmtEW4B/QqOBCyBzjWL5lR2WqxZxqgdW9vp/K+/sbYSGGeAN2Bgp3QhBfUs6eJEjr+Da2dGbmiXTzWxea7NEEKXBoMgayVFWKOBeI0dwUrpzSJ7a2EcaqiuxE7vB0R262tPkKuREamF64FAiwSzq08gIY+VXK4AXezYIHVB1/mbSRrabkIjVaGEGjt+23/IBcxv7Buh4KRWpwv0gS77lYT28BAkqm6AjICPT+Eua7vaaak7bGPx33qHfsUE989OQln/6PBFKRwQybA96QET7teWbsdjfQAiLl9iby2n3KMhsaVpvnyLJJb1vADmhKH9E3XaT26I9W694DWCOs4ak+AYS5GS5JbXcU=
+    secure: NEWXfFW7HAv76k7hrbCYMrFG0kkWMbfrL8Aq7nfCwxjR0pAZQusFq3UiTk4fBgO363fu86gO+vTC5mPCmLP9Msm1hESfBPV3jGyAlCunlA5NwoGdAUSA5wdCodmsks+ZJq/mhTBOUE2lvNqdHRyNZiea7vhhA5d7ZcWgW2t8q7o1FLe3esnd0RXGMlumWkkubKEBMv0FSGg3GXP5lkRVYN0ANVDUEqUQYTbmmvenvClwsrsCkK/N0O3ajlRfvCEXdtQJFFvRTmXD/mfzDEEn99KWLTtRQU0BV7hwwJO3oMMctCkr5d6pNYJyJc69N+f+sVZmpn6lRqR3iRw/FUQ0wyLKXFGNLuzgDiUFi7mwowfQqYQjibCKSS4WSukWYuZ6rwVwyBzLoqdMrBJG49vqUgXcnWg820KAkWOpz8wiSYnEkIkvE/8x7IpBGzkHscD/Y5L7PJ1PD+Lvyf+99MXvsRM8khsZ1lGGfxfcGbJRXXTgtDUCVxDuffyR51T9+hLd78ooi5nSveO3vHQyV8zl+i7cxVcCjW7K9b7M02/Axg7DmYcrENN1HShMLz5JvrIqWO0Jylqg4pI7Whvs71qCQpE2kue2ksaXfXF69wWeYn5myCTpJfMrI9wsMxUzSiX5O1UbLHiCTzD8HzKAVVIDXY2hnePpKeohavFnvdAmeZ8=
 before_deploy:
 - git config --global user.email "me@example.com"
 - git config --global user.name "deploy bot"
 - node build
 - git add dist/ --force
 - git commit -m "Updating build."
-- npm run deploy:ci
